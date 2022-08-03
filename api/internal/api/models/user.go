@@ -1,6 +1,7 @@
 //Defining the user object
 
 type User struct {
+	gorm.model
 	ID         int64     `json:"id"`
 	Name       string    `json:"name"`
 	Email      string    `json:"email"`
