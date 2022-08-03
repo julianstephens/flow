@@ -12,6 +12,10 @@ type CreateFooInput struct {
 	Name string `json:"name" binding:"required"`
 }
 
+func HelloWorld(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"message": "Hello, world!"})
+}
+
 func CreateFoo(c *gin.Context) {
 	var input CreateFooInput
 	if err := c.ShouldBindJSON(&input); err != nil {
