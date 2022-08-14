@@ -1,8 +1,8 @@
 package user
 
 import (
-	"api/internal/api/models"
 	client "api/internal/database/postgres"
+	"api/models"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

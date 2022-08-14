@@ -18,3 +18,5 @@
 replit.nix
 
 **/*/*.env*
+
+**/*/*debug*
