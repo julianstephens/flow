@@ -30,7 +30,14 @@ func New(auth *auth.AuthService) *gin.Engine {
 
 	v1 := router.Group("/api")
 	{
-		v1.GET("/users/:id", user.GetUser)
+		u := v1.Group("/users")
+		{
+			u.POST("/", user.CreateUser)
+			u.GET("/:id", user.GetUser)
+			// TODO: PUT, DELETE
+			// v1.PUT("/:id", user.UpdateUser)
+			// v1.DELETE("/:id", user.DeleteUser)
+		}
 	}
 
 	return router

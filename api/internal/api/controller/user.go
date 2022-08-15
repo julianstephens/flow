@@ -8,16 +8,20 @@ import (
 
 type User models.User
 
-// func (u User) CreateUser(input models.CreateUserInput) (*models.User, error) {
-// 	if err := client.DB.FirstOrCreate(&input).Error; err != nil {
-// 		return nil, errors.New("Something went wrong creating your user.")
-// 	}
+var user models.User
 
-// 	return &user, nil
-// }
+func (User) CreateUser(input models.CreateUserInput) (*models.User, error) {
+	// Convert request to user model
+	u, _ := user.ToUser(input)
 
-func (u User) GetUser(id int) (*models.User, error) {
-	var user models.User
+	if err := client.DB.Unscoped().Where("email = ? ", u.Email).FirstOrCreate(&u).Error; err != nil {
+		return nil, errors.New("Something went wrong creating your user.")
+	}
+
+	return u, nil
+}
+
+func (User) GetUser(id int) (*models.User, error) {
 	if err := client.DB.Unscoped().Find(&user, id).Error; err != nil {
 		return nil, errors.New("The user you're looking for could not be found.")
 	}
