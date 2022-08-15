@@ -1,22 +1,26 @@
 package controller
 
 import (
-	client "api/internal/database/postgres"
-	"api/models"
-	"net/http"
-
-	"github.com/gin-gonic/gin"
+	"api/internal/models"
+	client "api/pkg/db/postgres"
+	"errors"
 )
 
-var user models.User
+type User models.User
 
-func GetUser(c *gin.Context) {
-	id := c.Param("id")
+// func (u User) CreateUser(input models.CreateUserInput) (*models.User, error) {
+// 	if err := client.DB.FirstOrCreate(&input).Error; err != nil {
+// 		return nil, errors.New("Something went wrong creating your user.")
+// 	}
 
+// 	return &user, nil
+// }
+
+func (u User) GetUser(id int) (*models.User, error) {
+	var user models.User
 	if err := client.DB.Unscoped().Find(&user, id).Error; err != nil {
-		c.AbortWithStatusJSON(http.StatusNotFound, gin.H{"data": nil, "message": "The user you're looking for could not be found."})
-		return
+		return nil, errors.New("The user you're looking for could not be found.")
 	}
 
-	c.JSON(http.StatusOK, gin.H{"data": user, "message": "Retrieved."})
+	return &user, nil
 }
