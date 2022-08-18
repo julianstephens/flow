@@ -28,3 +28,21 @@ func (User) GetUser(id int) (*models.User, error) {
 
 	return &user, nil
 }
+
+func (User) UpdateUser(input models.CreateUserInput, id int) (*models.User, error) {
+	// Convert request to user model
+	u, _ := user.ToUser(input)
+
+	if err := client.DB.Unscoped().Updates(&u).Error; err != nil {
+		return nil, errors.New("Something went wrong updating your user.")
+	}
+
+	return u, nil
+}
+func (User) DeleteUser(id int) (*models.User, error) {
+	if err := client.DB.Unscoped().Delete(&user, id).Error; err != nil {
+		return nil, errors.New("Something went wrong deleting your user.")
+	}
+
+	return &user, nil
+}

@@ -35,8 +35,8 @@ func New(auth *auth.AuthService) *gin.Engine {
 			u.POST("/", user.CreateUser)
 			u.GET("/:id", user.GetUser)
 			// TODO: PUT, DELETE
-			// v1.PUT("/:id", user.UpdateUser)
-			// v1.DELETE("/:id", user.DeleteUser)
+			u.PUT("/:id", user.UpdateUser)
+			u.DELETE("/:id", user.DeleteUser)
 		}
 	}
 
