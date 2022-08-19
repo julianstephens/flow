@@ -33,7 +33,7 @@ func (User) UpdateUser(input models.CreateUserInput, id int) (*models.User, erro
 	// Convert request to user model
 	u, _ := user.ToUser(input)
 
-	if err := client.DB.Unscoped().Updates(&u).Error; err != nil {
+	if err := client.DB.Unscoped().Where("id = ? ", id).Updates(&u).Error; err != nil {
 		return nil, errors.New("Something went wrong updating your user.")
 	}
 
