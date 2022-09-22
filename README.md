@@ -25,6 +25,7 @@ npm i
 3. Create db docker volume
 ```
 docker volume create budget_pgdata
+docker volume create budget_redis
 ```
 4. Start project 
 ```

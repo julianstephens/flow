@@ -17,6 +17,7 @@ services:
       - .:${APP_HOME}
     links:
       - db
+      - redis
     restart: on-failure 
     command: npm run dev
 
@@ -34,6 +35,19 @@ services:
       - ${DB_PORT_FORWARD}:${DB_PORT}
     restart: always
 
+  redis: 
+    image: redis/redis-stack:latest
+    container_name: budget_redis
+    hostname: redis
+    ports: 
+      - ${REDIS_PORT_FORWARD}:${REDIS_PORT}
+      - ${REDIS_INSIGHT_PORT_FORWARD}:${REDIS_INSIGHT_PORT}
+    volumes:
+      - budget_redis:/data
+    # restart: always
+
 volumes:
   budget_pgdata:
+    external: true
+  budget_redis:
     external: true

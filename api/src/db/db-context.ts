@@ -1,11 +1,16 @@
 import { PrismaClient } from "@prisma/client";
 import { logger } from "@utils/logger";
 import { isNull } from "lodash";
+import { Client } from "redis-om";
 
+// Single shared DB Context instance
 let instance: DBContext = null;
 
-export default class DBContext {
+const REDIS_URL = process.env["REDIS_URL"]
+
+export class DBContext {
   client: PrismaClient;
+  cache: Client;
 
   private constructor() {
     this.client = new PrismaClient({
@@ -16,10 +21,11 @@ export default class DBContext {
         }
       ]
     })
+    this.cache = new Client()
   }
 
   async connect() {
-    await this.client.$connect()
+    const [pg, redis] = await Promise.all([this.client.$connect(), this.cache.open(REDIS_URL)])
   }
 
   static async init() {
