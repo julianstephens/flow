@@ -1,0 +1,39 @@
+version: '3.4'
+
+services:
+  api:
+    container_name: budget_api
+    hostname: api
+    build:
+      context: api
+      target: ${APP_ENV}
+      args:
+        APP_HOME: ${APP_HOME}
+    image: api:${API_IMG_VERSION}
+    ports:
+      - ${API_PORT_FORWARD}:${API_PORT}
+      - ${PRISMA_PORT_FORWARD}:${PRISMA_PORT}
+    volumes:
+      - .:${APP_HOME}
+    links:
+      - db
+    restart: on-failure 
+    command: npm run dev
+
+  db:
+    image: postgres:14-alpine
+    container_name: budget_db
+    hostname: postgres
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - budget_pgdata:/var/lib/postgresql/data
+    ports: 
+      - ${DB_PORT_FORWARD}:${DB_PORT}
+    restart: always
+
+volumes:
+  budget_pgdata:
+    external: true
