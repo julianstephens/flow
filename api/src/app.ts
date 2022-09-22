@@ -1,4 +1,5 @@
 import { logger } from "@utils/logger";
+import { DBContext as db } from "db/db-context";
 import dotenv from "dotenv";
 import express, { Express, Request, Response } from "express";
 import helmet from "helmet";
@@ -6,8 +7,10 @@ import morgan from "morgan";
 
 dotenv.config()
 
+db.init()
+
 const app: Express = express();
-const port: number = process.env["PORT"] ? Number.parseInt(process.env["PORT"]) : 3000;
+const port: number = Number.parseInt(process.env["PORT"]) || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
