@@ -61,3 +61,10 @@ REDIS_PORT=
 ```
 docker compose up -d --build
 ```
+
+6. Configure DB
+Access the CLI for your API container (can be done via Docker CLI or Docker Desktop)
+```
+cd api
+npx prisma migrate dev
+```
