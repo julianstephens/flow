@@ -5,4 +5,4 @@ test
 **/.env
 public
 dist
-
+auth_config.json
