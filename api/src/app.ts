@@ -13,7 +13,7 @@ dotenv.config();
 db.init();
 
 const app: Express = express();
-const port: number = Number.parseInt(process.env["PORT"]) || 3000;
+const port: number = Number.parseInt(process.env.PORT) || 3000;
 
 app.use(helmet());
 app.use(bodyParser.json());

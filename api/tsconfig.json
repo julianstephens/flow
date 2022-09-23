@@ -52,7 +52,7 @@
     // "emitDeclarationOnly": true,                      /* Only output d.ts files and not JavaScript files. */
     // "sourceMap": true,                                /* Create source map files for emitted JavaScript files. */
     // "outFile": "./",                                  /* Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output. */
-    // "outDir": "./",                                   /* Specify an output folder for all emitted files. */
+    "outDir": "../dist" /* Specify an output folder for all emitted files. */,
     // "removeComments": true,                           /* Disable emitting comments. */
     // "noEmit": true,                                   /* Disable emitting files from a compilation. */
     // "importHelpers": true,                            /* Allow importing helper functions from tslib once per project, instead of including them per-file. */
@@ -78,7 +78,7 @@
     "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
     /* Type Checking */
     "strict": true /* Enable all strict type-checking options. */,
-    // "noImplicitAny": true,                            /* Enable error reporting for expressions and declarations with an implied 'any' type. */
+    "noImplicitAny": true /* Enable error reporting for expressions and declarations with an implied 'any' type. */,
     "strictNullChecks": false /* When type checking, take into account 'null' and 'undefined'. */,
     // "strictFunctionTypes": true,                      /* When assigning functions, check to ensure parameters and the return values are subtype-compatible. */
     // "strictBindCallApply": true,                      /* Check that the arguments for 'bind', 'call', and 'apply' methods match the original function. */
@@ -93,7 +93,7 @@
     // "noFallthroughCasesInSwitch": true,               /* Enable error reporting for fallthrough cases in switch statements. */
     // "noUncheckedIndexedAccess": true,                 /* Add 'undefined' to a type when accessed using an index. */
     // "noImplicitOverride": true,                       /* Ensure overriding members in derived classes are marked with an override modifier. */
-    // "noPropertyAccessFromIndexSignature": true,       /* Enforces using indexed accessors for keys declared using an indexed type. */
+    "noPropertyAccessFromIndexSignature": false /* Enforces using indexed accessors for keys declared using an indexed type. */,
     // "allowUnusedLabels": true,                        /* Disable error reporting for unused labels. */
     // "allowUnreachableCode": true,                     /* Disable error reporting for unreachable code. */
     /* Completeness */
