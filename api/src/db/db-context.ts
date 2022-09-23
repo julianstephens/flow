@@ -6,7 +6,7 @@ import { Client } from "redis-om";
 // Single shared DB Context instance
 let instance: DBContext = null;
 
-const REDIS_URL = process.env["REDIS_URL"]
+const REDIS_URL = process.env.REDIS_URL;
 
 export class DBContext {
   client: PrismaClient;
@@ -18,14 +18,17 @@ export class DBContext {
         {
           emit: "event",
           level: "query",
-        }
-      ]
-    })
-    this.cache = new Client()
+        },
+      ],
+    });
+    this.cache = new Client();
   }
 
   async connect() {
-    const [pg, redis] = await Promise.all([this.client.$connect(), this.cache.open(REDIS_URL)])
+    const [pg, redis] = await Promise.all([
+      this.client.$connect(),
+      this.cache.open(REDIS_URL),
+    ]);
   }
 
   static async init() {
@@ -37,12 +40,11 @@ export class DBContext {
       instance = new DBContext();
       logger.info("Attempting to connect to DB...");
       await instance.connect();
-      logger.info("DB connected!")
-    } catch(err) {
-      logger.error("Error connecting to the DB")
-      logger.error(err)
-      throw err
+      logger.info("DB connected!");
+    } catch (err) {
+      logger.error("Error connecting to the DB");
+      logger.error(err);
+      throw err;
     }
   }
 }
-
