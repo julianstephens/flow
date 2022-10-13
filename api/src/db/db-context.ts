@@ -29,7 +29,6 @@ export class DBContext {
       this.client.$connect(),
       this.cache.open(REDIS_URL),
     ]);
-
   }
 
   static async init() {

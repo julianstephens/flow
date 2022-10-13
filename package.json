@@ -6,7 +6,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "clean:api": "cd api && yarn run code:clean",
+    "clean:client": "cd client && yarn run code:clean",
+    "code:clean": "yarn run clean:api && clean:client"
   },
   "devDependencies": {
     "husky": "^8.0.1",
