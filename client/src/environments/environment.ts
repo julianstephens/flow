@@ -1,22 +1,13 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-import config from './../../auth_config.json';
 
-export const environment = {
+import {IEnvironment} from "@app/models/common.models";
+
+export const environment: IEnvironment = {
   production: false,
   auth: {
-    domain: config.domain,
-    clientId: config.clientId,
-    redirectUri: window.location.origin,
+    domain: "dev-8nx0w2kt.us.auth0.com",
+    clientId: "U1uSdz2IkMborC9NM9sihV8DD21DQSV9",
+    audience: "http://localhost:3000",
+    redirectUri: "http://localhost:4200/auth/redirect",
   },
+  apiUri: "http://localhost:3000/api",
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
