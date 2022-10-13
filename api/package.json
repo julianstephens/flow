@@ -1,57 +1,56 @@
 {
-    "name": "api",
-    "version": "1.0.0",
-    "description": "",
-    "main": "app.ts",
-    "scripts": {
-        "dev:debug": "tsnd -r tsconfig-paths/register --respawn --inspect=0.0.0.0:9229 -- ./src/app.ts",
-        "dev": "tsnd -r tsconfig-paths/register --transpile-only --respawn ./src/app.ts",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "prepare": "husky install"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/julianstephens/budget-tracker.git"
-    },
-    "author": "",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/julianstephens/budget-tracker/issues"
-    },
-    "homepage": "https://github.com/julianstephens/budget-tracker#readme",
-    "devDependencies": {
-        "@tsconfig/node16-strictest-esm": "^1.0.3",
-        "@types/cors": "^2.8.12",
-        "@types/express": "^4.17.14",
-        "@types/express-jwt": "^6.0.4",
-        "@types/node": "^18.7.18",
-        "@typescript-eslint/eslint-plugin": "^5.38.0",
-        "@typescript-eslint/parser": "^5.38.0",
-        "eslint": "^8.23.1",
-        "eslint-plugin-no-loops": "^0.3.0",
-        "prettier": "^2.7.1",
-        "prisma": "^4.3.1",
-        "ts-node-dev": "^2.0.0",
-        "tsconfig-paths": "^4.1.0",
-        "typescript": "^4.8.3"
-    },
-    "dependencies": {
-        "@prisma/client": "^4.3.1",
-        "@types/lodash": "^4.14.185",
-        "@types/morgan": "^1.9.3",
-        "body-parser": "^1.20.0",
-        "cookie-parser": "^1.4.6",
-        "cors": "^2.8.5",
-        "dotenv": "^16.0.2",
-        "express": "^4.18.1",
-        "express-jwt": "^7.7.5",
-        "helmet": "^6.0.0",
-        "jwks-rsa": "^2.1.4",
-        "lodash": "^4.17.21",
-        "morgan": "^1.10.0",
-        "redis": "^4.3.1",
-        "redis-om": "^0.3.6",
-        "winston": "^3.8.2",
-        "winston-daily-rotate-file": "^4.7.1"
-    }
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.ts",
+  "scripts": {
+    "dev:debug": "tsnd -r tsconfig-paths/register --respawn --inspect=0.0.0.0:9229 -- ./src/app.ts",
+    "dev": "tsnd -r tsconfig-paths/register --transpile-only --respawn ./src/app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julianstephens/budget-tracker.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/julianstephens/budget-tracker/issues"
+  },
+  "homepage": "https://github.com/julianstephens/budget-tracker#readme",
+  "devDependencies": {
+    "@tsconfig/node16-strictest-esm": "^1.0.3",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.14",
+    "@types/express-jwt": "^6.0.4",
+    "@types/node": "^18.7.18",
+    "@typescript-eslint/eslint-plugin": "^5.38.0",
+    "@typescript-eslint/parser": "^5.38.0",
+    "eslint": "^8.23.1",
+    "eslint-plugin-no-loops": "^0.3.0",
+    "prettier": "^2.7.1",
+    "prisma": "^4.3.1",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.1.0",
+    "typescript": "^4.8.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.3.1",
+    "@types/lodash": "^4.14.185",
+    "@types/morgan": "^1.9.3",
+    "body-parser": "^1.20.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "express-jwt": "^7.7.5",
+    "helmet": "^6.0.0",
+    "jwks-rsa": "^2.1.4",
+    "lodash": "^4.17.21",
+    "morgan": "^1.10.0",
+    "redis": "^4.3.1",
+    "redis-om": "^0.3.6",
+    "winston": "^3.8.2",
+    "winston-daily-rotate-file": "^4.7.1"
+  }
 }
