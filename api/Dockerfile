@@ -13,7 +13,7 @@ ENV NODE_ENV = $NODE_ENV
 
 COPY package*.json ./
 
-RUN npm install 
+RUN yarn install 
 
 COPY  . .
 
@@ -27,7 +27,7 @@ ENV NODE_ENV = $NODE_ENV
 
 COPY package*.json ./
 
-RUN npm ci 
+RUN yarn install 
 
 COPY  . .
 

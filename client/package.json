@@ -7,7 +7,12 @@
     "start": "ng serve --host 0.0.0.0 --disable-host-check",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "code:check": "yarn code:lint; yarn code:format --check",
+    "code:clean": "yarn code:lint --fix; yarn code:format --write",
+    "code:lint": "eslint --ext .js,.jsx,.ts,.tsx \"src/\"",
+    "code:format": "prettier './src/**/**.{js,jsx,ts,tsx}'",
+    "code:check:rules": "npx eslint-config-prettier .eslintrc.js"
   },
   "private": true,
   "dependencies": {
@@ -36,7 +41,7 @@
     "@angular/compiler-cli": "^14.2.0",
     "@schuchard/prettier": "^5.1.0",
     "@types/jasmine": "~4.0.0",
-    "husky": "latest",
+    "husky": "^8.0.1",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
@@ -44,18 +49,19 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "lint-staged": "latest",
+    "poetic": "^1.7.0",
     "prettier": "latest",
     "tslint-config-prettier": "latest",
     "typescript": "~4.7.2"
   },
   "husky": {
-      "hooks": {
-        "pre-commit": "lint-staged"
-      }
-    },
-    "lint-staged": {
-      "*.{js,json,css,scss,less,md,ts,html,component.html}": [
-        "prettier --write"
-      ]
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,json,css,scss,less,md,ts,html,component.html}": [
+      "prettier --write"
+    ]
   }
+}
