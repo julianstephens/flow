@@ -11,6 +11,7 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "no-loops/no-loops": 2
+    "no-loops/no-loops": 2,
+    "no-unused-vars": 1,
   }
 }

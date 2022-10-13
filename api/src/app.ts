@@ -3,10 +3,13 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import { DBContext as db } from "db/db-context";
 import dotenv from "dotenv";
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import helmet from "helmet";
-import handleError from "middlewares/error-handler";
+import handleError from "middlewares/error-handler.middleware";
+import { checkJWT } from "middlewares/jwt.middleware";
 import morgan from "morgan";
+
+import { router as pong } from "./routes/pong.routes";
 
 dotenv.config();
 
@@ -15,16 +18,22 @@ db.init();
 const app: Express = express();
 const port: number = Number.parseInt(process.env.PORT) || 3000;
 
+const opts: cors.CorsOptions = {
+  origin: ["http://localhost:4200"],
+};
+
 app.use(helmet());
+app.use(cors(opts));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
+app.use(checkJWT.unless({ path: ["api/auth/login", "api/auth/register"] }));
 app.use(morgan("dev"));
 app.use(handleError);
 
-app.get("/ping", (req: Request, res: Response) => {
-  res.send("Hello, world!");
-});
+const api = express.Router();
+api.use("/", pong);
+
+app.use("/api", api);
 
 app.listen(port, () => {
   logger.info(`⚡️ [server]: Server is running at https://localhost:${port}`);
