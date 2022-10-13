@@ -4,12 +4,13 @@ import { isNull } from "lodash";
 import { Client } from "redis-om";
 
 // Single shared DB Context instance
-let instance: DBContext = null;
+let instance: DBContext | null = null;
 
-const REDIS_URL = process.env.REDIS_URL;
+const { REDIS_URL } = process.env;
 
 export class DBContext {
   client: PrismaClient;
+
   cache: Client;
 
   private constructor() {

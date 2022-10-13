@@ -1,8 +1,8 @@
 import { expressjwt, GetVerificationKey } from "express-jwt";
 import jwksRsa from "jwks-rsa";
 
-const ISSUER = process.env["AUTH0_ISSUER"];
-const AUDIENCE = process.env["AUDIENCE"];
+const ISSUER = process.env.AUTH0_ISSUER;
+const { AUDIENCE } = process.env;
 
 export const checkJWT = expressjwt({
   secret: jwksRsa.expressJwtSecret({

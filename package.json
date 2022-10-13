@@ -9,11 +9,19 @@
     "postinstall": "husky install",
     "clean:api": "cd api && yarn run code:clean",
     "clean:client": "cd client && yarn run code:clean",
-    "code:clean": "yarn run clean:api && clean:client"
+    "clean:project": "yarn run clean:api && yarn run clean:client",
+    "code:clean": "yarn code:lint --fix; yarn code:format --write",
+    "code:check": "yarn code:lint; yarn code:format --check",
+    "code:lint": "eslint --ext .js,.jsx,.ts,.tsx \"src/\"",
+    "code:format": "prettier './src/**/**.{js,jsx,ts,tsx}'",
+    "code:check:rules": "npx eslint-config-prettier .eslintrc.js"
   },
   "devDependencies": {
+    "@typescript-eslint/parser": "^5.40.0",
+    "eslint-import-resolver-typescript": "^3.5.1",
     "husky": "^8.0.1",
-    "lint-staged": "^13.0.3"
+    "lint-staged": "^13.0.3",
+    "poetic": "^1.7.0"
   },
   "husky": {
     "hooks": {

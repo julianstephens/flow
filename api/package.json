@@ -1,5 +1,6 @@
 {
   "name": "api",
+  "license": "MIT",
   "version": "1.0.0",
   "description": "",
   "main": "app.ts",
@@ -18,7 +19,6 @@
     "url": "git+https://github.com/julianstephens/budget-tracker.git"
   },
   "author": "",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/julianstephens/budget-tracker/issues"
   },

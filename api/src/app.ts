@@ -17,7 +17,7 @@ db.init();
 
 const app: Express = express();
 const port: number = process.env.PORT
-  ? Number.parseInt(process.env.PORT)
+  ? Number.parseInt(process.env.PORT, 10)
   : 3000;
 
 const opts: cors.CorsOptions = {

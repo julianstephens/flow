@@ -4,17 +4,17 @@ import { Injectable } from "@angular/core";
   providedIn: "root",
 })
 export class LocalStorageService {
-  private _key: string;
+  private key: string;
 
   constructor(key: string) {
-    this._key = key;
+    this.key = key;
   }
 
   set value(payload: any) {
     if (typeof payload === "string") {
-      localStorage.setItem(this._key, payload);
+      localStorage.setItem(this.key, payload);
     } else if (typeof payload === "object") {
-      localStorage.setItem(this._key, JSON.stringify(payload));
+      localStorage.setItem(this.key, JSON.stringify(payload));
     } else {
       throw new Error("LocalStorage Error: 'value' can only be a string or an object.");
     }
@@ -22,9 +22,9 @@ export class LocalStorageService {
 
   get value(): any {
     let res;
-    const payload = localStorage.getItem(this._key);
+    const payload = localStorage.getItem(this.key);
 
-    if (!payload) throw new Error(`LocalStorage Error: no value exists for 'key' <${this._key}>`);
+    if (!payload) throw new Error(`LocalStorage Error: no value exists for 'key' <${this.key}>`);
 
     try {
       res = JSON.parse(payload);

@@ -7,13 +7,14 @@ import { ApiService } from "./services/api.service";
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  title: string = "client";
-  test: string = "";
+  title = "client";
+
+  test = "";
 
   constructor(private apiSVC: ApiService) {}
 
   ngOnInit() {
-    this.apiSVC.get<string>("/ping").subscribe(res => {
+    this.apiSVC.get<string>("/ping").subscribe((res) => {
       this.test = res.json();
     });
   }
