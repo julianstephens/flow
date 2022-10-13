@@ -13,6 +13,6 @@ ENV NODE_ENV = $NODE_ENV
 
 COPY package*.json ./
 
-RUN npm install 
+RUN yarn install 
 
 COPY  . .
