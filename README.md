@@ -5,8 +5,17 @@
 
 2. Install packages
 ```shell
+yarn install
+```
+
+```shell
 cd api
-npm i
+yarn install
+```
+
+```shell
+cd client
+yarn install
 ```
 
 3. Create db docker volume
@@ -55,6 +64,16 @@ DATABASE_URL=
 
 REDIS_URL=
 REDIS_PORT=
+```
+
+```
+# client/.env
+API_URI=
+
+AUTH0_DOMAIN=
+AUTH0_CLIENT=
+AUTH0_REDIRECT=
+AUTH0_AUDIENCE=
 ```
 
 5. Start project 
