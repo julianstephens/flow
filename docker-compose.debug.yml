@@ -2,12 +2,14 @@ version: '3.4'
 
 services:
   api:
-    image: api
+    container_name: budget_api
+    hostname: api
     build:
       context: api
       target: ${APP_ENV}
       args:
         APP_HOME: ${APP_HOME}
+    image: api:${API_IMG_VERSION}
     ports:
       - ${API_PORT_FORWARD}:${API_PORT}
       - ${API_DEBUG_PORT_FORWARD}:${API_DEBUG_PORT}
@@ -16,8 +18,25 @@ services:
       - .:${APP_HOME}
     links:
       - db
-    restart: on-failure
+      - redis
+    restart: on-failure 
     command: npm run dev:debug
+
+  client:
+    container_name: budget_client
+    hostname: client
+    build:
+      context: client
+      target: ${APP_ENV}
+      args:
+        APP_HOME: ${APP_HOME}
+    image: client:${CLIENT_IMG_VERSION}
+    ports:
+      - ${CLIENT_PORT_FORWARD}:${CLIENT_PORT}
+    volumes:
+      - .:${APP_HOME}
+    restart: on-failure 
+    command: npm run start
 
   db:
     image: postgres:14-alpine
@@ -33,6 +52,19 @@ services:
       - ${DB_PORT_FORWARD}:${DB_PORT}
     restart: always
 
+  redis: 
+    image: redis/redis-stack:latest
+    container_name: budget_redis
+    hostname: redis
+    ports: 
+      - ${REDIS_PORT_FORWARD}:${REDIS_PORT}
+      - ${REDIS_INSIGHT_PORT_FORWARD}:${REDIS_INSIGHT_PORT}
+    volumes:
+      - budget_redis:/data
+    restart: always
+
 volumes:
   budget_pgdata:
+    external: true
+  budget_redis:
     external: true
