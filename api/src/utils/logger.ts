@@ -1,13 +1,20 @@
-import { existsSync, mkdirSync } from "fs";
+import fs from "fs";
+// import * as url from "url";
 import winston from "winston";
 import winstonDaily from "winston-daily-rotate-file";
+
+// const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 // logs dir
 const logDir: string = process.env.LOG_DIR ? process.env.LOG_DIR : "./logs";
 
-if (!existsSync(logDir)) {
-  mkdirSync(logDir);
-}
+fs.access(logDir, (err) => {
+  if (err) {
+    fs.mkdir(logDir, (err) => {
+      if (err) throw err;
+    });
+  }
+});
 
 // Define log format
 const logFormat = winston.format.printf(
@@ -52,10 +59,7 @@ const logger = winston.createLogger({
 
 logger.add(
   new winston.transports.Console({
-    format: winston.format.combine(
-      winston.format.splat(),
-      winston.format.colorize(),
-    ),
+    format: winston.format.combine(winston.format.splat(), winston.format.colorize()),
   }),
 );
 

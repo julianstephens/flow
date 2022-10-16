@@ -8,14 +8,24 @@ WORKDIR $APP_HOME/api
 ##########################
 FROM base as development
 
+# set env dev or prod
 ARG NODE_ENV
 ENV NODE_ENV = $NODE_ENV
 
-COPY package*.json ./
+# install dependencies
+COPY package.json ./
+COPY yarn.lock ./
 
 RUN yarn install 
 
+# copy api src files
 COPY  . .
+
+# generate .js files w/ sourceMap comments
+RUN npx tsc --sourceMap
+
+# create log dir
+RUN mkdir -p $APP_HOME/logs/api
 
 ##########################
 # PROD Stage

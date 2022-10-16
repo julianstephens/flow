@@ -2,6 +2,6 @@ import { Request, Response, Router } from "express";
 
 export const router: Router = Router();
 
-router.get("/ping", (req: Request, res: Response) => {
-  res.send("Hello, world!");
+router.get("/ping", (_req: Request, res: Response) => {
+  res.json({ data: "Hello, world!" });
 });

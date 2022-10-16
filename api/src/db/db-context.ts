@@ -1,7 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import { logger } from "@utils/logger";
-import { isNull } from "lodash";
+import lodash from "lodash";
 import { Client } from "redis-om";
+import { logger } from "./../utils/logger.js";
+
+const { isNull } = lodash;
 
 // Single shared DB Context instance
 let instance: DBContext | null = null;
@@ -26,10 +28,7 @@ export class DBContext {
   }
 
   async connect() {
-    const [pg, redis] = await Promise.all([
-      this.client.$connect(),
-      this.cache.open(REDIS_URL),
-    ]);
+    const [_pg, _redis] = await Promise.all([this.client.$connect(), this.cache.open(REDIS_URL)]);
   }
 
   static async init() {

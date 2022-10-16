@@ -3,11 +3,11 @@ export class AppError<T> {
 
   status!: number;
 
-  additionalInfo: T;
+  additionalInfo?: T;
 
-  constructor(message: string, status = 500, additionalInfo: T = null) {
+  constructor(message: string, status = 500, additionalInfo?: T) {
     this.message = message;
     this.status = status;
-    this.additionalInfo = additionalInfo;
+    this.additionalInfo = additionalInfo || undefined;
   }
 }
