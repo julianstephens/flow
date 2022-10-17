@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express, { Express } from "express";
 import helmet from "helmet";
-import "module-alias/register.js";
+import "module-alias/register";
 import morgan from "morgan";
 import { DBContext as db } from "./db/db-context.js";
 import handleError from "./middlewares/error-handler.middleware.js";

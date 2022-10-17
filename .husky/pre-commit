@@ -1,4 +1,56 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run clean:project
+x=1
+if git status --porcelain | grep "api"; then
+  echo "%===================================%"
+  echo "= $x Found changes in API."
+  echo "%===================================%"
+  {
+    echo "%===================================%"
+    echo "= $x:A Linting API..."
+    echo "%===================================%"
+    npm run lint:api
+  } || {
+    x=x+0.5
+    echo "%===================================%"
+    echo "= X You have eslint errors in API. Please fix them before committing." 1>&2
+    echo "%===================================%"
+    false
+  }
+
+  echo "%===================================%"
+  echo "= $x:B Formatting API..."
+  echo "%===================================%"
+  npm run format:api
+
+  x=$((x+1))
+fi
+
+if git status --porcelain | grep "api"; then
+  echo "%===================================%"
+  echo "= $x Found changes in Client."
+  echo "%===================================%"
+  {
+    echo "%===================================%"
+    echo "= $x:A Linting Client..."
+    echo "%===================================%"
+    npm run lint:client
+  } || {
+    echo "%===================================%"
+    echo "= X You have eslint errors in Client. Please fix them before committing." 1>&2
+    echo "%===================================%"
+    false
+  }
+
+  echo "%===================================%"
+  echo "= $x:B Formatting Client..."
+  echo "%===================================%"
+  npm run format:client
+  x=$((x+1))
+fi
+
+echo "%===================================%"
+echo "= $x Removing environment variables..."
+echo "%===================================%"
+npm run clean:env

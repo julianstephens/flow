@@ -10,8 +10,8 @@ const logDir: string = process.env.LOG_DIR ? process.env.LOG_DIR : "./logs";
 
 fs.access(logDir, (err) => {
   if (err) {
-    fs.mkdir(logDir, (err) => {
-      if (err) throw err;
+    fs.mkdir(logDir, (e) => {
+      if (e) throw e;
     });
   }
 });

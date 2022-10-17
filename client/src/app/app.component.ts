@@ -1,6 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { ApiService } from "./services/api.service";
 
+interface ITestResult {
+  data: string;
+}
+
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -14,8 +18,8 @@ export class AppComponent implements OnInit {
   constructor(private apiSVC: ApiService) {}
 
   ngOnInit() {
-    this.apiSVC.get<string>("/ping").subscribe((res) => {
-      this.test = res.json();
+    this.apiSVC.get<ITestResult>("/ping").subscribe((res) => {
+      this.test = res.body?.data || "";
     });
   }
 }

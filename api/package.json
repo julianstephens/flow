@@ -10,7 +10,7 @@
     "dev": "tsnd -r tsconfig-paths/register --transpile-only --respawn ./src/app.ts",
     "test": "ts-node-esm ./src/app.ts",
     "code:check": "yarn code:lint; yarn code:format --check",
-    "code:clean": "yarn code:lint --fix; yarn code:format --write",
+    "code:clean": "yarn code:lint --fix --quiet --max-warnings=0; yarn code:format --write",
     "code:lint": "eslint --ext .js,.jsx,.ts,.tsx \"src/\"",
     "code:format": "prettier './src/**/**.{js,jsx,ts,tsx}'",
     "code:check:rules": "npx eslint-config-prettier .eslintrc.js"

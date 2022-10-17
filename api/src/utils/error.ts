@@ -5,7 +5,7 @@ export class AppError<T> {
 
   additionalInfo?: T;
 
-  constructor(message: string, status = 500, additionalInfo?: T) {
+  constructor(message: string, additionalInfo?: T, status = 500) {
     this.message = message;
     this.status = status;
     this.additionalInfo = additionalInfo || undefined;

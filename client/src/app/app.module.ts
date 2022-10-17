@@ -3,7 +3,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AuthHttpInterceptor, AuthModule } from "@auth0/auth0-angular";
 import { environment as env } from "src/environments/environment";
 
-import { HttpClient, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgSelectModule } from "@ng-select/ng-select";
@@ -17,7 +17,7 @@ import { HomeComponent } from "./components/home/home.component";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClient,
+    HttpClientModule,
     AuthModule.forRoot({
       domain: env.auth.domain || "",
       clientId: env.auth.clientId || "",

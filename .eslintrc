@@ -1,13 +1,22 @@
 {
-  "extends": ["./node_modules/poetic/config/eslint/eslint-config.js"],
+  "extends": [
+    "./node_modules/poetic/config/eslint/eslint-config.js"
+  ],
   "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 11,
     "tsconfigRootDir": ".",
-    "project": [".eslintrc", "./api/tsconfig.json", "./client/tsconfig.json"]
+    "project": [
+      ".eslintrc",
+      "./api/tsconfig.json",
+      "./client/tsconfig.json"
+    ]
   },
-  "plugins": ["@typescript-eslint", "import"],
+  "plugins": [
+    "@typescript-eslint",
+    "import"
+  ],
   "rules": {
     "class-methods-use-this": 1,
     "no-useless-constructor": 1,
@@ -17,7 +26,6 @@
     "new-cap": 0,
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-unused-vars": "warn",
-    "@typescript-eslint/no-unused-": "warn",
     "@typescript-eslint/no-empty-function": "warn",
     "import/prefer-default-export": "off"
   },

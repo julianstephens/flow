@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import lodash from "lodash";
 import { Client } from "redis-om";
-import { logger } from "./../utils/logger.js";
+import { logger } from "../utils/logger.js";
 
 const { isNull } = lodash;
 
