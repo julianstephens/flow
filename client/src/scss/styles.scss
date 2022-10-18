@@ -1,0 +1,21 @@
+@import "variables";
+@import "utils";
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  background: $bg;
+  font-family: $font-primary;
+  color: $black;
+  font-size: $font-md;
+}
+
+a {
+  color: $black;
+  text-decoration: none;
+
+  &:hover {
+    color: $blue;
+  }
+}

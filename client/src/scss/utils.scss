@@ -1,0 +1,99 @@
+@import "variables";
+
+/*****************************
+* COLORS
+*****************************/
+$colors: (
+  "black": $black,
+  "blue": $blue,
+  "grey": $grey,
+  "grey-light": $grey-light,
+  "grey-dark": $grey-dark,
+  "gold": $gold,
+  "green-soft": $green-soft,
+);
+@each $name, $color in $colors {
+  .color-#{$name} {
+    color: $color !important;
+  }
+  .bg-#{$name} {
+    background: $color !important;
+  }
+}
+
+/*****************************
+* FONTS
+*****************************/
+.font-logo {
+  font-family: $font-logo !important;
+}
+.font-hero {
+  font-family: $font-hero !important;
+}
+
+$fonts: (
+  "2xl": $font-2xl,
+  "xl": $font-xl,
+  "lg": $font-lg,
+  "md": $font-md,
+  "sm": $font-sm,
+  "xs": $font-xs,
+  "2xs": $font-2xs,
+  "3xs": $font-3xs,
+);
+@each $size, $font in $fonts {
+  .font-#{$size} {
+    font-size: $font !important;
+  }
+}
+
+/*****************************
+* SPACING
+*****************************/
+$sides: (
+  "t": "top",
+  "b": "bottom",
+  "s": "left",
+  "e": "right",
+);
+@each $abbrev, $side in $sides {
+  // margin
+  .m#{$abbrev}-xl {
+    margin-#{$side}: $space-xl !important;
+  }
+  .m#{$abbrev}-lg {
+    margin-#{$side}: $space-lg !important;
+  }
+
+  // padding
+  .p#{$abbrev}-xl {
+    padding-#{$side}: $space-xl !important;
+  }
+  .p#{$abbrev}-lg {
+    padding-#{$side}: $space-lg !important;
+  }
+}
+
+$spaces: (
+  "xl": $space-xl,
+  "lg": $space-lg,
+);
+@each $size, $space in $spaces {
+  .mx-#{$size} {
+    margin-left: $space !important;
+    margin-right: $space !important;
+  }
+  .my-#{$size} {
+    margin-top: $space !important;
+    margin-right: $space !important;
+  }
+
+  .px-#{$size} {
+    margin-left: $space !important;
+    margin-right: $space !important;
+  }
+  .py-#{$size} {
+    margin-top: $space !important;
+    margin-right: $space !important;
+  }
+}
