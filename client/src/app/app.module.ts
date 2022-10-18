@@ -9,11 +9,11 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { AuthButtonComponent } from "./components/auth-button/auth-button.component";
-import { HomeComponent } from "./components/home/home.component";
+import { IconButtonComponent } from "./common/icon-button/icon-button.component";
+import { LandingComponent } from "./landing/landing.component";
 
 @NgModule({
-  declarations: [AppComponent, AuthButtonComponent, HomeComponent],
+  declarations: [AppComponent, LandingComponent, IconButtonComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

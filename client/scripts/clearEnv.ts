@@ -1,9 +1,8 @@
 import fs from "fs/promises";
 
-
 const clearEnv = async (isProd: boolean = false) => {
   const envFileContent = `
-  import {IEnvironment} from "@app/models/common.models";
+  import {IEnvironment} from "@app/common/common.models";
 
   export const environment: IEnvironment = {
     production: ${isProd},
@@ -18,7 +17,7 @@ const clearEnv = async (isProd: boolean = false) => {
   `;
 
   const targetPath = `./src/environments/environment${isProd ? ".prod" : ""}.ts`;
-  
+
   try {
     await fs.writeFile(targetPath, envFileContent);
     console.log(`ClearEnv: Removed ${isProd ? "PROD" : "DEV"} .env for git`);
@@ -27,8 +26,8 @@ const clearEnv = async (isProd: boolean = false) => {
   }
 };
 
-// Clear dev 
+// Clear dev
 clearEnv();
 
-// Clear prod 
+// Clear prod
 clearEnv(true);

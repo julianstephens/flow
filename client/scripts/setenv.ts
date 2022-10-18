@@ -2,10 +2,11 @@ import dotenv from "dotenv";
 import { writeFile } from "fs";
 import yargs from "yargs";
 
-dotenv.config({ path: "./.env"});
+dotenv.config({ path: "./.env" });
 
-const parser = yargs(process.argv.slice(2))
-  .options({ environment: { type: "string", default: "development" } })
+const parser = yargs(process.argv.slice(2)).options({
+  environment: { type: "string", default: "development" },
+});
 
 const argv = await parser.argv;
 const { environment } = argv;
@@ -18,7 +19,7 @@ const targetPath = isProd
   : `./src/environments/environment.ts`;
 
 const envFileContent = `
-import {IEnvironment} from "@app/models/common.models";
+import {IEnvironment} from "@app/common/common.models";
 
 export const environment: IEnvironment = {
   production: ${isProd},
@@ -32,7 +33,7 @@ export const environment: IEnvironment = {
 };
 `;
 
-writeFile(targetPath, envFileContent, err => {
+writeFile(targetPath, envFileContent, (err) => {
   console.log(`SetEnv: Wrote variables to ${targetPath}`);
 
   if (err) console.log(`SetEnv Error: ${err}`);

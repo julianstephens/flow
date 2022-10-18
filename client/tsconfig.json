@@ -17,6 +17,7 @@
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "strictPropertyInitialization": false,
     "target": "es2020",
     "module": "esnext",
     "lib": ["es2020", "dom"],
