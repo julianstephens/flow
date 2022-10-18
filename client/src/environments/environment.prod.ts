@@ -1,5 +1,5 @@
 
-  import {IEnvironment} from "@app/models/common.models";
+  import {IEnvironment} from "@app/common/common.models";
 
   export const environment: IEnvironment = {
     production: true,

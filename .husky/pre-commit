@@ -27,7 +27,7 @@ if git status --porcelain | grep "api"; then
   x=$((x+1))
 fi
 
-if git status --porcelain | grep "api"; then
+if git status --porcelain | grep "client"; then
   echo "%===================================%"
   echo "= $x Found changes in Client."
   echo "%===================================%"
@@ -50,7 +50,7 @@ if git status --porcelain | grep "api"; then
   x=$((x+1))
 
   echo "%===================================%"
-  echo "= $x Removing environment variables..."
+  echo "= $x:C Removing environment variables..."
   echo "%===================================%"
   npm run clean:env
 fi
