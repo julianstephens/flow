@@ -48,9 +48,9 @@ if git status --porcelain | grep "api"; then
   echo "%===================================%"
   npm run format:client
   x=$((x+1))
-fi
 
-echo "%===================================%"
-echo "= $x Removing environment variables..."
-echo "%===================================%"
-npm run clean:env
+  echo "%===================================%"
+  echo "= $x Removing environment variables..."
+  echo "%===================================%"
+  npm run clean:env
+fi
