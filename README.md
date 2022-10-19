@@ -86,6 +86,9 @@ docker compose up -d --build
 Access the CLI for your API container (can be done via Docker CLI or Docker Desktop)
 
 ```
-cd api
+cd api/prisma
 npx prisma migrate dev
 ```
+
+
+
