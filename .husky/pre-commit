@@ -4,7 +4,7 @@
 x=1
 if git diff --cached --quiet -- "api/*.ts"; then
   echo "%===================================%"
-  echo "= $x No changes in API (Skipping)"
+  echo "= $x No changes in .ts API (Skipping)"
   echo "%===================================%"
 else 
   echo "%===================================%"
@@ -32,9 +32,9 @@ else
 fi
 
 
-if git diff --cached --quiet -- "client/*.ts"; then
+if git diff --cached --name-only --quiet -- "client/*.ts"; then
   echo "%===================================%"
-  echo "= $x No changes in Client (Skipping)"
+  echo "= $x No changes in .ts Client (Skipping)"
   echo "%===================================%"
 else
   echo "%===================================%"
@@ -61,5 +61,10 @@ else
   echo "= $x:C Removing environment variables..."
   echo "%===================================%"
   npm run clean:env
-  git add . && git commit --amend --no-edit
+
+  if git diff --name-only --quiet ./client/src/environments/*; then
+    true
+  else
+    git add ./client/src/environments/* && git commit --amend --no-edit
+  fi
 fi

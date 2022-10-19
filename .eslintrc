@@ -9,6 +9,7 @@
     },
     "tsconfigRootDir": ".",
     "project": [
+      ".eslintrc",
       "./api/tsconfig.json",
       "./client/tsconfig.json"
     ]
