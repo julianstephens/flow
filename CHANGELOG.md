@@ -1,11 +1,13 @@
 # Changelog
 
-## Sprint: 09.12.2022-09.30.2022
+## Sprint: 10.03.2022-10.24.2022
 
 #### Changed
 - Updated project to use yarn
 
+
 #### Added 
+- Added scss variables, mixins, and util classes
 
 ---
 

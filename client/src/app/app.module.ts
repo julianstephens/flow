@@ -10,10 +10,11 @@ import { NgSelectModule } from "@ng-select/ng-select";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { IconButtonComponent } from "./common/icon-button/icon-button.component";
+import { DashboardComponent } from "./dashboard/dashboard.component";
 import { LandingComponent } from "./landing/landing.component";
 
 @NgModule({
-  declarations: [AppComponent, LandingComponent, IconButtonComponent],
+  declarations: [AppComponent, LandingComponent, IconButtonComponent, DashboardComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

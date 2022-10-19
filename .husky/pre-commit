@@ -47,11 +47,9 @@ if git status --porcelain | grep "client"; then
   echo "= $x:B Formatting Client..."
   echo "%===================================%"
   npm run format:client
-  x=$((x+1))
-fi
 
-echo "%===================================%"
-echo "= $x Removing environment variables..."
-echo "%===================================%"
-npm run clean:env
-x=$((x+1))
+  echo "%===================================%"
+  echo "= $x:C Removing environment variables..."
+  echo "%===================================%"
+  npm run clean:env
+fi
