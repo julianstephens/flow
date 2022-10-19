@@ -50,33 +50,22 @@ $fonts: (
 /*****************************
 * SPACING
 *****************************/
+$spaces: (
+  "3xl": $space-3xl,
+  "2xl": $space-2xl,
+  "xl": $space-xl,
+  "lg": $space-lg,
+  "md": $space-md,
+  "sm": $space-sm,
+  "xs": $space-xs,
+  "2xs": $space-2xs,
+  "3xs": $space-3xs,
+);
 $sides: (
   "t": "top",
   "b": "bottom",
   "s": "left",
   "e": "right",
-);
-@each $abbrev, $side in $sides {
-  // margin
-  .m#{$abbrev}-xl {
-    margin-#{$side}: $space-xl !important;
-  }
-  .m#{$abbrev}-lg {
-    margin-#{$side}: $space-lg !important;
-  }
-
-  // padding
-  .p#{$abbrev}-xl {
-    padding-#{$side}: $space-xl !important;
-  }
-  .p#{$abbrev}-lg {
-    padding-#{$side}: $space-lg !important;
-  }
-}
-
-$spaces: (
-  "xl": $space-xl,
-  "lg": $space-lg,
 );
 @each $size, $space in $spaces {
   .mx-#{$size} {
@@ -95,5 +84,20 @@ $spaces: (
   .py-#{$size} {
     margin-top: $space !important;
     margin-right: $space !important;
+  }
+
+  @each $abbrev, $side in $sides {
+    .m#{$abbrev}-#{$size} {
+      margin-#{$side}: $space !important;
+    }
+    .m#{$abbrev}-lg {
+      margin-#{$side}: $space !important;
+    }
+    .p#{$abbrev}-xl {
+      padding-#{$side}: $space !important;
+    }
+    .p#{$abbrev}-lg {
+      padding-#{$side}: $space !important;
+    }
   }
 }

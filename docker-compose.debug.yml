@@ -20,7 +20,7 @@ services:
       - db
       - redis
     restart: on-failure 
-    command: npm run dev:debug
+    command: yarn run dev:debug
 
   client:
     container_name: budget_client
@@ -36,7 +36,7 @@ services:
     volumes:
       - .:${APP_HOME}
     restart: on-failure 
-    command: npm run start
+    command: yarn run start
 
   db:
     image: postgres:14-alpine
