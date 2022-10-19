@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { AuthService, User } from "@auth0/auth0-angular";
 
 @Component({
   selector: "app-dashboard",
@@ -6,7 +7,13 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./dashboard.component.scss"],
 })
 export class DashboardComponent implements OnInit {
-  constructor() {}
+  constructor(private authSVC: AuthService) {}
 
-  ngOnInit(): void {}
+  user: User | undefined;
+
+  ngOnInit(): void {
+    this.authSVC.getUser().subscribe((user) => {
+      this.user = user;
+    });
+  }
 }
