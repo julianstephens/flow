@@ -11,7 +11,8 @@ FROM base as development
 ARG NODE_ENV
 ENV NODE_ENV = $NODE_ENV
 
-COPY package*.json ./
+COPY package.json ./
+COPY yarn.lock ./
 
 RUN yarn install 
 

@@ -20,7 +20,7 @@ services:
       - db
       - redis
     restart: on-failure 
-    command: yarn run test
+    command: yarn run dev
 
   client:
     container_name: budget_client
