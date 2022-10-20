@@ -14,7 +14,8 @@
     "format:api": "cd api && yarn run code:format --write",
     "lint:client": "cd client && yarn run code:lint --fix --quiet",
     "format:client": "cd client && yarn run code:format --write",
-    "clean:env": "cd client && npx ts-node-esm scripts/clearEnv.ts"
+    "clean:env": "cd client && npx ts-node-esm scripts/clearEnv.ts",
+    "commit": "git-cz"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
