@@ -5,20 +5,17 @@
     "experimentalResolver": true,
     "experimentalSpecifierResolution": "node",
     "esm": true,
-    "pretty": true,
+    "pretty": true
   },
   "compilerOptions": {
     "target": "ES2020",
     "module": "esnext",
     "lib": ["dom", "dom.iterable", "es2020"],
     "outDir": "dist",
-
     "forceConsistentCasingInFileNames": true,
-    
     "moduleResolution": "nodenext",
     "baseUrl": "./src",
     "esModuleInterop": true,
-
     "strict": true,
     "skipLibCheck": true,
     "isolatedModules": true,
@@ -27,16 +24,13 @@
     "sourceMap": true,
     "allowJs": true,
     "noEmit": true,
-
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-
-
     "paths": {
       "@utils/*": ["utils/*"],
       "@middlewares/*": ["middlewares/*"],
       "@controllers/*": ["controllers/*"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*.ts"]
 }

@@ -11,8 +11,12 @@
       "remoteRoot": "/usr/src/app/budget-tracker/api",
       "port": 9229,
       "address": "localhost",
-      "localRoot": "${workspaceFolder}",
-      "cwd": "${workspaceFolder}",
+      "localRoot": "${workspaceFolder}/api",
+      "cwd": "${workspaceFolder}/api",
+      "outFiles": [
+        "${workspaceFolder}/**/*.js",
+        "!**/node_modules/**"
+      ],
       "restart": true
     },
     {
