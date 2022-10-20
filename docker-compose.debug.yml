@@ -14,6 +14,8 @@ services:
     links:
       - db
       - redis
+    volumes:
+      - .:${APP_HOME}
     command: yarn debug:api
 
   tsoa: 
@@ -24,7 +26,11 @@ services:
     links:
       - db
       - redis
-    command: yarn watch:openapi 
+    volumes:
+      - ./api/src/controllers:$APP_HOME/api/src/controllers
+      - ./api/src/routes:$APP_HOME/api/src/routes
+      - ./api/openapi:$APP_HOME/api/openapi
+    command: yarn watch:openapi
 
   redoc: 
     image: redocly/redoc

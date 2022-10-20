@@ -23,7 +23,10 @@ const app: express.Express = express();
 const port: number = process.env.PORT ? Number.parseInt(process.env.PORT, 10) : 3000;
 
 const { CLIENT } = process.env;
-if (!CLIENT) throw Error("AppError: CLIENT env var not set");
+if (!CLIENT) {
+  logger.error("AppError: CLIENT env var not set");
+  throw Error();
+}
 
 const opts: cors.CorsOptions = {
   origin: [CLIENT],

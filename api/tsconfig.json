@@ -5,7 +5,8 @@
     "experimentalResolver": true,
     "experimentalSpecifierResolution": "node",
     "esm": true,
-    "pretty": true
+    "pretty": true,
+    "logError": true
   },
   "compilerOptions": {
     "target": "ES2020",
