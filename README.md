@@ -1,6 +1,7 @@
 # budget-tracker
 
 ## Setup Project 
+
 1. Clone repo
 
 2. Install packages
