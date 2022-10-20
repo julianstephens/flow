@@ -3,6 +3,7 @@ FROM node:16-alpine as base
 ARG APP_HOME
 WORKDIR $APP_HOME/api
 RUN chown -R node:node $APP_HOME/api
+RUN apk add --no-cache bash
 
 ##########################
 # DEV Stage

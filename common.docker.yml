@@ -5,6 +5,4 @@ services:
       target: ${APP_ENV}
       args:
         APP_HOME: ${APP_HOME}
-    volumes:
-      - .:${APP_HOME}
     restart: on-failure 
