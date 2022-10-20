@@ -1,20 +1,24 @@
 # budget-tracker
 
 ## Setup Project 
+
 1. Clone repo
 
 2. Install packages
+
+a. In the root directory:
 ```shell
 yarn install
 ```
 
+b. Open `api.code-workspace` in VSCode. In a terminal,
+
 ```shell
-cd api
 yarn install
 ```
 
+c. Open `client.code-workspace` in VSCode. In a terminal,
 ```shell
-cd client
 yarn install
 ```
 

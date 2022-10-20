@@ -3,7 +3,9 @@
   "ts-node": {
     "require": ["tsconfig-paths/register"],
     "experimentalResolver": true,
-    "experimentalSpecifierResolution": "node"
+    "experimentalSpecifierResolution": "node",
+    "esm": true,
+    "pretty": true
   },
   "compilerOptions": {
     "target": "ES2020",

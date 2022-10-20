@@ -5,14 +5,13 @@
     "type": "module",
     "scripts": {
         "ng": "ng",
-        "prettier": "prettier --write \"**/*.{js,json,css,scss,less,md,ts,html,component.html}\"",
         "config": "ts-node-esm ./scripts/setenv.ts",
-        "start": "npm run config -- --environment=dev && ng serve --host 0.0.0.0 --disable-host-check",
-        "build": "npm run config -- --environment=prod && ng build",
+        "start": "yarn run config -- --environment=dev && ng serve --host 0.0.0.0 --disable-host-check",
+        "build": "yarn run config -- --environment=prod && ng build",
         "test": "ng test",
         "code:check": "yarn code:lint; yarn code:format --check",
         "code:clean": "yarn code:lint --fix; yarn code:format --write",
-        "code:lint": "eslint --ext .js,.jsx,.ts,.tsx \"src/\"",
+        "code:lint": "npx eslint --ext .js,.jsx,.ts,.tsx \"src/\"",
         "code:format": "npx prettier ./src/**/**.{js,jsx,ts,tsx}",
         "code:check:rules": "npx eslint-config-prettier .eslintrc.js"
     },
