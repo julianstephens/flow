@@ -4,23 +4,38 @@ services:
   api:
     container_name: budget_api
     hostname: api
-    build:
-      context: api
-      target: ${APP_ENV}
-      args:
-        APP_HOME: ${APP_HOME}
-    image: api:${API_IMG_VERSION}
+    extends:
+      file: common.docker.yml
+      service: backend
     ports:
       - ${API_PORT_FORWARD}:${API_PORT}
       - ${API_DEBUG_PORT_FORWARD}:${API_DEBUG_PORT}
       - ${PRISMA_PORT_FORWARD}:${PRISMA_PORT}
-    volumes:
-      - .:${APP_HOME}
     links:
       - db
       - redis
-    restart: on-failure 
-    command: yarn run dev
+    command: yarn watch:api
+
+  tsoa: 
+    container_name: budget_tsoa
+    extends:
+      file: common.docker.yml
+      service: backend
+    links:
+      - db
+      - redis
+    command: yarn watch:openapi 
+
+  redoc: 
+    image: redocly/redoc
+    container_name: budget_redoc
+    hostname: docs
+    environment:
+      SPEC_URL: swagger/swagger.json
+    ports:
+      - ${REDOC_PORT_FORWARD}:${REDOC_PORT}
+    volumes:
+      - ./api/openapi/:/usr/share/nginx/html/swagger/
 
   client:
     container_name: budget_client
@@ -36,7 +51,7 @@ services:
     volumes:
       - .:${APP_HOME}
     restart: on-failure 
-    command: yarn run start
+    command: yarn start
 
   db:
     image: postgres:14-alpine

@@ -4,3 +4,4 @@ serviceWorker.*
 node_modules
 **/*/*.test.ts
 **/*/*.test.js
+**/*/.eslintrc

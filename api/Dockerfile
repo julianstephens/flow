@@ -2,6 +2,7 @@ FROM node:16-alpine as base
 
 ARG APP_HOME
 WORKDIR $APP_HOME/api
+RUN chown -R node:node $APP_HOME/api
 
 ##########################
 # DEV Stage
@@ -13,19 +14,20 @@ ARG NODE_ENV
 ENV NODE_ENV = $NODE_ENV
 
 # install dependencies
-COPY package.json ./
-COPY yarn.lock ./
-
+COPY --chown=node:node package.json yarn.lock ./
 RUN yarn install 
 
 # copy api src files
-COPY  . .
+COPY --chown=node:node . .
 
-# generate .js files w/ sourceMap comments
-RUN npx tsc --sourceMap
+USER node
 
-# create log dir
-RUN mkdir -p $APP_HOME/logs/api
+# generate routes from controllers
+RUN mkdir -p src/routes
+# RUN yarn run tsoa routes
+
+# compile ts
+RUN yarn run build
 
 ##########################
 # PROD Stage
@@ -35,7 +37,7 @@ FROM base as production
 ARG NODE_ENV
 ENV NODE_ENV = $NODE_ENV
 
-COPY package*.json ./
+COPY package.json ./
 
 RUN yarn install 
 
