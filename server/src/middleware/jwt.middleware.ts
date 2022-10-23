@@ -12,7 +12,7 @@ import { ExtractJwt, Strategy } from "passport-jwt";
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: "thisismysupersecretprivatekey1",
     issuer: process.env.AUTH0_ISSUER || "localhost",
-    audience: process.env.AUTH0_AUDIENCE ||"localhost",
+    audience: process.env.AUTH0_AUDIENCE || "localhost",
   },
 })
 export class JwtProtocol implements OnVerify {
