@@ -1,8 +1,8 @@
 node_modules
 test
 **/logs/*
-**/.log
+**/*.log
 **/.env
 public
 dist
-auth_config.json
+api/yarn-error.log
