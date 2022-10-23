@@ -4,7 +4,7 @@
 
 #### Changed
 - Updated project to use yarn
-
+- Rename api to server and convert to Ts.ED project: [Migrate project to Ts.ED](https://github.com/julianstephens/budget-tracker/issues/23)
 
 #### Added 
 - Added scss variables, mixins, and util classes
