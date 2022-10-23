@@ -5,9 +5,7 @@ export declare class UserModel implements User {
     fullName: string;
     shortName: string;
     email: string;
-    passwordHash: string;
     roles: Role[];
     createdAt: Date;
     updatedAt: Date;
-    deletedAt: Date | null;
 }

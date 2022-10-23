@@ -1,2 +1,2 @@
-export * from "./userModified";
-export * from "./userNotFound";
+export * from "./user/userModified.error";
+export * from "./user/userNotFound.error";

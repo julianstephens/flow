@@ -91,6 +91,7 @@ export class Server {
   protected settings: Configuration;
 
   public $beforeRoutesInit(): void | Promise<any> {
+    this.prisma.$use(new CacheMiddleware().cacheMiddleware());
     this.app
       .use(
         helmet({
@@ -111,6 +112,5 @@ export class Server {
       .use(methodOverride())
       .use(morgan("dev"));
 
-    this.prisma.$use(new CacheMiddleware().cacheMiddleware());
   }
 }

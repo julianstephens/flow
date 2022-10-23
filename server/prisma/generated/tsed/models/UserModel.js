@@ -18,28 +18,28 @@ __decorate([
     (0, schema_1.Property)(Number),
     (0, schema_1.Integer)(),
     (0, schema_1.Required)(),
+    (0, schema_1.Groups)("profile", "!creation"),
     __metadata("design:type", Number)
 ], UserModel.prototype, "id", void 0);
 __decorate([
     (0, schema_1.Property)(String),
     (0, schema_1.Required)(),
+    (0, schema_1.Description)("User full name. Must be their legal name."),
     __metadata("design:type", String)
 ], UserModel.prototype, "fullName", void 0);
 __decorate([
     (0, schema_1.Property)(String),
     (0, schema_1.Required)(),
+    (0, schema_1.Description)("User nickname."),
     __metadata("design:type", String)
 ], UserModel.prototype, "shortName", void 0);
 __decorate([
     (0, schema_1.Property)(String),
     (0, schema_1.Required)(),
+    (0, schema_1.Email)(),
+    (0, schema_1.Description)("User email. This email must be unique!"),
     __metadata("design:type", String)
 ], UserModel.prototype, "email", void 0);
-__decorate([
-    (0, schema_1.Property)(String),
-    (0, schema_1.Required)(),
-    __metadata("design:type", String)
-], UserModel.prototype, "passwordHash", void 0);
 __decorate([
     (0, schema_1.Required)(),
     (0, schema_1.Enum)(enums_1.Role),
@@ -57,10 +57,4 @@ __decorate([
     (0, schema_1.Required)(),
     __metadata("design:type", Date)
 ], UserModel.prototype, "updatedAt", void 0);
-__decorate([
-    (0, schema_1.Property)(Date),
-    (0, schema_1.Format)("date-time"),
-    (0, schema_1.Allow)(null),
-    __metadata("design:type", Date)
-], UserModel.prototype, "deletedAt", void 0);
 exports.UserModel = UserModel;
