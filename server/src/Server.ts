@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import helmet from "helmet";
 import methodOverride from "method-override";
+import morgan from "morgan";
 import { config } from "./config/index";
 import * as api from "./controllers/index";
 
@@ -49,7 +50,14 @@ if (!CLIENT_URL || !PORT) throw "CLIENT env var not set.";
     bodyParser.urlencoded({
       extended: true,
     }),
+    morgan("dev"),
   ],
+  views: {
+    root: `${__dirname}/../views`,
+    extensions: {
+      ejs: "ejs",
+    },
+  },
   exclude: ["**/*.spec.ts"],
   logger: {
     debug: true,
@@ -84,8 +92,7 @@ export class Server {
       .use(bodyParser.json())
       .use(bodyParser.urlencoded({ extended: true }))
       .use(cookieParser())
-      .use(methodOverride());
-    // .use(MorganMiddleware)
-    // .use(MetadataMiddleware);
+      .use(methodOverride())
+      .use(morgan("dev"));
   }
 }
