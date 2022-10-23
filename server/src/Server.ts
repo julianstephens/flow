@@ -14,7 +14,7 @@ import { config } from "./config/index";
 import * as api from "./controllers/index";
 
 const { CLIENT_URL, PORT } = process.env;
-if (!CLIENT_URL || !PORT) throw "CLIENT env var not set.";
+if (!CLIENT_URL || !PORT) throw Error("CLIENT env var not set.");
 
 @Configuration({
   ...config,

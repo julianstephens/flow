@@ -1,8 +1,8 @@
-export enum ORDER_BY {
+export enum OrderBy {
   ASC = "asc",
   DESC = "desc",
 }
 export interface IOrderByFilter {
   prop: string;
-  direction: ORDER_BY;
+  direction: OrderBy;
 }

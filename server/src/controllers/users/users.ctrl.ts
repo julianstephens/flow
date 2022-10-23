@@ -1,11 +1,11 @@
 import { UserModel, UsersRepository } from "@generated/tsed";
+import { IUserSearchParams, UserNotFound, UserNotFoundDesc } from "@interfaces/user.interfaces";
 import { Prisma } from "@prisma/client";
 import { Controller, Inject } from "@tsed/di";
 import { BadRequest } from "@tsed/exceptions";
 import { BodyParams, PathParams } from "@tsed/platform-params";
 import { Description, Get, Name, Returns, Summary } from "@tsed/schema";
 import lodash from "lodash";
-import { IUserSearchParams, UserNotFound, UserNotFoundDesc } from "src/interfaces/user.interfaces";
 
 @Controller("/users")
 @Name("Users")
@@ -18,7 +18,7 @@ export class UserCtrl {
   @Returns(200, UserModel).Description("A user")
   @Returns(404).Description(UserNotFoundDesc)
   async get(@PathParams("id") @Description("User ID") id: number): Promise<UserModel> {
-    if (isNaN(id)) {
+    if (Number.isNaN(id)) {
       const err = new BadRequest("Not a number");
       err.errors = [{ message: "ID is not a number" }];
       throw err;
@@ -31,7 +31,7 @@ export class UserCtrl {
     };
 
     const user = this.repo.findUnique(args);
-    if (lodash.isNil(user)) throw UserNotFound;
+    if (lodash.isNil(user)) throw UserNotFound();
 
     return user as any as UserModel;
   }
@@ -62,7 +62,7 @@ export class UserCtrl {
     }
 
     const users = this.repo.findMany(args);
-    if (lodash.isNil(users)) throw UserNotFound;
+    if (lodash.isNil(users)) throw UserNotFound();
 
     return users as any as UserModel[];
   }
