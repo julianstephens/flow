@@ -111,6 +111,5 @@ export class Server {
       .use(cookieParser())
       .use(methodOverride())
       .use(morgan("dev"));
-
   }
 }

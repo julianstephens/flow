@@ -1,12 +1,12 @@
 import { UserModel, UsersRepository } from "@generated/tsed";
 import { IDFormatException, StatusCodes } from "@interfaces/common.interfaces";
 import {
-    IUserInput,
-    IUserSearchFilters,
-    UserCreateExample,
-    UserNotFoundDesc,
-    UserSearchParamsExample,
-    UserSelectProfile
+  IUserInput,
+  IUserSearchFilters,
+  UserCreateExample,
+  UserNotFoundDesc,
+  UserSearchParamsExample,
+  UserSelectProfile,
 } from "@interfaces/user.interfaces";
 import { Prisma } from "@prisma/client";
 import { Controller, Inject } from "@tsed/di";
@@ -25,9 +25,11 @@ export class UserCtrl {
   @Summary("Filter users by name or email")
   @Returns(StatusCodes.OK, Array).Of(UserModel).Description("A list of users")
   @Returns(StatusCodes.NOT_FOUND).Description(UserNotFoundDesc)
-  async search(@Example(UserSearchParamsExample) @BodyParams("filters") filters: IUserSearchFilters): Promise<UserModel[]> {
+  async search(
+    @Example(UserSearchParamsExample) @BodyParams("filters") filters: IUserSearchFilters,
+  ): Promise<UserModel[]> {
     const args: Prisma.UserFindManyArgs = { select: UserSelectProfile };
-    
+
     if (filters.limit) {
       args.take = filters.limit;
     }
@@ -86,22 +88,25 @@ export class UserCtrl {
 
     return user as any as UserModel;
   }
- 
+
   @Put("/:id")
   @Summary("Update a user")
   @Returns(StatusCodes.OK, UserModel).Description("The updated user")
   @Returns(StatusCodes.NOT_FOUND).Description(UserNotFoundDesc)
-  async edit(@PathParams("id") @Description("User ID") id: number, @Example(UserCreateExample) @BodyParams("data") data: IUserInput): Promise<UserModel> {
-    const args: Prisma.UserUpdateArgs = { 
+  async edit(
+    @PathParams("id") @Description("User ID") id: number,
+    @Example(UserCreateExample) @BodyParams("data") data: IUserInput,
+  ): Promise<UserModel> {
+    const args: Prisma.UserUpdateArgs = {
       where: {
-        id
+        id,
       },
       data: {
-        ...data
-      }
-    } 
-    
-    const user = await this.repo.update(args)
+        ...data,
+      },
+    };
+
+    const user = await this.repo.update(args);
     if (!user || lodash.isNil(user)) throw new UserNotFound();
 
     return user as any as UserModel;

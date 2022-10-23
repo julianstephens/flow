@@ -3,7 +3,6 @@ import fs from "fs";
 import winston from "winston";
 import winstonDaily from "winston-daily-rotate-file";
 
-
 // logs dir
 const logDir: string = process.env.LOG_DIR ? process.env.LOG_DIR : "./logs";
 
