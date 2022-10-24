@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
+}
+
+generator tsed {
+  provider           = "tsed-prisma"
+  output             = "../prisma/generated/tsed"
+  emitTranspiledCode = true
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  /// @TsED.Groups("profile", "!creation")
+  id        Int      @id @default(autoincrement())
+  /// @TsED.Description("User full name. Must be their legal name.")
+  /// @TsEd.Groups("profile", "creation")
+  fullName  String   @map("full_name")
+  /// @TsED.Description("User nickname.")
+  /// @TsEd.Groups("profile")
+  shortName String   @map("short_name")
+  /// @TsED.Email()
+  /// @TsED.Description("User email. This email must be unique!")
+  /// @TsEd.Groups("profile", "creation")
+  email     String   @unique
+  /// @TsEd.CollectionOf(String)
+  /// @TsEd.Groups("roles", "!profile")
+  roles     Role[]   @default([USER])
+  /// @TsEd.Groups("time", "!profile")
+  createdAt DateTime @default(now()) @map("created_at")
+  /// @TsEd.Groups("time", "!profile")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
