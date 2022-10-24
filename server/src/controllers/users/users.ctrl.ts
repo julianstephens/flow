@@ -1,3 +1,4 @@
+import { UserModifyError, UserNotFound } from "@errors/index";
 import { UserModel, UsersRepository } from "@generated/tsed";
 import { IDFormatException, StatusCodes } from "@interfaces/common.interfaces";
 import {
@@ -13,7 +14,6 @@ import { Controller, Inject } from "@tsed/di";
 import { BodyParams, PathParams } from "@tsed/platform-params";
 import { Description, Example, Get, Groups, Name, Post, Put, Returns, Summary } from "@tsed/schema";
 import lodash from "lodash";
-import { UserModifyError, UserNotFound } from "src/errors";
 
 @Controller("/users")
 @Name("Users")

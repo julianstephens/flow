@@ -1,13 +1,15 @@
 {
   "ts-node": {
-    "require": ["tsconfig-paths/register"],
+    "require": [
+      "tsconfig-paths/register"
+    ],
     "pretty": true
   },
   "compilerOptions": {
     "baseUrl": ".",
     "sourceRoot": "src",
     "module": "commonjs",
-    "target": "esnext",
+    "target": "es2022",
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,
@@ -25,16 +27,38 @@
     "noEmit": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "lib": ["es7", "dom", "ESNext.AsyncIterable"],
-    "typeRoots": ["./node_modules/@types"],
+    "lib": [
+      "es7",
+      "dom",
+      "ESNext.AsyncIterable"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
     "paths": {
-      "@generated/*": ["./prisma/generated/*"],
-      "@controllers/*": ["./src/controllers/*"],
-      "@interfaces/*": ["./src/interfaces/*"],
-      "@logger/*": ["./src/config/logger/*"]
+      "@generated/*": [
+        "./prisma/generated/*"
+      ],
+      "@controllers/*": [
+        "./src/controllers/*"
+      ],
+      "@middleware/*": [
+        "./src/middleware/*"
+      ],
+      "@interfaces/*": [
+        "./src/interfaces/*"
+      ],
+      "@config/*": [
+        "./src/config/*"
+      ],
+      "@errors/*": [
+        "./src/errors/*"
+      ]
     }
   },
-  "include": ["src"],
+  "include": [
+    "src"
+  ],
   "linterOptions": {
     "exclude": []
   }

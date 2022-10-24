@@ -57,7 +57,7 @@ services:
     container_name: budget_redis
     hostname: redis
     ports: 
-      - ${REDIS_PORT_FORWARD}:${REDIS_PORT}
+      # - ${REDIS_PORT_FORWARD}:${REDIS_PORT}
       - ${REDIS_INSIGHT_PORT_FORWARD}:${REDIS_INSIGHT_PORT}
     volumes:
       - budget_redis:/data
