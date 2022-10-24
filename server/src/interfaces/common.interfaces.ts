@@ -16,7 +16,7 @@ export class IDFormatException extends BadRequest {
 export enum StatusCodes {
   OK = 200,
   CREATED = 201,
-  UPDATED = 204,
+  NO_CONTENT = 204,
   NOT_FOUND = 404,
   ERROR = 500,
 }

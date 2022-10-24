@@ -7,9 +7,8 @@ generator client {
 }
 
 generator tsed {
-  provider           = "tsed-prisma"
-  output             = "../prisma/generated/tsed"
-  emitTranspiledCode = true
+  provider = "tsed-prisma"
+  output   = "../prisma/generated/tsed"
 }
 
 datasource db {

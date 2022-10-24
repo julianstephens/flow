@@ -936,7 +936,7 @@
     tslib "2.4.0"
     uuid "8.3.2"
 
-"@tsed/components-scan@^7.2.3":
+"@tsed/components-scan@7.2.3":
   version "7.2.3"
   resolved "https://registry.yarnpkg.com/@tsed/components-scan/-/components-scan-7.2.3.tgz#654230454155872abc49d84e718ddf53e9e1746d"
   integrity sha512-4kf+9+Jb6PaYlpdys1yT/JyhEN4+x0mBC6WTZkB041W1HSqYtHiENBkjUbv3SJgL/Z1y2IpRVdq/gDGDYwON5w==
@@ -968,7 +968,7 @@
     fs-extra "10.0.1"
     tslib "2.4.0"
 
-"@tsed/exceptions@7.2.3", "@tsed/exceptions@^7.2.3":
+"@tsed/exceptions@7.2.3":
   version "7.2.3"
   resolved "https://registry.yarnpkg.com/@tsed/exceptions/-/exceptions-7.2.3.tgz#d186d1fa907399a8a08c9a02ebcfdfe52f354be2"
   integrity sha512-MV8QHiCeZ4zFD0yZO6vO1PkpdUB3i+ACxWUINFNbTqhfI10oKwDiju1n4Oz/oH5mHEBEit1e3aSGoI7tILt1Ag==
@@ -977,7 +977,7 @@
     statuses ">=2.0.1"
     tslib "2.4.0"
 
-"@tsed/ioredis@^7.2.3":
+"@tsed/ioredis@7.2.3":
   version "7.2.3"
   resolved "https://registry.yarnpkg.com/@tsed/ioredis/-/ioredis-7.2.3.tgz#e224cde04d2b6b115f57045acd5def61f08f6299"
   integrity sha512-Qzmnz0xtquOLnk42yrLqWQ4xsufAHY1qk/BxAQV23cSESr4SGMx1UEWZTNdFubHPjXMmkaSx6hDdCDcpTHp0Tg==
@@ -1100,7 +1100,7 @@
     ejs "^3.1.5"
     tslib "2.4.0"
 
-"@tsed/prisma@^7.2.3":
+"@tsed/prisma@7.2.3":
   version "7.2.3"
   resolved "https://registry.yarnpkg.com/@tsed/prisma/-/prisma-7.2.3.tgz#39ea2f7d2e34501998dfb813ae31724eb95a4288"
   integrity sha512-pmMuG8lFd2wwF9wZQ+YzGlysZrKkDFql4j9AxOCwqx7zxeFeGcd+Vvt0S5FSdLKcsLpgUG8InN2tHqywLBMmHg==

@@ -54,6 +54,9 @@ if (!CLIENT_URL || !PORT) throw Error("CLIENT env var not set.");
     disableRoutesSummary: false,
   },
   passport: {},
+  prisma: {
+    errorFormat: "minimal",
+  },
   // ioredis: redisConf,
 })
 export class Server {

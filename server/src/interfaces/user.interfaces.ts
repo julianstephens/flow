@@ -28,7 +28,6 @@ export const UserCreateExample = {
   fullName: "Shinji Ikari",
   shortName: "Shinji",
   email: "shinji.ikari@xyz.com",
-  // password: "1234567",
 };
 
 export const UserSelectProfile: Prisma.UserSelect = {
