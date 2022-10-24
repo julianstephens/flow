@@ -1,19 +1,25 @@
-import { UserModifyError, UserNotFound } from "@errors/index";
+import { InvalidInput } from "@errors/common/invalidInput.error";
+import { UserNotFound } from "@errors/index";
 import { UserModel, UsersRepository } from "@generated/tsed";
-import { IDFormatException, StatusCodes } from "@interfaces/common.interfaces";
-import {
-  IUserInput,
-  IUserSearchFilters,
-  UserCreateExample,
-  UserNotFoundDesc,
-  UserSearchParamsExample,
-  UserSelectProfile,
-} from "@interfaces/user.interfaces";
+import { StatusCodes } from "@interfaces/common.interfaces";
+import { IUserInput, UserCreateExample, UserNotFoundDesc } from "@interfaces/user.interfaces";
 import { Prisma } from "@prisma/client";
+import { PrismaClientValidationError } from "@prisma/client/runtime";
 import { Controller, Inject } from "@tsed/di";
 import { BodyParams, PathParams } from "@tsed/platform-params";
-import { Description, Example, Get, Groups, Name, Post, Put, Returns, Summary } from "@tsed/schema";
-import lodash from "lodash";
+import {
+  Delete,
+  Description,
+  Example,
+  Groups,
+  Name,
+  Post,
+  Put,
+  Required,
+  Returns,
+  Summary,
+} from "@tsed/schema";
+import { UserService } from "src/services/user.service";
 
 @Controller("/users")
 @Name("Users")
@@ -21,72 +27,37 @@ export class UserCtrl {
   @Inject()
   protected repo: UsersRepository;
 
-  @Get("/search")
-  @Summary("Filter users by name or email")
-  @Returns(StatusCodes.OK, Array).Of(UserModel).Description("A list of users")
-  @Returns(StatusCodes.NOT_FOUND).Description(UserNotFoundDesc)
-  async search(
-    @Example(UserSearchParamsExample) @BodyParams("filters") filters: IUserSearchFilters,
-  ): Promise<UserModel[]> {
-    const args: Prisma.UserFindManyArgs = { select: UserSelectProfile };
-
-    if (filters.limit) {
-      args.take = filters.limit;
-    }
-    if (filters.email) {
-      args.where = { ...args.where, email: filters.email };
-    }
-    if (filters.fullName) {
-      args.where = { ...args.where, fullName: filters.fullName };
-    }
-    if (filters.shortName) {
-      args.where = { ...args.where, shortName: filters.shortName };
-    }
-    if (filters.orderBy) {
-      args.orderBy = {};
-      args.orderBy[filters.orderBy.prop as keyof Prisma.UserOrderByWithRelationInput] =
-        filters.orderBy.direction;
-    }
-
-    const users = this.repo.findMany(args);
-    if (!users || lodash.isNil(users)) throw new UserNotFound();
-
-    return users as any as UserModel[];
-  }
+  @Inject()
+  protected userSVC: UserService;
 
   @Post()
   @Summary("Create a user")
   @Returns(StatusCodes.CREATED, UserModel)
   async create(
-    @Example(UserCreateExample) @Groups("creation") @BodyParams("data") data: IUserInput,
+    @Example(UserCreateExample)
+    @Groups("creation")
+    @BodyParams("input")
+    @Required()
+    input: IUserInput,
   ): Promise<UserModel> {
-    const args: Prisma.UserCreateInput = { ...data };
-    const user = await this.repo.create({ data: args });
-    if (!user || lodash.isNil(user)) throw new UserModifyError();
-
-    return user;
+    try {
+      const data: UserModel = await this.userSVC.createUser(input);
+      return data;
+    } catch (err) {
+      if (err instanceof PrismaClientValidationError) {
+        const prop = err.message.split("`")[1];
+        throw new InvalidInput(prop);
+      }
+      throw err;
+    }
   }
 
-  @Get("/:id")
   @Summary("Retrieve a single user by ID")
   @Returns(StatusCodes.OK, UserModel).Description("A user")
   @Returns(StatusCodes.NOT_FOUND).Description(UserNotFoundDesc)
   async get(@PathParams("id") @Description("User ID") id: number): Promise<UserModel> {
-    if (Number.isNaN(id)) {
-      throw new IDFormatException();
-    }
-
-    const args: Prisma.UserFindUniqueArgs = {
-      where: {
-        id,
-      },
-      select: UserSelectProfile,
-    };
-
-    const user = this.repo.findUnique(args);
-    if (!user || lodash.isNil(user)) throw new UserNotFound();
-
-    return user as any as UserModel;
+    const data: UserModel = await this.userSVC.getUser(id);
+    return data;
   }
 
   @Put("/:id")
@@ -97,18 +68,30 @@ export class UserCtrl {
     @PathParams("id") @Description("User ID") id: number,
     @Example(UserCreateExample) @BodyParams("data") data: IUserInput,
   ): Promise<UserModel> {
-    const args: Prisma.UserUpdateArgs = {
-      where: {
-        id,
-      },
-      data: {
-        ...data,
-      },
-    };
+    try {
+      const user = this.userSVC.editUser(id, data);
+      return user;
+    } catch (err) {
+      if (err instanceof PrismaClientValidationError) {
+        const prop = err.message.split(``)[1];
+        throw new InvalidInput(prop);
+      }
+      throw err;
+    }
+  }
 
-    const user = await this.repo.update(args);
-    if (!user || lodash.isNil(user)) throw new UserNotFound();
-
-    return user as any as UserModel;
+  @Delete("/:id")
+  @Summary("Delete a user")
+  @Returns(StatusCodes.NO_CONTENT)
+  @Returns(StatusCodes.NOT_FOUND).Description(UserNotFoundDesc)
+  async delete(@PathParams("id") @Description("User ID") id: number): Promise<void> {
+    try {
+      this.userSVC.deleteUser(id);
+    } catch (err) {
+      if (err instanceof Prisma.NotFoundError) {
+        throw new UserNotFound();
+      }
+      throw err;
+    }
   }
 }

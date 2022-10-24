@@ -19,16 +19,23 @@ export const UserSearchParamsExample = {
 };
 
 export interface IUserInput {
-  fullName: string;
-  shortName: string;
-  email: string;
+  fullName?: string;
+  shortName?: string;
+  email?: string;
+  dob?: number;
+  address: {
+    streetAddress?: string;
+    streetAddress2?: string;
+    city?: string;
+    country?: string;
+    postalCode?: string;
+  };
 }
 
 export const UserCreateExample = {
   fullName: "Shinji Ikari",
   shortName: "Shinji",
   email: "shinji.ikari@xyz.com",
-  // password: "1234567",
 };
 
 export const UserSelectProfile: Prisma.UserSelect = {
@@ -36,4 +43,5 @@ export const UserSelectProfile: Prisma.UserSelect = {
   email: true,
   fullName: true,
   shortName: true,
+  address: true,
 };

@@ -17,12 +17,12 @@ export const cacheMiddleware = createPrismaRedisCache({
   cacheTime: 300,
   excludeMethods: ["count", "groupBy"],
   onHit: (key) => {
-    console.log("hit", key);
+    console.info(`=======> CACHE: hit\n ${key}`);
   },
   onMiss: (key) => {
-    console.log("miss", key);
+    console.info(`=======> CACHE: miss \n ${key}`);
   },
   onError: (key) => {
-    console.log("error", key);
+    console.error(`=======> CACHE: error \n ${key}`);
   },
 });

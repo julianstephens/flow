@@ -16,7 +16,6 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import helmet from "helmet";
 import methodOverride from "method-override";
-import morgan from "morgan";
 
 const { CLIENT_URL, PORT } = process.env;
 if (!CLIENT_URL || !PORT) throw Error("CLIENT env var not set.");
@@ -41,7 +40,6 @@ if (!CLIENT_URL || !PORT) throw Error("CLIENT env var not set.");
     bodyParser.urlencoded({
       extended: true,
     }),
-    morgan("dev"),
   ],
   views: {
     root: `${__dirname}/../views`,
@@ -52,9 +50,12 @@ if (!CLIENT_URL || !PORT) throw Error("CLIENT env var not set.");
   exclude: ["**/*.spec.ts"],
   logger: {
     disableRoutesSummary: false,
+    perf: true,
   },
   passport: {},
-  // ioredis: redisConf,
+  prisma: {
+    errorFormat: "minimal",
+  },
 })
 export class Server {
   @Inject()

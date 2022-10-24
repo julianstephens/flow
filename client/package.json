@@ -60,5 +60,6 @@
     "prettier": "latest",
     "tslint-config-prettier": "latest",
     "typescript": "^4.8.4"
-  }
+  },
+  "prettier": "../.prettierrc.js"
 }
