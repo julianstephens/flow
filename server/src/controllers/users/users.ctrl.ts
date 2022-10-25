@@ -2,22 +2,29 @@ import { InvalidInput } from "@errors/common/invalidInput.error";
 import { UserNotFound } from "@errors/index";
 import { UserModel, UsersRepository } from "@generated/tsed";
 import { StatusCodes } from "@interfaces/common.interfaces";
-import { IUserInput, UserCreateExample, UserNotFoundDesc } from "@interfaces/user.interfaces";
+import {
+    IUserInput,
+    IUserSearchFilters,
+    UserCreateExample,
+    UserNotFoundDesc,
+    UserSearchParamsExample
+} from "@interfaces/user.interfaces";
 import { Prisma } from "@prisma/client";
 import { PrismaClientValidationError } from "@prisma/client/runtime";
 import { Controller, Inject } from "@tsed/di";
 import { BodyParams, PathParams } from "@tsed/platform-params";
 import {
-  Delete,
-  Description,
-  Example,
-  Groups,
-  Name,
-  Post,
-  Put,
-  Required,
-  Returns,
-  Summary,
+    Delete,
+    Description,
+    Example,
+    Get,
+    Groups,
+    Name,
+    Post,
+    Put,
+    Required,
+    Returns,
+    Summary
 } from "@tsed/schema";
 import { UserService } from "src/services/user.service";
 
@@ -47,6 +54,24 @@ export class UserCtrl {
       if (err instanceof PrismaClientValidationError) {
         const prop = err.message.split("`")[1];
         throw new InvalidInput(prop);
+      }
+      throw err;
+    }
+  }
+
+  @Get("/search")
+  @Summary("Search users with filters")
+  @Returns(StatusCodes.OK, Array).Of(UserModel).Description("A list of users")
+  @Returns(StatusCodes.NOT_FOUND).Description(UserNotFoundDesc)
+  async search(
+    @Example(UserSearchParamsExample) @BodyParams("filters") filters: IUserSearchFilters,
+  ): Promise<UserModel[]> {
+    try {
+      const users = this.userSVC.searchUsers(filters);
+      return users;
+    } catch (err) {
+      if (err instanceof PrismaClientValidationError) {
+        throw new InvalidInput();
       }
       throw err;
     }
