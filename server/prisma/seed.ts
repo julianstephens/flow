@@ -17,7 +17,7 @@ const main = async () => {
         const tempCur = el.currencies[0];
         const callingCodes = el.idd.suffixes.map((s: any) => el.idd.root + s);
         const country = {
-          code: el.cca3,
+          abbrev: el.cca3,
           name: el.name.common,
           callingCodes: callingCodes,
         };

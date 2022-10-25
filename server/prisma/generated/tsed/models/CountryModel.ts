@@ -11,7 +11,7 @@ export class CountryModel implements Country {
 
   @Property(String)
   @Required()
-  code: string;
+  abbrev: string;
 
   @Property(String)
   @Required()

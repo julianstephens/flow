@@ -61,7 +61,7 @@ model Address {
 model Country {
   /// @TsED.Groups("!creation")
   id           Int      @id @default(autoincrement())
-  code         String   @unique
+  abbrev       String   @unique
   name         String
   callingCodes String[] @map("calling_code")
 

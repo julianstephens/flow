@@ -30,7 +30,7 @@ export class UserService {
           city: input.address?.city,
           country: {
             connect: {
-              code: input.address?.country,
+              abbrev: input.address?.country,
             },
           },
           postalCode: input.address?.postalCode,
@@ -95,7 +95,7 @@ export class UserService {
           city: input.address?.city,
           country: {
             connect: {
-              code: input.address?.country,
+              abbrev: input.address?.country,
             },
           },
           postalCode: input.address?.postalCode,
