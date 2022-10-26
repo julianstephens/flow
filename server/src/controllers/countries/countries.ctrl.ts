@@ -20,7 +20,7 @@ export class CountriesCtrl {
     @QueryParams("names") @Description("Select country names") names?: boolean,
     @QueryParams("codes") @Description("Select IDD calling codes") codes?: boolean,
   ): Promise<CountryModel[]> {
-    const args: Prisma.CountryFindManyArgs = {};
+    const args: Prisma.CountryFindManyArgs = { select: { id: true } };
 
     if (abbrev) {
       args.select = { ...args.select, abbrev: true };
