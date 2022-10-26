@@ -1,5 +1,5 @@
 import { Address } from "../client";
-import { Integer, Required, Property, Groups, Description, Allow, MinLength, MaxLength, CollectionOf } from "@tsed/schema";
+import { Integer, Required, Property, Min, Groups, Description, Allow, MinLength, MaxLength, CollectionOf } from "@tsed/schema";
 import { CountryModel } from "./CountryModel";
 import { UserModel } from "./UserModel";
 
@@ -7,6 +7,7 @@ export class AddressModel implements Address {
   @Property(Number)
   @Integer()
   @Required()
+  @Min(1)
   @Groups("!creation")
   id: number;
 
@@ -23,6 +24,11 @@ export class AddressModel implements Address {
   @Property(String)
   @Required()
   city: string;
+
+  @Property(String)
+  @Required()
+  @Description("Related terms would be 'state', 'province', 'prefecture', 'zone', 'subdivision', etc.")
+  region: string;
 
   @Property(() => CountryModel)
   @Required()

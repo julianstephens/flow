@@ -1,5 +1,5 @@
 import { User } from "../client";
-import { Integer, Required, Property, Description, Email, Allow, Enum, CollectionOf, Format } from "@tsed/schema";
+import { Integer, Required, Property, Min, Description, Email, Allow, Enum, CollectionOf, Format } from "@tsed/schema";
 import { AddressModel } from "./AddressModel";
 import { Role } from "../enums";
 
@@ -7,6 +7,7 @@ export class UserModel implements User {
   @Property(Number)
   @Integer()
   @Required()
+  @Min(1)
   id: number;
 
   @Property(String)

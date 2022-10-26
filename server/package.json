@@ -96,8 +96,5 @@
     "convention": "default",
     "architecture": "default"
   },
-  "prettier": "../.prettierrc.js",
-  "prisma": {
-    "seed": "npx ts-node --transpile-only ./prisma/seed.ts"
-  }
+  "prettier": "../.prettierrc.js"
 }

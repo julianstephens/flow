@@ -1,16 +1,23 @@
-import { InvalidInput } from "@errors/common/invalidInput.error";
+import { errOrValidationError } from "@errors/common/invalidInput.error";
 import { UserNotFound } from "@errors/index";
 import { UserModel } from "@generated/tsed";
 import { StatusCodes } from "@interfaces/common.interfaces";
-import { IUserInput, UserCreateExample, UserNotFoundDesc } from "@interfaces/user.interfaces";
-import { Prisma } from "@prisma/client";
-import { PrismaClientValidationError } from "@prisma/client/runtime";
+import {
+  IUserInput,
+  UserCreateExample,
+  UserExistsDesc,
+  UserNotFoundDesc,
+} from "@interfaces/user.interfaces";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
+import { UserService } from "@services/user.service";
 import { Controller } from "@tsed/di";
+import { BadRequest } from "@tsed/exceptions";
 import { BodyParams, PathParams } from "@tsed/platform-params";
 import {
   Delete,
   Description,
   Example,
+  Get,
   Groups,
   Name,
   Post,
@@ -19,7 +26,6 @@ import {
   Returns,
   Summary,
 } from "@tsed/schema";
-import { UserService } from "src/services/user.service";
 
 @Controller("/users")
 @Name("Users")
@@ -40,14 +46,14 @@ export class UserCtrl {
       const data: UserModel = await this.userSVC.createUser(input);
       return data;
     } catch (err) {
-      if (err instanceof PrismaClientValidationError) {
-        const prop = err.message.split("`")[1];
-        throw new InvalidInput(prop);
+      if (err instanceof PrismaClientKnownRequestError) {
+        throw new BadRequest(UserExistsDesc);
       }
-      throw err;
+      throw errOrValidationError(err);
     }
   }
 
+  @Get("/:id")
   @Summary("Retrieve a single user by ID")
   @Returns(StatusCodes.OK, UserModel).Description("A user")
   @Returns(StatusCodes.NOT_FOUND).Description(UserNotFoundDesc)
@@ -65,14 +71,16 @@ export class UserCtrl {
     @Example(UserCreateExample) @BodyParams("data") data: IUserInput,
   ): Promise<UserModel> {
     try {
-      const user = this.userSVC.editUser(id, data);
+      const user: UserModel = await this.userSVC.editUser(id, data);
       return user;
     } catch (err) {
-      if (err instanceof PrismaClientValidationError) {
-        const prop = err.message.split(``)[1];
-        throw new InvalidInput(prop);
+      if (
+        err instanceof PrismaClientKnownRequestError &&
+        err.message.toLowerCase().includes("not found")
+      ) {
+        throw new UserNotFound();
       }
-      throw err;
+      throw errOrValidationError(err);
     }
   }
 
@@ -82,12 +90,16 @@ export class UserCtrl {
   @Returns(StatusCodes.NOT_FOUND).Description(UserNotFoundDesc)
   async delete(@PathParams("id") @Description("User ID") id: number): Promise<void> {
     try {
-      this.userSVC.deleteUser(id);
+      await this.userSVC.deleteUser(id);
     } catch (err) {
-      if (err instanceof Prisma.NotFoundError) {
+      if (
+        err instanceof PrismaClientKnownRequestError &&
+        err.message.toLowerCase().includes("not found")
+      ) {
         throw new UserNotFound();
       }
-      throw err;
+
+      throw errOrValidationError(err);
     }
   }
 }

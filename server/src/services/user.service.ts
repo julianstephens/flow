@@ -1,13 +1,11 @@
-import { InvalidInput } from "@errors/common/invalidInput.error";
-import { UserNotFound } from "@errors/index";
+import { IDFormatException, InvalidInput, UserNotFound } from "@errors/index";
 import { UserModel, UsersRepository } from "@generated/tsed";
-import { IDFormatException } from "@interfaces/common.interfaces";
 import { IUserInput, UserSelectProfile } from "@interfaces/user.interfaces";
 import { Prisma } from "@prisma/client";
-import { Inject, Injectable } from "@tsed/di";
-import { hasNilProps, omitObjProps } from "src/utils/common.utils";
+import { Inject, Service } from "@tsed/di";
+import { hasNilProps, omitObjProps } from "@utils/common.utils";
 
-@Injectable()
+@Service()
 export class UserService {
   @Inject()
   protected repo: UsersRepository;
@@ -28,6 +26,7 @@ export class UserService {
           streetAddress: input.address?.streetAddress,
           streetAddress2: input.address?.streetAddress2,
           city: input.address?.city,
+          region: input.address?.region,
           country: {
             connect: {
               abbrev: input.address?.country,
@@ -47,7 +46,7 @@ export class UserService {
     const user = await this.repo.create(args);
     if (!user) throw new UserNotFound();
 
-    return user;
+    return omitObjProps(user, UserSelectProfile);
   }
 
   /**
@@ -56,7 +55,7 @@ export class UserService {
    * @returns <UserModel> - the user filtered by profile fields
    */
   async getUser(id: number): Promise<UserModel> {
-    if (Number.isNaN(id)) {
+    if (Number.isNaN(id) || id < 1) {
       throw new IDFormatException();
     }
 
@@ -64,13 +63,12 @@ export class UserService {
       where: {
         id,
       },
-      select: UserSelectProfile,
     };
 
     const user = await this.repo.findUnique(args);
     if (!user) throw new UserNotFound();
 
-    return user;
+    return omitObjProps(user, UserSelectProfile);
   }
 
   /**
@@ -79,7 +77,7 @@ export class UserService {
    * @returns <UserModel> - the user filtered by profile fields
    */
   async editUser(id: number, input: IUserInput): Promise<UserModel> {
-    if (Number.isNaN(id)) {
+    if (Number.isNaN(id) || id < 1) {
       throw new IDFormatException();
     }
 
@@ -88,19 +86,6 @@ export class UserService {
       shortName: input.shortName,
       email: input.email,
       dob: input.dob,
-      address: {
-        update: {
-          streetAddress: input.address?.streetAddress,
-          streetAddress2: input.address?.streetAddress2,
-          city: input.address?.city,
-          country: {
-            connect: {
-              abbrev: input.address?.country,
-            },
-          },
-          postalCode: input.address?.postalCode,
-        },
-      },
     };
     const args = Prisma.validator<Prisma.UserUpdateArgs>()({
       where: {
@@ -111,10 +96,11 @@ export class UserService {
       },
     });
 
-    const user = await this.repo.update(args);
-    if (!user) throw new UserNotFound();
+    if (hasNilProps(args.data)) throw new InvalidInput();
 
-    return omitObjProps(user, Object.keys(UserSelectProfile));
+    const user = await this.repo.update(args);
+
+    return omitObjProps(user, UserSelectProfile);
   }
 
   /**
@@ -122,7 +108,7 @@ export class UserService {
    * @param id <number>
    */
   async deleteUser(id: number): Promise<void> {
-    if (Number.isNaN(id)) {
+    if (Number.isNaN(id) || id < 1) {
       throw new IDFormatException();
     }
 

@@ -1,11 +1,12 @@
 import { Country } from "../client";
-import { Integer, Required, Property, Groups, CollectionOf } from "@tsed/schema";
+import { Integer, Required, Property, Min, Groups, CollectionOf } from "@tsed/schema";
 import { AddressModel } from "./AddressModel";
 
 export class CountryModel implements Country {
   @Property(Number)
   @Integer()
   @Required()
+  @Min(1)
   @Groups("!creation")
   id: number;
 

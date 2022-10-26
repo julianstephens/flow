@@ -20,7 +20,3 @@ RUN yarn install
 
 # copy server src files
 COPY --chown=node:node . .
-
-# generate prisma client
-# RUN npx prisma generate
-
