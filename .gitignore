@@ -2,7 +2,11 @@ node_modules
 test
 **/logs/*
 **/*.log
-**/.env
 public
 dist
 api/yarn-error.log
+
+**/.env*
+.flaskenv*
+!.env.project
+!.env.vault
