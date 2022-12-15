@@ -38,7 +38,7 @@ Access the CLI for your API container (can be done via Docker CLI or Docker Desk
 
 ```
 cd server/prisma
-npx prisma migrate dev
+yarn prisma migrate dev
 ```
 
 
