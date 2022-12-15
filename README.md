@@ -1,45 +1,16 @@
 # budget-tracker
 
-## Setup Project 
+## Documentation
+1. [Setting Up the Dev Environment](docs/Setup-Dev-Environment.md)
+2. [Server Architecture](docs/Server-Architecture.md)
 
-1. Clone repo
+---
 
-2. Install packages
+## Current Sprint Changelog
 
-a. In the root directory:
-```shell
-yarn install
-```
+## Sprint: 12.15.2022-12.31.2022
 
-b. In a terminal,
-```
-yarn install
-```
+#### Changed
 
-3. Create db docker volume
-```
-docker volume create budget_pgdata
-docker volume create budget_redis
-```
-
-4. Add `.env` files
-- `.env`
-- `server/.env`
-- `client/.env`
-
-5. Start project 
-```
-docker compose up -d --build
-```
-
-6. Configure DB
-
-Access the CLI for your API container (can be done via Docker CLI or Docker Desktop)
-
-```
-cd server/prisma
-npx prisma migrate dev
-```
-
-
-
+#### Added 
+- Created directory for docs
