@@ -1,10 +1,7 @@
-import {
-    Allow, CollectionOf, Description,
-    Email, Enum, Format, Integer, Property, Required
-} from "@tsed/schema";
 import { User } from "../client";
-import { Role } from "../enums";
+import { Integer, Required, Property, Description, Email, Allow, Enum, CollectionOf, Format } from "@tsed/schema";
 import { AddressModel } from "./AddressModel";
+import { Role } from "../enums";
 
 export class UserModel implements User {
   @Property(Number)
@@ -59,3 +56,4 @@ export class UserModel implements User {
   @Required()
   updatedAt: Date;
 }
+

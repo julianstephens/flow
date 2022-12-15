@@ -24,6 +24,10 @@ export class AddressModel implements Address {
   @Required()
   city: string;
 
+  @Property(String)
+  @Required()
+  region: string;
+
   @Property(() => CountryModel)
   @Required()
   country: CountryModel;

@@ -3,28 +3,28 @@ import { UserNotFound } from "@errors/index";
 import { UserModel, UsersRepository } from "@generated/tsed";
 import { StatusCodes } from "@interfaces/common.interfaces";
 import {
-    IUserInput,
-    IUserSearchFilters,
-    UserCreateExample,
-    UserNotFoundDesc,
-    UserSearchParamsExample
+  IUserInput,
+  IUserSearchFilters,
+  UserCreateExample,
+  UserNotFoundDesc,
+  UserSearchParamsExample,
 } from "@interfaces/user.interfaces";
 import { Prisma } from "@prisma/client";
 import { PrismaClientValidationError } from "@prisma/client/runtime";
 import { Controller, Inject } from "@tsed/di";
 import { BodyParams, PathParams } from "@tsed/platform-params";
 import {
-    Delete,
-    Description,
-    Example,
-    Get,
-    Groups,
-    Name,
-    Post,
-    Put,
-    Required,
-    Returns,
-    Summary
+  Delete,
+  Description,
+  Example,
+  Get,
+  Groups,
+  Name,
+  Post,
+  Put,
+  Required,
+  Returns,
+  Summary,
 } from "@tsed/schema";
 import { UserService } from "src/services/user.service";
 
