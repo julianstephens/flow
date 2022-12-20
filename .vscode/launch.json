@@ -8,11 +8,11 @@
       "type": "node",
       "request": "attach",
       "name": "Debug Docker",
-      "remoteRoot": "/usr/src/app/budget-tracker/api",
+      "remoteRoot": "/usr/src/app/budget-tracker/server",
       "port": 9229,
       "address": "localhost",
-      "localRoot": "${workspaceFolder}/api",
-      "cwd": "${workspaceFolder}/api",
+      "localRoot": "${workspaceFolder}/server",
+      "cwd": "${workspaceFolder}/server",
       "outFiles": [
         "${workspaceFolder}/**/*.js",
         "!**/node_modules/**"
