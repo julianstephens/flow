@@ -18,3 +18,12 @@
   padding: rem(3) $space-xl;
   font-weight: bold;
 }
+
+.hero {
+  margin-top: 6rem;
+
+  .auth-btn {
+    @include button($outline: false);
+    padding: rem(2) $space-xl;
+  }
+}

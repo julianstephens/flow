@@ -59,24 +59,6 @@ export class UserCtrl {
     }
   }
 
-  @Get("/search")
-  @Summary("Search users with filters")
-  @Returns(StatusCodes.OK, Array).Of(UserModel).Description("A list of users")
-  @Returns(StatusCodes.NOT_FOUND).Description(UserNotFoundDesc)
-  async search(
-    @Example(UserSearchParamsExample) @BodyParams("filters") filters: IUserSearchFilters,
-  ): Promise<UserModel[]> {
-    try {
-      const users = this.userSVC.searchUsers(filters);
-      return users;
-    } catch (err) {
-      if (err instanceof PrismaClientValidationError) {
-        throw new InvalidInput();
-      }
-      throw err;
-    }
-  }
-
   @Summary("Retrieve a single user by ID")
   @Returns(StatusCodes.OK, UserModel).Description("A user")
   @Returns(StatusCodes.NOT_FOUND).Description(UserNotFoundDesc)

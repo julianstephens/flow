@@ -8,10 +8,9 @@ import { AuthService } from "@auth0/auth0-angular";
   styleUrls: ["./landing.component.scss"],
 })
 export class LandingComponent {
-  constructor(private authSVC: AuthService, private router: Router) {}
+  constructor(public authSVC: AuthService, private router: Router) {}
 
   redirectLogin(): void {
     this.authSVC.loginWithRedirect();
-    this.router.navigateByUrl("/home");
   }
 }
