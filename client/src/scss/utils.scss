@@ -52,6 +52,7 @@ $fonts: (
 * SPACING
 *****************************/
 $spaces: (
+  "4xl": $space-4xl,
   "3xl": $space-3xl,
   "2xl": $space-2xl,
   "xl": $space-xl,
@@ -75,29 +76,23 @@ $sides: (
   }
   .my-#{$size} {
     margin-top: $space !important;
-    margin-right: $space !important;
+    margin-bottom: $space !important;
   }
 
   .px-#{$size} {
-    margin-left: $space !important;
-    margin-right: $space !important;
+    padding-left: $space !important;
+    padding-right: $space !important;
   }
   .py-#{$size} {
-    margin-top: $space !important;
-    margin-right: $space !important;
+    padding-top: $space !important;
+    padding-bottom: $space !important;
   }
 
   @each $abbrev, $side in $sides {
     .m#{$abbrev}-#{$size} {
       margin-#{$side}: $space !important;
     }
-    .m#{$abbrev}-lg {
-      margin-#{$side}: $space !important;
-    }
-    .p#{$abbrev}-xl {
-      padding-#{$side}: $space !important;
-    }
-    .p#{$abbrev}-lg {
+    .p#{$abbrev}-#{$size} {
       padding-#{$side}: $space !important;
     }
   }

@@ -12,13 +12,13 @@ export class DashboardComponent implements OnInit {
   user: User | undefined;
 
   ngOnInit(): void {
-    this.authSVC.getUser().subscribe((user) => {
-      this.user = user;
+    // this.authSVC.getUser().subscribe((user) => {
+    //   this.user = user;
 
-      if (!this.user) {
-        this.logout();
-      }
-    });
+    //   if (!this.user) {
+    //     this.logout();
+    //   }
+    // });
   }
 
   logout(): void {
