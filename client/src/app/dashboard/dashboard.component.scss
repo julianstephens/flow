@@ -1,0 +1,34 @@
+@import "../../scss/variables";
+
+.sidebar {
+  max-width: 16rem;
+  @include box-shadow($shadow-sidebar);
+}
+
+.circle {
+  width: 2rem;
+  height: 2rem;
+}
+
+.module-nav {
+  ul {
+    list-style: none;
+
+    li {
+      margin-bottom: $space-sm;
+
+      a {
+        font-size: $font-2xs;
+        color: $grey-dark;
+      }
+
+      &:active a {
+        color: $blue;
+      }
+    }
+  }
+}
+
+.logout {
+  @include text-button($text_color: $grey-dark);
+}

@@ -3,6 +3,7 @@ FROM node:16-alpine as base
 ARG APP_HOME
 WORKDIR $APP_HOME/server
 RUN chown -R node:node $APP_HOME/server
+RUN apk add --update --no-cache libc6-compat openssl openssl-dev openssl1.1-compat
 RUN apk add --no-cache bash
 
 ##########################
@@ -20,3 +21,6 @@ RUN yarn install
 
 # copy server src files
 COPY --chown=node:node . .
+
+# generate prisma client
+# RUN yarn prisma generate

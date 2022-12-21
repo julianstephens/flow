@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { AuthService } from "@auth0/auth0-angular";
 import { ApiService } from "./services/api.service";
 
 interface ITestResult {
@@ -15,7 +16,7 @@ export class AppComponent implements OnInit {
 
   test = "";
 
-  constructor(private apiSVC: ApiService) {}
+  constructor(public authSVC: AuthService, private apiSVC: ApiService) {}
 
   ngOnInit() {
     this.apiSVC.get<ITestResult>("/ping").subscribe((res) => {

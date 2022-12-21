@@ -3,10 +3,10 @@ import { UserNotFound } from "@errors/index";
 import { UserModel } from "@generated/tsed";
 import { StatusCodes } from "@interfaces/common.interfaces";
 import {
-  IUserInput,
-  UserCreateExample,
-  UserExistsDesc,
-  UserNotFoundDesc,
+    IUserInput,
+    UserCreateExample,
+    UserExistsDesc,
+    UserNotFoundDesc
 } from "@interfaces/user.interfaces";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { UserService } from "@services/user.service";
@@ -14,17 +14,17 @@ import { Controller } from "@tsed/di";
 import { BadRequest } from "@tsed/exceptions";
 import { BodyParams, PathParams } from "@tsed/platform-params";
 import {
-  Delete,
-  Description,
-  Example,
-  Get,
-  Groups,
-  Name,
-  Post,
-  Put,
-  Required,
-  Returns,
-  Summary,
+    Delete,
+    Description,
+    Example,
+    Get,
+    Groups,
+    Name,
+    Post,
+    Put,
+    Required,
+    Returns,
+    Summary
 } from "@tsed/schema";
 
 @Controller("/users")
