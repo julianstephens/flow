@@ -14,7 +14,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     // this.authSVC.getUser().subscribe((user) => {
     //   this.user = user;
-
     //   if (!this.user) {
     //     this.logout();
     //   }
