@@ -1,9 +1,6 @@
-import { HttpClient, HttpResponse } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-
-// const URI = env.apiURI;
-const URI = "";
+import { EnvProvider } from "./env-provider.service";
 
 @Injectable({
   providedIn: "root",
@@ -17,27 +14,30 @@ export class ApiService {
     responseType: "json",
   };
 
-  constructor(private http: HttpClient) {
+  uri: string;
+
+  constructor(private http: HttpClient, private envSVC: EnvProvider) {
     this.headers.append("Content-Type", "application/json");
+    this.uri = this.envSVC.require("apiUri") as string;
   }
 
-  get<T>(url: string, options?: any): Observable<HttpResponse<T>> {
-    return this.http.get<T>(URI + url, {
+  get<T>(path: string, options?: any) {
+    return this.http.get<T>(this.uri + path, {
       headers: this.headers,
       observe: "response",
       ...options,
-    }) as Observable<HttpResponse<T>>;
+    });
   }
 
-  post<T>(url: string, body: any, options?: any) {
-    return this.http.post<T>(URI + url, { headers: this.headers, ...options });
+  post<T>(path: string, body: any, options?: any) {
+    return this.http.post<T>(this.uri + path, { headers: this.headers, ...options });
   }
 
-  put<T>(url: string, body: any, options?: any) {
-    return this.http.put<T>(URI + url, { headers: this.headers, ...options });
+  put<T>(path: string, body: any, options?: any) {
+    return this.http.put<T>(this.uri + path, { headers: this.headers, ...options });
   }
 
-  delete<T>(url: string, options?: any) {
-    return this.http.delete<T>(URI + url, { headers: this.headers, ...options });
+  delete<T>(path: string, options?: any) {
+    return this.http.delete<T>(this.uri + path, { headers: this.headers, ...options });
   }
 }

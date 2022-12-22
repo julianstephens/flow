@@ -11,6 +11,7 @@ $colors: (
   "grey-dark": $grey-dark,
   "gold": $gold,
   "green-soft": $green-soft,
+  "red": $red,
 );
 @each $name, $color in $colors {
   .color-#{$name} {
@@ -27,12 +28,13 @@ $colors: (
 .font-logo {
   font-family: $font-logo !important;
 }
-.font-hero {
+.font-accent {
   font-family: $font-hero !important;
 }
 
 $fonts: (
-  "3xl": $font-3xl,
+  "hero": $font-hero,
+  "3xl": $font-2xl,
   "2xl": $font-2xl,
   "xl": $font-xl,
   "lg": $font-lg,

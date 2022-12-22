@@ -1,0 +1,36 @@
+@import "../../../../scss/variables.scss";
+
+.modal-header {
+  margin-top: 1.5rem;
+}
+
+form {
+  .row {
+    width: 100%;
+
+    &:not(:last-of-type) {
+      margin-bottom: $space-lg;
+    }
+  }
+  .col {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+// #dob {
+//   width: 25.25rem;
+// }
+
+.next-btn {
+  @include button($outline: false);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: rem(35);
+  width: rem(100);
+
+  span {
+    margin-left: 0.25rem;
+  }
+}

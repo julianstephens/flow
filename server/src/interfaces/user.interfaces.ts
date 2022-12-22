@@ -1,13 +1,8 @@
-import { IOrderByFilter } from "./common.interfaces";
-
 export const UserNotFoundDesc = "User(s) not found.";
 export const UserExistsDesc = "User already exists with this email.";
 
 export interface IUserSearchFilters {
-  limit?: number;
-  orderBy?: IOrderByFilter;
   email?: string;
-  shortName?: string;
   fullName?: string;
 }
 
@@ -42,6 +37,7 @@ export const UserCreateExample = {
     streetAddress: "123 ABC Lane",
     streetAddress2: "Unit 4",
     city: "Tokyo",
+    region: "Kanto",
     country: "JPN",
     postalCode: "021",
   },

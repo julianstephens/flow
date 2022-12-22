@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { Router } from "@angular/router";
 import { AuthService } from "@auth0/auth0-angular";
 
 @Component({
@@ -8,7 +7,7 @@ import { AuthService } from "@auth0/auth0-angular";
   styleUrls: ["./landing.component.scss"],
 })
 export class LandingComponent {
-  constructor(public authSVC: AuthService, private router: Router) {}
+  constructor(private authSVC: AuthService) {}
 
   redirectLogin(): void {
     this.authSVC.loginWithRedirect();

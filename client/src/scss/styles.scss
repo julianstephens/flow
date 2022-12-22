@@ -30,6 +30,47 @@ p {
   border-radius: 50%;
 }
 
-.icon {
+.icon-left {
   margin-right: $space-xs;
+}
+
+.icon-right {
+  margin-left: $space-xs;
+}
+
+.form-group {
+  width: 100%;
+
+  label {
+    font-size: $font-2xs;
+    font-weight: bold;
+    color: $grey-dark;
+  }
+
+  input,
+  textarea {
+    outline: none;
+    padding: 0 $space-sm;
+    background: $grey-light;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background: $grey-light;
+    }
+  }
+}
+
+input,
+textarea,
+button {
+  &:disabled {
+    cursor: default;
+    background: $grey !important;
+
+    &:hover {
+      box-shadow: none !important;
+      background: $grey !important;
+    }
+  }
 }

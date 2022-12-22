@@ -19,6 +19,6 @@ export class IconButtonComponent implements OnInit {
 
   ngOnInit(): void {
     this.iconClasses = `bi ${this.icon}`;
-    this.spanClasses = _.isEmpty(this.span) ? "" : this.span.join(" ");
+    this.spanClasses = _.isEmpty(this.span) ? "" : `${this.span.join(" ")}`;
   }
 }

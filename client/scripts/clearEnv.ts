@@ -2,7 +2,7 @@ import fs from "fs/promises";
 
 const clearEnv = async (isProd: boolean = false) => {
   const envFileContent = `
-  import {IEnvironment} from "@app/common/common.models";
+  import {IEnvironment} from "@shared/interfaces/index";
 
   export const environment: IEnvironment = {
     production: ${isProd},

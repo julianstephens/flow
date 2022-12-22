@@ -21,20 +21,7 @@ export class UserService {
       shortName: input.shortName,
       email: input.email,
       dob: input.dob,
-      address: {
-        create: {
-          streetAddress: input.address?.streetAddress,
-          streetAddress2: input.address?.streetAddress2,
-          city: input.address?.city,
-          region: input.address?.region,
-          country: {
-            connect: {
-              abbrev: input.address?.country,
-            },
-          },
-          postalCode: input.address?.postalCode,
-        },
-      },
+      address: input.address,
     };
 
     if (!prismaInput || hasNilProps(prismaInput)) throw new InvalidInput();
@@ -50,11 +37,29 @@ export class UserService {
   }
 
   /**
+   * Retrieve a single user by email
+   * @param email <string>
+   * @returns <UserModel> - the found user
+   */
+  async getUserByEmail(email: string): Promise<UserModel> {
+    const args: Prisma.UserFindUniqueArgs = {
+      where: {
+        email,
+      },
+    };
+
+    const user = await this.repo.findUnique(args);
+    if (!user) throw new UserNotFound();
+
+    return omitObjProps(user, UserSelectProfile);
+  }
+
+  /**
    * Retrieve a single user by ID
    * @param id <number>
    * @returns <UserModel> - the user filtered by profile fields
    */
-  async getUser(id: number): Promise<UserModel> {
+  async getUserById(id: number): Promise<UserModel> {
     if (Number.isNaN(id) || id < 1) {
       throw new IDFormatException();
     }

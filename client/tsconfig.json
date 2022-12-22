@@ -22,7 +22,10 @@
     "module": "esnext",
     "lib": ["es2020", "dom"],
     "paths": {
-      "@app/*": ["./src/app/*"]
+      "@app/*": ["./src/app/*"],
+      "@components/*": ["./src/app/components/*"],
+      "@services/*": ["./src/app/services/*"],
+      "@shared/*": ["./src/app/shared/*"]
     }
   },
   "angularCompilerOptions": {
@@ -31,8 +34,5 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "include": [
-    "src",
-    "scripts"
-  ]
+  "include": ["src", "scripts"]
 }

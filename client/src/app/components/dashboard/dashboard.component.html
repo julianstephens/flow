@@ -1,34 +1,38 @@
 <div class="h-100 w-100 row">
+  <!-- Sidebar -->
   <div
     class="sidebar col h-100 w-25 py-lg ps-2xl d-flex flex-column justify-content-between border-end"
   >
     <div>
-      <p class="font-logo font-xs">flow</p>
-      <nav class="module-nav font-2xs mt-3xl">
+      <p class="font-logo font-sm">flow</p>
+      <nav class="module-nav font-xs mt-3xl">
         <ul class="p-0 d-flex flex-column">
           <li>
             <a class="d-flex align-items-center"
-              ><span class="icon"><i class="bi bi-columns-gap"></i></span>Dashboard</a
+              ><app-icon-button icon="bi-columns-gap" spanClasses="icon-left"></app-icon-button
+              >Dashboard</a
             >
           </li>
           <li>
             <a class="d-flex align-items-center"
-              ><span class="icon"><i class="bi bi-calculator"></i></span>Budgets</a
+              ><app-icon-button icon="bi-calculator" spanClasses="icon-left"></app-icon-button
+              >Budgets</a
             >
           </li>
           <li>
             <a class="d-flex align-items-center"
-              ><span class="icon"><i class="bi bi-bank"></i></span>Accounts</a
+              ><app-icon-button icon="bi-bank" spanClasses="icon-left"></app-icon-button>Accounts</a
             >
           </li>
         </ul>
       </nav>
     </div>
-    <button class="logout font-2xs" (click)="logout()">
-      <span class="icon"><i class="bi bi-box-arrow-right"></i></span>Logout
+    <button class="logout font-xs" (click)="logout()">
+      <app-icon-button icon="bi-box-icon-right" spanClasses="icon-left"></app-icon-button>Logout
     </button>
   </div>
 
+  <!-- Content -->
   <div class="col h-100 w-auto pt-lg d-flex flex-column">
     <!-- Header -->
     <div class="w-100 d-flex justify-content-between align-items-center">

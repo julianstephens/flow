@@ -3,28 +3,28 @@ import { UserNotFound } from "@errors/index";
 import { UserModel } from "@generated/tsed";
 import { StatusCodes } from "@interfaces/common.interfaces";
 import {
-    IUserInput,
-    UserCreateExample,
-    UserExistsDesc,
-    UserNotFoundDesc
+  IUserInput,
+  UserCreateExample,
+  UserExistsDesc,
+  UserNotFoundDesc,
 } from "@interfaces/user.interfaces";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { UserService } from "@services/user.service";
 import { Controller } from "@tsed/di";
 import { BadRequest } from "@tsed/exceptions";
-import { BodyParams, PathParams } from "@tsed/platform-params";
+import { BodyParams, PathParams, QueryParams } from "@tsed/platform-params";
 import {
-    Delete,
-    Description,
-    Example,
-    Get,
-    Groups,
-    Name,
-    Post,
-    Put,
-    Required,
-    Returns,
-    Summary
+  Delete,
+  Description,
+  Example,
+  Get,
+  Groups,
+  Name,
+  Post,
+  Put,
+  Required,
+  Returns,
+  Summary,
 } from "@tsed/schema";
 
 @Controller("/users")
@@ -34,7 +34,7 @@ export class UserCtrl {
 
   @Post()
   @Summary("Create a user")
-  @Returns(StatusCodes.CREATED, UserModel)
+  @Returns(StatusCodes.CREATED, UserModel).Description("The created user")
   async create(
     @Example(UserCreateExample)
     @Groups("creation")
@@ -53,12 +53,20 @@ export class UserCtrl {
     }
   }
 
+  @Get()
+  @Summary("Retrieve a single user by filter")
+  @Returns(StatusCodes.OK, UserModel).Description("A user")
+  async getByEmail(@QueryParams("email") email: string): Promise<UserModel> {
+    const data: UserModel = await this.userSVC.getUserByEmail(email);
+    return data;
+  }
+
   @Get("/:id")
   @Summary("Retrieve a single user by ID")
   @Returns(StatusCodes.OK, UserModel).Description("A user")
   @Returns(StatusCodes.NOT_FOUND).Description(UserNotFoundDesc)
   async get(@PathParams("id") @Description("User ID") id: number): Promise<UserModel> {
-    const data: UserModel = await this.userSVC.getUser(id);
+    const data: UserModel = await this.userSVC.getUserById(id);
     return data;
   }
 
