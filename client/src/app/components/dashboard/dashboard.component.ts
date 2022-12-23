@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import { EnvService } from "@app/services";
+import { ApiService } from "@app/services/api.service";
 import { AuthService } from "@auth0/auth0-angular";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import FlowSDK from "@sdk/index";
-import { EnvProvider } from "@services/index";
 import { OnboardingModalComponent } from "@shared/components/index";
 
 @Component({
@@ -11,24 +11,19 @@ import { OnboardingModalComponent } from "@shared/components/index";
   styleUrls: ["./dashboard.component.scss"],
 })
 export class DashboardComponent implements OnInit {
-  private api: FlowSDK;
-
   loading = false;
 
   constructor(
     private authSVC: AuthService,
     private modalSVC: NgbModal,
-    private envSVC: EnvProvider,
+    private envSVC: EnvService,
+    private apiSVC: ApiService,
   ) {}
 
   ngOnInit(): void {
     this.loading = true;
     this.authSVC.getIdTokenClaims().subscribe((claims) => {
-      this.api = new FlowSDK({
-        baseUrl: this.envSVC.require("apiUri") as string,
-        accessToken: claims?.__raw ?? "",
-      });
-      this.api.users.getByEmail(claims?.email ?? "").catch(() => this.openModal());
+      this.apiSVC.users.getByEmail(claims?.email ?? "").catch(() => this.openModal());
       this.loading = false;
     });
   }

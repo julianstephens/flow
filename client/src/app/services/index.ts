@@ -1,1 +1,1 @@
-export { EnvProvider } from "./env-provider.service";
+export { EnvService } from "./env-provider.service";
