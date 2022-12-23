@@ -1,3 +1,5 @@
+export * from "./users.interfaces";
+
 export interface IEnvironment {
   production: boolean;
   auth: {

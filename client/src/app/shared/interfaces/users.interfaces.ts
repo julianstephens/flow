@@ -14,9 +14,9 @@ export interface UserAddress {
   country: string;
 }
 
-export interface UserCreateRequest extends UserBase {}
+export type UserCreateRequest = UserBase
 
-export interface UserUpdateRequest extends Partial<UserBase> {}
+export type UserUpdateRequest = Partial<UserBase>
 
 export interface UserResponse extends UserBase {
   id: number;

@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { EnvProvider } from "@app/services";
+import { ApiService } from "@app/services/api.service";
 import { AuthService } from "@auth0/auth0-angular";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import FlowSDK from "@sdk/index";
-import { UserCreateRequest } from "@sdk/interfaces";
+import { UserCreateRequest } from "@shared/interfaces";
 import moment from "moment";
 
 class OnboardingForm {
@@ -37,8 +36,6 @@ class OnboardingForm {
 export class OnboardingModalComponent implements OnInit {
   @ViewChild("userForm", { read: NgForm }) userForm: any;
 
-  private api: FlowSDK;
-
   disableNext = true;
 
   maxDOB: string;
@@ -49,15 +46,10 @@ export class OnboardingModalComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private envSVC: EnvProvider,
     private authSVC: AuthService,
+    private apiSVC: ApiService,
   ) {
     this.authSVC.getIdTokenClaims().subscribe((claims) => {
-      this.api = new FlowSDK({
-        baseUrl: this.envSVC.require("apiUri") as string,
-        accessToken: claims?.__raw ?? "",
-      });
-
       this.req.email = claims?.email ?? "";
     });
   }
@@ -86,7 +78,7 @@ export class OnboardingModalComponent implements OnInit {
       },
     };
 
-    this.api.users.create(userReq).then(() => {
+    this.apiSVC.users.create(userReq).then(() => {
       this.activeModal.close();
     });
     // .catch(() => this.toastSVC.showError("Oops something went wrong! Please try again."));

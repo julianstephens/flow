@@ -20,13 +20,23 @@
     "strictPropertyInitialization": false,
     "target": "es2022",
     "module": "esnext",
-    "lib": ["es2022", "dom"],
+    "lib": [
+      "es2022",
+      "dom"
+    ],
     "paths": {
-      "@app/*": ["./src/app/*"],
-      "@components/*": ["./src/app/components/*"],
-      "@services/*": ["./src/app/services/*"],
-      "@shared/*": ["./src/app/shared/*"],
-      "@sdk/*": ["../sdk/src/*"]
+      "@app/*": [
+        "./src/app/*"
+      ],
+      "@components/*": [
+        "./src/app/components/*"
+      ],
+      "@services/*": [
+        "./src/app/services/*"
+      ],
+      "@shared/*": [
+        "./src/app/shared/*"
+      ]
     }
   },
   "angularCompilerOptions": {
@@ -35,5 +45,8 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true
   },
-  "include": ["src", "scripts"]
+  "include": [
+    "src",
+    "scripts"
+  ]
 }

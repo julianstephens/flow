@@ -8,7 +8,7 @@ type OptionalEnvResponse = EnvResponse | undefined;
 @Injectable({
   providedIn: "root",
 })
-export class EnvProvider {
+export class EnvService {
   constructor() {}
 
   require(key: string): EnvResponse {

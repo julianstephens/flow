@@ -8,10 +8,21 @@
       "jsx": false
     },
     "tsconfigRootDir": ".",
-    "project": [".eslintrc", "./api/tsconfig.json", "./client/tsconfig.json"]
+    "project": [
+      ".eslintrc",
+      "./api/tsconfig.json",
+      "./client/tsconfig.json"
+    ]
   },
-  "ignorePatterns": ["**/*.spec.ts"],
-  "plugins": ["@typescript-eslint", "import", "no-loops", "eslint-plugin-tsdoc"],
+  "ignorePatterns": [
+    "**/*.spec.ts"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "no-loops",
+    "eslint-plugin-tsdoc"
+  ],
   "rules": {
     "class-methods-use-this": 0,
     "no-useless-constructor": 0,
