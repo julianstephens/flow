@@ -54,7 +54,7 @@ export class UserCtrl {
   }
 
   @Get()
-  @Summary("Retrieve a single user by filter")
+  @Summary("Retrieve a single user by email")
   @Returns(StatusCodes.OK, UserModel).Description("A user")
   async getByEmail(@QueryParams("email") email: string): Promise<UserModel> {
     const data: UserModel = await this.userSVC.getUserByEmail(email);

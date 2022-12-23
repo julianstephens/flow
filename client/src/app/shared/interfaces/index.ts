@@ -6,5 +6,5 @@ export interface IEnvironment {
     audience?: string;
     redirectUri?: string;
   };
-  apiUri?: string;
+  apiUri: string;
 }
