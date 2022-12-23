@@ -1,3 +1,1 @@
-export { ApiService } from "./api.service";
-export { EnvProvider as EnvProviderService } from "./env-provider.service";
-export { UserService } from "./user.service";
+export { EnvProvider } from "./env-provider.service";

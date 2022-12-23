@@ -11,12 +11,19 @@ import { IconButtonComponent, OnboardingModalComponent } from "@shared/component
 import { environment as env } from "../environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
+import { LoaderComponent } from './shared/components/loader.component';
 
 @NgModule({
-  declarations: [AppComponent, LandingComponent, IconButtonComponent, DashboardComponent],
+  declarations: [
+    AppComponent,
+    LandingComponent,
+    IconButtonComponent,
+    DashboardComponent,
+    OnboardingModalComponent,
+    LoaderComponent,
+  ],
   imports: [
     BrowserModule,
-    OnboardingModalComponent,
     AppRoutingModule,
     HttpClientModule,
     AuthModule.forRoot({

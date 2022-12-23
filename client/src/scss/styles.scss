@@ -61,8 +61,6 @@ p {
   }
 }
 
-input,
-textarea,
 button {
   &:disabled {
     cursor: default;
@@ -71,6 +69,24 @@ button {
     &:hover {
       box-shadow: none !important;
       background: $grey !important;
+    }
+  }
+}
+
+input,
+textarea {
+  &:disabled {
+    cursor: default;
+    outline: none;
+    color: $grey-dark !important;
+    background: darken($grey-light, 15) !important;
+
+    &:hover,
+    &:focus {
+      outline: none;
+      box-shadow: none !important;
+      color: $grey-dark !important;
+      background: darken($grey-light, 15) !important;
     }
   }
 }

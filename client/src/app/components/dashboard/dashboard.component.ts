@@ -1,7 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService, User } from "@auth0/auth0-angular";
+import { AuthService } from "@auth0/auth0-angular";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { UserService } from "@services/index";
+import FlowSDK from "@sdk/index";
+import { EnvProvider } from "@services/index";
 import { OnboardingModalComponent } from "@shared/components/index";
 
 @Component({
@@ -10,36 +11,35 @@ import { OnboardingModalComponent } from "@shared/components/index";
   styleUrls: ["./dashboard.component.scss"],
 })
 export class DashboardComponent implements OnInit {
+  private api: FlowSDK;
+
+  loading = false;
+
   constructor(
     private authSVC: AuthService,
-    private userSVC: UserService,
     private modalSVC: NgbModal,
+    private envSVC: EnvProvider,
   ) {}
 
-  user: User | undefined;
-
-  isOnboarding = true;
-
   ngOnInit(): void {
-    this.openModal();
-    // this.authSVC.getUser().subscribe((user) => {
-    //   debugger;
-    //   if (user) {
-    //     const email = user.email;
-    //     if (email) {
-    //       try {
-    //         console.log(this.userSVC.getUserByEmail(email));
-    //       } catch (err) {
-    //         this.isOnboarding = true;
-    //         this.openModal();
-    //       }
-    //     }
-    //   }
-    // });
+    this.loading = true;
+    this.authSVC.getIdTokenClaims().subscribe((claims) => {
+      this.api = new FlowSDK({
+        baseUrl: this.envSVC.require("apiUri") as string,
+        accessToken: claims?.__raw ?? "",
+      });
+      this.api.users.getByEmail(claims?.email ?? "").catch(() => this.openModal());
+      this.loading = false;
+    });
   }
 
   openModal() {
-    this.modalSVC.open(OnboardingModalComponent, { fullscreen: true, scrollable: true });
+    this.modalSVC.open(OnboardingModalComponent, {
+      fullscreen: true,
+      scrollable: true,
+      backdrop: "static",
+      keyboard: false,
+    });
   }
 
   logout(): void {
