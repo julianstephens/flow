@@ -10,3 +10,5 @@ dist
 .flaskenv*
 !.env.project
 !.env.vault
+
+.null-ls*
