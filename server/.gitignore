@@ -56,7 +56,11 @@ test/**/*.js.map
 .env.local
 .env.development
 
+<<<<<<< HEAD
 .env*
 .flaskenv*
 !.env.project
 !.env.vault
+=======
+prisma/generated/*
+>>>>>>> 2f5ab68d09e18c7694212787e909ea8a2a2cbba2

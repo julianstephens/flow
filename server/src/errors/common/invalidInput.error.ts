@@ -1,3 +1,4 @@
+import { PrismaClientValidationError } from "@prisma/client/runtime";
 import { BadRequest } from "@tsed/exceptions";
 
 export class InvalidInput extends BadRequest {
@@ -9,3 +10,10 @@ export class InvalidInput extends BadRequest {
     );
   }
 }
+
+export const errOrValidationError = (err: Error): Error => {
+  if (err instanceof PrismaClientValidationError) {
+    return new InvalidInput();
+  }
+  return err;
+};

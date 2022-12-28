@@ -1,43 +1,67 @@
-import { HttpClient, HttpResponse } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-
-// const URI = env.apiURI;
-const URI = "";
+import { Inject, Injectable } from "@angular/core";
+import { AuthService } from "@auth0/auth0-angular";
+import { UserCreateRequest, UserResponse, UserUpdateRequest } from "@shared/interfaces";
+import axios, { Axios, AxiosRequestConfig, AxiosResponse } from "axios";
+import { EnvService } from "./env-provider.service";
 
 @Injectable({
   providedIn: "root",
 })
 export class ApiService {
-  headers: Headers = new Headers();
+  protected axios: Axios;
 
-  options = {
-    headers: new Headers(),
-    observe: "response",
-    responseType: "json",
+  timeout = 30_000;
+
+  constructor(private authSVC: AuthService, @Inject(EnvService) private envSVC: EnvService) {
+    this.authSVC.getAccessTokenSilently().subscribe((token) => {
+      this.axios = axios.create({
+        baseURL: this.envSVC.require("apiUri") as string,
+        timeout: this.timeout,
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    });
+  }
+
+  async request<ResourceData, ResourceRequest = unknown>(
+    req: AxiosRequestConfig<ResourceRequest>,
+  ): Promise<AxiosResponse<ResourceData>> {
+    return this.axios.request<ResourceData, AxiosResponse<ResourceData>, ResourceRequest>({
+      ...req,
+    });
+  }
+
+  async ping(): Promise<AxiosResponse<any>> {
+    return this.request<string>({
+      url: "/ping",
+    });
+  }
+
+  readonly users = {
+    get: (id: number): Promise<AxiosResponse<UserResponse>> =>
+      this.request<UserResponse>({
+        url: `/users/${id}`,
+      }),
+    getByEmail: (email: string): Promise<AxiosResponse<UserResponse>> =>
+      this.request<UserResponse>({
+        url: `/users`,
+        params: { email },
+      }),
+    create: (data: UserCreateRequest): Promise<AxiosResponse<UserResponse>> =>
+      this.request<UserResponse, UserCreateRequest>({
+        method: "post",
+        url: "/users",
+        data,
+      }),
+    update: (id: number, data: UserUpdateRequest): Promise<AxiosResponse<UserResponse>> =>
+      this.request<UserResponse, UserUpdateRequest>({
+        method: "put",
+        url: `/users/${id}`,
+        data,
+      }),
+    delete: (id: number): Promise<AxiosResponse<void>> =>
+      this.request({
+        method: "delete",
+        url: `/users/${id}`,
+      }),
   };
-
-  constructor(private http: HttpClient) {
-    this.headers.append("Content-Type", "application/json");
-  }
-
-  get<T>(url: string, options?: any): Observable<HttpResponse<T>> {
-    return this.http.get<T>(URI + url, {
-      headers: this.headers,
-      observe: "response",
-      ...options,
-    }) as Observable<HttpResponse<T>>;
-  }
-
-  post<T>(url: string, body: any, options?: any) {
-    return this.http.post<T>(URI + url, { headers: this.headers, ...options });
-  }
-
-  put<T>(url: string, body: any, options?: any) {
-    return this.http.put<T>(URI + url, { headers: this.headers, ...options });
-  }
-
-  delete<T>(url: string, options?: any) {
-    return this.http.delete<T>(URI + url, { headers: this.headers, ...options });
-  }
 }

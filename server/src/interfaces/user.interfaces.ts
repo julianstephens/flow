@@ -1,13 +1,8 @@
-import { Prisma } from "@prisma/client";
-import { IOrderByFilter } from "./common.interfaces";
-
 export const UserNotFoundDesc = "User(s) not found.";
+export const UserExistsDesc = "User already exists with this email.";
 
 export interface IUserSearchFilters {
-  limit?: number;
-  orderBy?: IOrderByFilter;
   email?: string;
-  shortName?: string;
   fullName?: string;
 }
 
@@ -23,10 +18,11 @@ export interface IUserInput {
   shortName?: string;
   email?: string;
   dob?: number;
-  address: {
+  address?: {
     streetAddress?: string;
     streetAddress2?: string;
     city?: string;
+    region?: string;
     country?: string;
     postalCode?: string;
   };
@@ -36,12 +32,22 @@ export const UserCreateExample = {
   fullName: "Shinji Ikari",
   shortName: "Shinji",
   email: "shinji.ikari@xyz.com",
+  dob: 991428224,
+  address: {
+    streetAddress: "123 ABC Lane",
+    streetAddress2: "Unit 4",
+    city: "Tokyo",
+    region: "Kanto",
+    country: "JPN",
+    postalCode: "021",
+  },
 };
 
-export const UserSelectProfile: Prisma.UserSelect = {
-  id: true,
-  email: true,
-  fullName: true,
-  shortName: true,
-  address: true,
+export const UserUpdateExample = {
+  fullName: "Shinji Ikari",
+  shortName: "Shinji",
+  email: "shinji.ikari@xyz.com",
+  dob: 991428224,
 };
+
+export const UserSelectProfile = ["id", "fullName", "shortName", "email", "dob"];

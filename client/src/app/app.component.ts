@@ -1,9 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ApiService } from "./services/api.service";
-
-interface ITestResult {
-  data: string;
-}
+import { AuthService } from "@auth0/auth0-angular";
 
 @Component({
   selector: "app-root",
@@ -11,15 +7,9 @@ interface ITestResult {
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent implements OnInit {
-  title = "client";
+  title = "flow";
 
-  test = "";
+  constructor(public authSVC: AuthService) {}
 
-  constructor(private apiSVC: ApiService) {}
-
-  ngOnInit() {
-    this.apiSVC.get<ITestResult>("/ping").subscribe((res) => {
-      this.test = res.body?.data || "";
-    });
-  }
+  ngOnInit() {}
 }

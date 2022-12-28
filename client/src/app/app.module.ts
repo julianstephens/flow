@@ -1,20 +1,28 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AuthHttpInterceptor, AuthModule } from "@auth0/auth0-angular";
-import { environment as env } from "src/environments/environment";
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
+import { DashboardComponent, LandingComponent } from "@components/index";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgSelectModule } from "@ng-select/ng-select";
+import { EnvService } from "@services/index";
+import { IconButtonComponent, OnboardingModalComponent } from "@shared/components/index";
+import { environment as env } from "../environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { IconButtonComponent } from "./common/icon-button/icon-button.component";
-import { DashboardComponent } from "./dashboard/dashboard.component";
-import { LandingComponent } from "./landing/landing.component";
+import { LoaderComponent } from "./shared/components/loader.component";
 
 @NgModule({
-  declarations: [AppComponent, LandingComponent, IconButtonComponent, DashboardComponent],
+  declarations: [
+    AppComponent,
+    LandingComponent,
+    IconButtonComponent,
+    DashboardComponent,
+    OnboardingModalComponent,
+    LoaderComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,7 +39,10 @@ import { LandingComponent } from "./landing/landing.component";
     NgSelectModule,
     FormsModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
+    { provide: EnvService },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

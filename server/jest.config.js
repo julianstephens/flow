@@ -15,7 +15,14 @@ module.exports = {
   coverageDirectory: "coverage",
 
   // An array of regexp pattern strings used to skip coverage collection
-  coveragePathIgnorePatterns: ["index.ts", "/dist/", "/node_modules/"],
+  coveragePathIgnorePatterns: [
+    "index.ts",
+    "/dist/",
+    "/node_modules/",
+    "/generated/",
+    "/interfaces",
+    "/errors/",
+  ],
 
   // An object that configures minimum threshold enforcement for coverage results
   coverageThreshold: {
@@ -43,6 +50,8 @@ module.exports = {
   moduleNameMapper: {
     "^@generated/(.*)$": "<rootDir>/prisma/generated/$1",
     "^@controllers/(.*)$": "<rootDir>/src/controllers/$1",
+    "^@services/(.*)$": "<rootDir>/src/services/$1",
+    "^@utils/(.*)$": "<rootDir>/src/utils/$1",
     "^@middleware/(.*)$": "<rootDir>/src/middleware/$1",
     "^@interfaces/(.*)$": "<rootDir>/src/interfaces/$1",
     "^@config/(.*)$": "<rootDir>/src/config/$1",

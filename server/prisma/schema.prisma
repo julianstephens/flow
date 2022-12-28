@@ -17,6 +17,7 @@ datasource db {
 }
 
 model User {
+  /// @TsED.Min(1)
   id        Int      @id @default(autoincrement())
   /// @TsED.Description("User full name. Must be their legal name.")
   fullName  String   @map("full_name")
@@ -28,46 +29,13 @@ model User {
   /// @TsED.Description("User date of birth. Format: Unix Timestamp")
   dob       Int
   /// @TsED.Description("User address")
-  address   Address? @relation(fields: [addressId], references: [id], onDelete: Cascade)
-  addressId Int?     @unique
+  address   Json
   /// @TsED.CollectionOf(String)
   roles     Role[]   @default([USER])
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
   updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
 
   @@map("users")
-}
-
-model Address {
-  /// @TsED.Groups("!creation")
-  id             Int     @id @default(autoincrement())
-  /// @TsED.Description("Primary street portion of the address.")
-  streetAddress  String  @map("street_address")
-  /// @TsED.Description("Extra street information, like an apartment or suite number.")
-  streetAddress2 String? @map("street_address_2")
-  city           String
-  country        Country @relation(fields: [countryId], references: [id])
-  /// @TsED.Description("Postal code for associated address. Must be 5 digits for US addresses.")
-  /// @TsED.MinLength(2)
-  /// @TsED.MaxLength(10)
-  postalCode     String  @map("postal_code")
-  user           User[]
-
-  countryId Int
-
-  @@map("addresses")
-}
-
-model Country {
-  /// @TsED.Groups("!creation")
-  id           Int      @id @default(autoincrement())
-  code         String   @unique
-  name         String
-  callingCodes String[] @map("calling_code")
-
-  Address Address[]
-
-  @@map("countries")
 }
 
 enum Role {

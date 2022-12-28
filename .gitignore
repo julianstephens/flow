@@ -4,11 +4,13 @@ test
 **/*.log
 public
 dist
-api/yarn-error.log
+**/yarn-error.log
 
 **/.env*
 .flaskenv*
 !.env.project
 !.env.vault
 
-.env*
+.null-ls*
+
+.null-ls*

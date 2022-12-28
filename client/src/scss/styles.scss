@@ -14,8 +14,79 @@ body {
 a {
   color: $black;
   text-decoration: none;
+  cursor: pointer;
 
   &:hover {
     color: $blue;
+  }
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.icon-left {
+  margin-right: $space-xs;
+}
+
+.icon-right {
+  margin-left: $space-xs;
+}
+
+.form-group {
+  width: 100%;
+
+  label {
+    font-size: $font-2xs;
+    font-weight: bold;
+    color: $grey-dark;
+  }
+
+  input,
+  textarea {
+    outline: none;
+    padding: 0 $space-sm;
+    background: $grey-light;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background: $grey-light;
+    }
+  }
+}
+
+button {
+  &:disabled {
+    cursor: default;
+    background: $grey !important;
+
+    &:hover {
+      box-shadow: none !important;
+      background: $grey !important;
+    }
+  }
+}
+
+input,
+textarea {
+  &:disabled {
+    cursor: default;
+    outline: none;
+    color: $grey-dark !important;
+    background: darken($grey-light, 15) !important;
+
+    &:hover,
+    &:focus {
+      outline: none;
+      box-shadow: none !important;
+      color: $grey-dark !important;
+      background: darken($grey-light, 15) !important;
+    }
   }
 }

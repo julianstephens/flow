@@ -24,4 +24,3 @@ COPY --chown=node:node . .
 
 # generate prisma client
 # RUN yarn prisma generate
-

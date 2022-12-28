@@ -11,6 +11,7 @@ $colors: (
   "grey-dark": $grey-dark,
   "gold": $gold,
   "green-soft": $green-soft,
+  "red": $red,
 );
 @each $name, $color in $colors {
   .color-#{$name} {
@@ -27,11 +28,13 @@ $colors: (
 .font-logo {
   font-family: $font-logo !important;
 }
-.font-hero {
+.font-accent {
   font-family: $font-hero !important;
 }
 
 $fonts: (
+  "hero": $font-hero,
+  "3xl": $font-2xl,
   "2xl": $font-2xl,
   "xl": $font-xl,
   "lg": $font-lg,
@@ -51,6 +54,7 @@ $fonts: (
 * SPACING
 *****************************/
 $spaces: (
+  "4xl": $space-4xl,
   "3xl": $space-3xl,
   "2xl": $space-2xl,
   "xl": $space-xl,
@@ -74,29 +78,23 @@ $sides: (
   }
   .my-#{$size} {
     margin-top: $space !important;
-    margin-right: $space !important;
+    margin-bottom: $space !important;
   }
 
   .px-#{$size} {
-    margin-left: $space !important;
-    margin-right: $space !important;
+    padding-left: $space !important;
+    padding-right: $space !important;
   }
   .py-#{$size} {
-    margin-top: $space !important;
-    margin-right: $space !important;
+    padding-top: $space !important;
+    padding-bottom: $space !important;
   }
 
   @each $abbrev, $side in $sides {
     .m#{$abbrev}-#{$size} {
       margin-#{$side}: $space !important;
     }
-    .m#{$abbrev}-lg {
-      margin-#{$side}: $space !important;
-    }
-    .p#{$abbrev}-xl {
-      padding-#{$side}: $space !important;
-    }
-    .p#{$abbrev}-lg {
+    .p#{$abbrev}-#{$size} {
       padding-#{$side}: $space !important;
     }
   }
