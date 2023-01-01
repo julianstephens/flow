@@ -35,10 +35,68 @@ model User {
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
   updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
 
+  budgets Budget[]
+
   @@map("users")
+}
+
+model Budget{
+  /// @TsED.Min(1)
+  id        Int      @id @default(autoincrement())
+  /// @TsED.Description("User full name. Must be their legal name.")
+  user      User        @relation(fields: [userid], references: [id], onDelete: Cascade) 
+/// @TsED.Description("User Id that connects User to Budget")
+  userid    Int
+/// @TsED.Description("Budget Title")
+  title     String       @map("title")
+ 
+ /// @TsED.Description("Budget Type")
+  budgetType BudgetType  @default(TRADITIONAL)
+
+/// @TsED.Description("The Active Budget")
+  isActive  Boolean
+
+
+/// @TsED.Description("Description")
+  description String?
+
+/// @TsED.Description("Target Budget")
+  target  Decimal?
+
+
+/// @TsED.Description("Target Date")
+  targetDate  Int?
+
+/// @TsED.Description("Income")
+  income    Decimal?
+
+
+/// @TsED.Description("Expenses")
+  expenses  Decimal?
+
+
+/// @TsED.Description("Catergory ID")
+  catergoryMap Json?
+
+
+
+
+
+
+
+/// @TsED.CollectionOf(String)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  
 }
 
 enum Role {
   USER
   ADMIN
+}
+
+enum BudgetType { 
+  TRADITIONAL
+  GOAL
+  FIFTY_THIRTY_TWENTY
 }
