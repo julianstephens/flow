@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "//"
+  ],
+  "pipeline": {
+    "build": {
+      "outputs": [
+        "dist"
+      ],
+      "dependsOn": [
+        "config-prod"
+      ]
+    },
+    "start": {
+      "dependsOn": [
+        "config"
+      ]
+    },
+    "config": {},
+    "config-prod": {}
+  }
+}
