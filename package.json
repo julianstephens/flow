@@ -1,10 +1,18 @@
 {
+  "name": "flow",
   "private": true,
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev",
+    "start": "dotenv -- turbo run start",
+    "db:generate": "turbo run db:generate",
+    "db:studio": "turbo run db:studio",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
   },
   "devDependencies": {
     "eslint": "^7.32.0",
@@ -12,6 +20,5 @@
     "prettier": "^2.5.1",
     "turbo": "latest"
   },
-  "packageManager": "pnpm@7.15.0",
-  "name": "flow"
+  "packageManager": "pnpm@7.15.0"
 }

@@ -1,11 +1,6 @@
 module.exports = {
-  extends: ["next", "turbo", "prettier"],
-  rules: {
-    "@next/next/no-html-link-for-pages": "off",
-  },
-  parserOptions: {
-    babelOptions: {
-      presets: [require.resolve("next/babel")],
-    },
-  },
+  extends: ["turbo", "prettier"],
+  parser: "@typescript-eslint/parser",
+  plugins: ["@typescript-eslint", "prettier"],
+  rules: {},
 };
