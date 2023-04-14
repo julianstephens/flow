@@ -6,7 +6,7 @@ export const environment: IEnvironment = {
   auth: {
     domain: "dev-8nx0w2kt.us.auth0.com",
     clientId: "undefined",
-    audience: "",
+    audience: "http://localhost:3000",
     redirectUri: "",
   },
   apiUri: "undefined",

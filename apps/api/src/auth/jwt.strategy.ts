@@ -1,10 +1,10 @@
-import { JWTPayload } from "@/types";
+import { JwtPayload } from "@/types";
 import { UnauthorizedException } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
 import { passportJwtSecret } from "jwks-rsa";
 import { ExtractJwt, Strategy } from "passport-jwt";
 
-export class JWTStrategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
       secretOrKeyProvider: passportJwtSecret({
@@ -15,13 +15,13 @@ export class JWTStrategy extends PassportStrategy(Strategy) {
       }),
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       audience: process.env.AUTH0_AUDIENCE,
-      issuer: `https://${process.env.AUTH0_DOMAIN}`,
+      issuer: `https://${process.env.AUTH0_DOMAIN}/`,
       algorithms: ["RS256"],
     });
   }
 
-  validate(payload: JWTPayload): JWTPayload {
-    if (Object.keys(payload).length === 0) throw new UnauthorizedException();
+  validate(payload: JwtPayload): JwtPayload {
+    if (!payload) throw new UnauthorizedException();
     return payload;
   }
 }

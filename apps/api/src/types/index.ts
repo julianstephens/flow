@@ -6,7 +6,7 @@ export type APIResp<T = unknown> = {
   data?: T;
 };
 
-export type JWTPayload = {
+export type JwtPayload = {
   /** Issuer (who created and signed this token) */
   iss?: string;
   /** Subject (whom the token refers to) */

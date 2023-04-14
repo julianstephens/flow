@@ -1,17 +1,17 @@
 import { PassportModule } from "@nestjs/passport";
 import { Test, TestingModule } from "@nestjs/testing";
-import { JWTStrategy } from "./jwt.strategy";
+import { JwtStrategy } from "./jwt.strategy";
 
 describe("JWTStrategy", () => {
-  let jwtStrategy: JWTStrategy;
+  let jwtStrategy: JwtStrategy;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [PassportModule],
-      providers: [JWTStrategy],
+      providers: [JwtStrategy],
     }).compile();
 
-    jwtStrategy = module.get<JWTStrategy>(JWTStrategy);
+    jwtStrategy = module.get<JwtStrategy>(JwtStrategy);
   });
 
   describe("validate", () => {

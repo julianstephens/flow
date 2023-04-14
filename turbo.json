@@ -8,17 +8,41 @@
     "build": {
       "outputs": [
         "dist"
+      ],
+      "dependsOn": [
+        "^db:generate"
       ]
     },
     "start": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "dependsOn": [
+        "^db:generate"
+      ]
     },
     "lint": {},
     "format": {},
-    "test": {},
-    "db:studio": {},
+    "test": {
+      "dependsOn": [
+        "^db:generate"
+      ]
+    },
     "db:generate": {
+      "cache": false,
+      "dependsOn": [
+        "^db:generate"
+      ]
+    },
+    "db:migrate:deploy": {
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
+    },
+    "db:seed": {
+      "cache": false
+    },
+    "db:studio": {
       "cache": false
     }
   }
