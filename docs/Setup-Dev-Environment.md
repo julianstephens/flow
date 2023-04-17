@@ -23,9 +23,9 @@ docker volume create flow_pgdata
 ### In the root directory:
 
 ```shell
-npx dotenv-vault new vlt_b93e804ba2510521e329e68f9f861bec6d617ea28b100130fc33b66fc92f7980
-npx dotenv-vault login -y
-npx dotenv-vault pull
+pnpm dlx dotenv-vault new vlt_b93e804ba2510521e329e68f9f861bec6d617ea28b100130fc33b66fc92f7980
+pnpm dlx dotenv-vault login -y
+pnpm dlx dotenv-vault pull
 ```
 
 ## 5. Start db 
@@ -34,6 +34,8 @@ docker compose up -d db
 ```
 
 ## 6. Push db schema
+
+### In the root directory:
 ```
 pnpm db:migrate
 ```
