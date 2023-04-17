@@ -3,7 +3,7 @@
 ## 1. Clone repo
 
 ```shell
-git clone git@github.com:julianstephens/budget-tracker.git
+git clone git@github.com:julianstephens/flow.git
 ```
 
 ## 2. Install packages
