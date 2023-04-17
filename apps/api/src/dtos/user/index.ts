@@ -1,20 +1,13 @@
-import { MIN } from "@/utils";
+import { UserSchema } from "db";
 import { createZodDto } from "nestjs-zod";
-import { z } from "nestjs-zod/z";
 
-const UserSchema = z.object({
-  email: z.string().email().describe("User's email address"),
-  password: z
-    .password()
-    .min(8)
-    .max(100)
-    .atLeastOne("digit", { message: MIN("digit") })
-    .atLeastOne("special", { message: MIN("special character") })
-    .atLeastOne("lowercase", { message: MIN("uppercase character") })
-    .atLeastOne("uppercase", { message: MIN("uppercase character") })
-    .describe("User's password"),
-  fname: z.string().nullish().describe("User's first name"),
-  lname: z.string().nullish().describe("User's last name"),
+export const CreateUserSchema = UserSchema.omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
 });
+export const UpdateUserScheam = CreateUserSchema.partial();
 
 export class UserDto extends createZodDto(UserSchema) {}
+export class CreateUserDto extends createZodDto(CreateUserSchema) {}
+export class UpdateUserDto extends createZodDto(UpdateUserScheam) {}

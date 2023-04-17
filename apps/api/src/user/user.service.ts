@@ -1,43 +1,28 @@
-import { UserDto } from "@/dtos/user";
+import { CreateUserDto, UpdateUserDto } from "@/dtos/user";
 import { PrismaService } from "@/prisma.service";
 import { Injectable } from "@nestjs/common";
-import { Prisma, User } from "@prisma/client";
+import { Prisma, User } from "db";
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prismaSVC: PrismaService) {}
 
-  async exists(opts: Prisma.UserWhereUniqueInput): Promise<boolean> {
-    const userSelect = {
-      id: true,
-    } satisfies Prisma.UserSelect;
-
-    const user = await this.find(opts, userSelect);
-    return Boolean(user);
-  }
-
-  async find(
-    opts: Prisma.UserWhereUniqueInput,
-    select?: Prisma.UserSelect
-  ): Promise<User | null> {
-    return await this.prisma.user.findUnique({
-      where: opts,
+  async find(id: number, select?: Prisma.UserSelect): Promise<User | null> {
+    return await this.prismaSVC.db.user.findUnique({
+      where: { id },
       ...(select ? { select } : {}),
     });
   }
 
-  async create(data: UserDto): Promise<User> {
-    return await this.prisma.user.create({ data });
+  async create(data: CreateUserDto): Promise<User> {
+    return await this.prismaSVC.db.user.create({ data });
   }
 
-  async update(
-    opts: Prisma.UserWhereUniqueInput,
-    data: Partial<UserDto>
-  ): Promise<User> {
-    return await this.prisma.user.update({ where: opts, data });
+  async update(id: number, data: UpdateUserDto): Promise<User> {
+    return await this.prismaSVC.db.user.update({ where: { id }, data });
   }
 
-  async delete(id: number): Promise<void> {
-    await this.prisma.user.delete({ where: { id } });
+  async delete(id: number): Promise<User> {
+    return await this.prismaSVC.db.user.delete({ where: { id } });
   }
 }

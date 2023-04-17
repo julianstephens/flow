@@ -1,10 +1,3 @@
-import { StatusCodes } from "http-status-codes";
-
-export type APIResp<T = unknown> = {
-  status: StatusCodes;
-  message: string;
-  data?: T;
-};
 
 export type JwtPayload = {
   /** Issuer (who created and signed this token) */
