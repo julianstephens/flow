@@ -76,3 +76,8 @@ testem.log
 .DS_Store
 Thumbs.db
 *.null-ls*
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
