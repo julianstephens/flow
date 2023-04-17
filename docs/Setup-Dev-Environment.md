@@ -23,7 +23,7 @@ docker volume create flow_pgdata
 ### In the root directory:
 
 ```shell
-npx dotenv-vault new vlt_c69127b52a712040b74475a43f697468e9688c5f5c6e3d5e0bb9cb1829007402
+npx dotenv-vault new vlt_b93e804ba2510521e329e68f9f861bec6d617ea28b100130fc33b66fc92f7980
 npx dotenv-vault login -y
 npx dotenv-vault pull
 ```
