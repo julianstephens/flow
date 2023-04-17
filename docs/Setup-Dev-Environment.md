@@ -10,26 +10,15 @@ git clone git@github.com:julianstephens/budget-tracker.git
 
 ### In the root directory:
 ```shell
-yarn install
+pnpm i
 ```
 
-### In the `client` directory:
+## 3. Create docker volume for Postgres
 ```
-yarn install
-```
-
-### In the `server` directory:
-```
-yarn install
+docker volume create flow_pgdata
 ```
 
-## 3. Create docker volumes for the Postgres and Redis databases
-```
-docker volume create budget_pgdata
-docker volume create budget_redis
-```
-
-## 4. Add `.env` files
+## 4. Add `.env` file
 
 ### In the root directory:
 
@@ -39,33 +28,12 @@ npx dotenv-vault login -y
 npx dotenv-vault pull
 ```
 
-### In the `client` directory:
-
-```shell
-npx dotenv-vault new vlt_e55b4fd461894b412352bcf16e3cfd97466ebc42585528df26f7981850321707
-npx dotenv-vault login -y
-npx dotenv-vault pull
+## 5. Start db 
+```
+docker compose up -d db
 ```
 
-### In the `server` directory:
-
-```shell
-npx dotenv-vault new vlt_108913fcf94895451ba334dbe45f5f2be97e8d5fca65af0682566ac7fc7b81cb
-npx dotenv-vault login -y
-npx dotenv-vault pull
+## 6. Push db schema
 ```
-
-## 5. Start project 
-```
-docker compose up -d --build
-```
-
-## 6. Configure DB
-
-Access the CLI for your server container (can be done via Docker CLI or Docker Desktop)
-
-Using the CLI:
-```
-docker exec -it budget_server bash
-yarn prisma migrate dev
+pnpm db:migrate
 ```
