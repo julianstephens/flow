@@ -3,10 +3,20 @@
   "version": "1.0.0",
   "private": true,
   "description": "",
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "exports": {
+    "import": {
+      "default": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "require": {
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && cp ./prisma/schema.prisma ./dist/schema.prisma",
     "clean": "rimraf",
     "db:generate": "prisma generate",
     "db:migrate:deploy": "prisma migrate deploy",
@@ -23,13 +33,16 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.15.11",
+    "eslint-config-custom": "workspace:*",
     "prisma": "^4.12.0",
     "tsconfig": "workspace:*",
-    "eslint-config-custom": "workspace:*",
     "tsup": "^6.7.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "zod-prisma": "^0.5.4"
   },
   "dependencies": {
-    "@prisma/client": "^4.12.0"
+    "@prisma/client": "^4.12.0",
+    "decimal.js": "^10.4.3",
+    "zod": "^3.21.4"
   }
 }

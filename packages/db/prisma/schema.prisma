@@ -3,6 +3,14 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/prisma-client"
+}
+
+generator zod {
+  provider     = "zod-prisma"
+  output       = "../src/generated"
+  modelSuffix  = "Schema"
+  useDecimalJs = true
 }
 
 datasource db {
