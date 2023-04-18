@@ -1,6 +1,6 @@
 services:
   db:
-    container_name: budget_db
+    container_name: flow_db
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -11,8 +11,8 @@ services:
       - ${DB_PORT_FORWARD}:${DB_PORT}
     restart: always
     volumes:
-      - budget_pgdata:/var/lib/postgresql/data
+      - flow_pgdata:/var/lib/postgresql/data
         
 volumes:
-  budget_pgdata:
+  flow_pgdata:
     external: true
