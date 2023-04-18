@@ -37,5 +37,5 @@ docker compose up -d db
 
 ### In the root directory:
 ```
-pnpm db:migrate
+pnpm db:migrate:dev
 ```
