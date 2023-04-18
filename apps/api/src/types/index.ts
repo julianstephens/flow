@@ -1,4 +1,3 @@
-
 export type JwtPayload = {
   /** Issuer (who created and signed this token) */
   iss?: string;
@@ -15,3 +14,15 @@ export type JwtPayload = {
   /** Token scope (what the token has access to) */
   scope?: string;
 };
+
+type FindById = {
+  id: number;
+  email?: never;
+};
+
+type FindByEmail = {
+  id?: never;
+  email: string;
+};
+
+export type FindOneQuery = FindById | FindByEmail;

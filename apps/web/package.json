@@ -5,9 +5,7 @@
   "type": "module",
   "scripts": {
     "ng": "ng",
-    "config": "ts-node-esm ./scripts/setenv.ts",
-    "config-prod": "pnpm config -- --environment=prod",
-    "start": "ng serve --host 0.0.0.0 --disable-host-check",
+    "start": "ng serve --host 0.0.0.0 --disable-host-check --extra-webpack-config webpack.partial.js -o",
     "build": "ng build",
     "test": "ng test"
   },
@@ -27,8 +25,10 @@
     "axios": "1.2.1",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.4",
+    "db": "workspace:*",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
+    "ngx-build-plus": "^14.0.0",
     "rxjs": "~7.5.7",
     "ts-node": "^10.9.1",
     "tslib": "^2.5.0",

@@ -1,13 +1,15 @@
+import { Environment } from "@/shared/types";
 
-import {IEnvironment} from "@shared/interfaces/index";
+declare const NODE_ENV: string;
+declare const AUTH_DOMAIN: string;
+declare const AUTH_CLIENT: string;
+declare const API_URL: string;
 
-export const environment: IEnvironment = {
-  production: false,
+export const environment: Environment = {
+  isProd: NODE_ENV === "production",
   auth: {
-    domain: "dev-8nx0w2kt.us.auth0.com",
-    clientId: "U1uSdz2IkMborC9NM9sihV8DD21DQSV9",
-    audience: "http://localhost:3000",
-    redirectUri: "",
+    domain: AUTH_DOMAIN,
+    clientId: AUTH_CLIENT,
   },
-  apiUri: "undefined",
+  apiUri: API_URL,
 };
