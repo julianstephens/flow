@@ -21,17 +21,11 @@
       "dom"
     ],
     "paths": {
-      "@app/*": [
+      "env/*": [
+        "./src/environments/*"
+      ],
+      "@/*": [
         "./src/app/*"
-      ],
-      "@components/*": [
-        "./src/app/components/*"
-      ],
-      "@services/*": [
-        "./src/app/services/*"
-      ],
-      "@shared/*": [
-        "./src/app/shared/*"
       ]
     }
   },

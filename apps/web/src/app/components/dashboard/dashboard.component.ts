@@ -1,9 +1,8 @@
+import { ApiService } from "@/services";
+import { OnboardingModalComponent } from "@/shared/components";
 import { Component, OnInit } from "@angular/core";
-import { EnvService } from "@app/services";
-import { ApiService } from "@app/services/api.service";
 import { AuthService } from "@auth0/auth0-angular";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { OnboardingModalComponent } from "@shared/components/index";
 
 @Component({
   selector: "app-dashboard",
@@ -16,14 +15,15 @@ export class DashboardComponent implements OnInit {
   constructor(
     private authSVC: AuthService,
     private modalSVC: NgbModal,
-    private envSVC: EnvService,
-    private apiSVC: ApiService,
+    private apiSVC: ApiService
   ) {}
 
   ngOnInit(): void {
     this.loading = true;
     this.authSVC.getIdTokenClaims().subscribe((claims) => {
-      this.apiSVC.users.getByEmail(claims?.email ?? "").catch(() => this.openModal());
+      this.apiSVC.users
+        .getByEmail(claims?.email ?? "")
+        .catch(() => this.openModal());
       this.loading = false;
     });
   }

@@ -2,20 +2,19 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AuthHttpInterceptor, AuthModule } from "@auth0/auth0-angular";
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { FormsModule } from "@angular/forms";
-import { DashboardComponent, LandingComponent } from "@components/index";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { NgSelectModule } from "@ng-select/ng-select";
-import { EnvService } from "@services/index";
+import { DashboardComponent, LandingComponent } from "@/components";
 import {
     IconButtonComponent,
+    LoaderComponent,
     OnboardingModalComponent
-} from "@shared/components/index";
-import { environment as env } from "../environments/environment";
+} from "@/shared/components";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgSelectModule } from "@ng-select/ng-select";
+import { environment as env } from "env/environment";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { LoaderComponent } from "./shared/components/loader.component";
 
 @NgModule({
   declarations: [
@@ -44,7 +43,6 @@ import { LoaderComponent } from "./shared/components/loader.component";
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true },
-    { provide: EnvService },
   ],
   bootstrap: [AppComponent],
 })

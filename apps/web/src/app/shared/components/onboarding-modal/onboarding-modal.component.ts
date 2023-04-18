@@ -1,9 +1,9 @@
+import { ApiService } from "@/services";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { ApiService } from "@app/services/api.service";
 import { AuthService } from "@auth0/auth0-angular";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { UserCreateRequest } from "@shared/interfaces";
+import { Prisma } from "db";
 import moment from "moment";
 
 class OnboardingForm {
@@ -47,7 +47,7 @@ export class OnboardingModalComponent implements OnInit {
   constructor(
     public activeModal: NgbActiveModal,
     private authSVC: AuthService,
-    private apiSVC: ApiService,
+    private apiSVC: ApiService
   ) {
     this.authSVC.getIdTokenClaims().subscribe((claims) => {
       this.req.email = claims?.email ?? "";
@@ -64,18 +64,20 @@ export class OnboardingModalComponent implements OnInit {
   onSubmit() {
     this.loading = true;
 
-    const userReq: UserCreateRequest = {
-      fullName: `${this.req.lname}, ${this.req.fname}`,
-      shortName: this.req.prefName ?? this.req.fname,
+    // TODO: uncomment these props once db is up to date again
+    const userReq: Prisma.UserCreateInput = {
+      // fullName: `${this.req.lname}, ${this.req.fname}`,
+      // shortName: this.req.prefName ?? this.req.fname,
       email: this.req.email,
-      dob: moment(this.req.dob).unix(),
-      address: {
-        street: this.req.street,
-        street2: this.req.street2,
-        city: this.req.city,
-        postal: this.req.postal,
-        country: this.req.country,
-      },
+      password: "",
+      // dob: moment(this.req.dob).unix(),
+      // address: {
+      //   street: this.req.street,
+      //   street2: this.req.street2,
+      //   city: this.req.city,
+      //   postal: this.req.postal,
+      //   country: this.req.country,
+      // },
     };
 
     this.apiSVC.users.create(userReq).then(() => {

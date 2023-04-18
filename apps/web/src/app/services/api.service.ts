@@ -1,21 +1,20 @@
-import { Inject, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { AuthService } from "@auth0/auth0-angular";
-import { UserCreateRequest, UserResponse, UserUpdateRequest } from "@shared/interfaces";
 import axios, { Axios, AxiosRequestConfig, AxiosResponse } from "axios";
-import { EnvService } from "./env-provider.service";
+import { Prisma, User } from "db";
+import { environment as env } from "env/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class ApiService {
   protected axios: Axios;
-
   timeout = 30_000;
 
-  constructor(private authSVC: AuthService, @Inject(EnvService) private envSVC: EnvService) {
+  constructor(private authSVC: AuthService) {
     this.authSVC.getAccessTokenSilently().subscribe((token) => {
       this.axios = axios.create({
-        baseURL: this.envSVC.require("apiUri") as string,
+        baseURL: env.apiUri,
         timeout: this.timeout,
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -23,9 +22,13 @@ export class ApiService {
   }
 
   async request<ResourceData, ResourceRequest = unknown>(
-    req: AxiosRequestConfig<ResourceRequest>,
+    req: AxiosRequestConfig<ResourceRequest>
   ): Promise<AxiosResponse<ResourceData>> {
-    return this.axios.request<ResourceData, AxiosResponse<ResourceData>, ResourceRequest>({
+    return this.axios.request<
+      ResourceData,
+      AxiosResponse<ResourceData>,
+      ResourceRequest
+    >({
       ...req,
     });
   }
@@ -37,28 +40,32 @@ export class ApiService {
   }
 
   readonly users = {
-    get: (id: number): Promise<AxiosResponse<UserResponse>> =>
-      this.request<UserResponse>({
-        url: `/users/${id}`,
+    get: (id: number): Promise<AxiosResponse<User>> =>
+      this.request<User>({
+        url: `/users`,
+        params: { id },
       }),
-    getByEmail: (email: string): Promise<AxiosResponse<UserResponse>> =>
-      this.request<UserResponse>({
+    getByEmail: (email: string): Promise<AxiosResponse<User>> =>
+      this.request<User>({
         url: `/users`,
         params: { email },
       }),
-    create: (data: UserCreateRequest): Promise<AxiosResponse<UserResponse>> =>
-      this.request<UserResponse, UserCreateRequest>({
+    create: (data: Prisma.UserCreateInput): Promise<AxiosResponse<User>> =>
+      this.request<User, Prisma.UserCreateInput>({
         method: "post",
         url: "/users",
         data,
       }),
-    update: (id: number, data: UserUpdateRequest): Promise<AxiosResponse<UserResponse>> =>
-      this.request<UserResponse, UserUpdateRequest>({
+    update: (
+      id: number,
+      data: Prisma.UserUpdateInput
+    ): Promise<AxiosResponse<User>> =>
+      this.request<User, Prisma.UserUpdateInput>({
         method: "put",
         url: `/users/${id}`,
         data,
       }),
-    delete: (id: number): Promise<AxiosResponse<void>> =>
+    delete: (id: number): Promise<AxiosResponse<User>> =>
       this.request({
         method: "delete",
         url: `/users/${id}`,

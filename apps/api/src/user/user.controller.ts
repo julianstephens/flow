@@ -1,4 +1,5 @@
 import { CreateUserDto, UpdateUserDto, UserDto } from "@/dtos/user";
+import { FindOneQuery } from "@/types";
 import { UserService } from "@/user/user.service";
 import {
     Body,
@@ -36,13 +37,25 @@ export class UserController {
     }
   }
 
-  @Get(":id")
+  @Get("")
   @ApiOkResponse({
     description: "Retrieve a user",
     type: UserDto,
   })
-  async find(@Param("id", ParseIntPipe) id: number): Promise<User> {
-    const user = await this.userSVC.find(id);
+  async find(
+    @Param("id", ParseIntPipe) id?: number,
+    @Param("email") email?: string
+  ): Promise<User | null> {
+    if (!id && !email) return null;
+
+    let query: FindOneQuery = {} as FindOneQuery;
+    if (id) {
+      query = { id };
+    } else if (email) {
+      query = { email };
+    }
+
+    const user = await this.userSVC.find(query);
     if (!user) throw new NotFoundException("User not found");
     return user;
   }

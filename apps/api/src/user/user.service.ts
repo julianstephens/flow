@@ -1,5 +1,6 @@
 import { CreateUserDto, UpdateUserDto } from "@/dtos/user";
 import { PrismaService } from "@/prisma.service";
+import { FindOneQuery } from "@/types";
 import { Injectable } from "@nestjs/common";
 import { Prisma, User } from "db";
 
@@ -7,9 +8,12 @@ import { Prisma, User } from "db";
 export class UserService {
   constructor(private prismaSVC: PrismaService) {}
 
-  async find(id: number, select?: Prisma.UserSelect): Promise<User | null> {
+  async find(
+    query: FindOneQuery,
+    select?: Prisma.UserSelect
+  ): Promise<User | null> {
     return await this.prismaSVC.db.user.findUnique({
-      where: { id },
+      where: query,
       ...(select ? { select } : {}),
     });
   }
