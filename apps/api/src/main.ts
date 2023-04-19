@@ -10,6 +10,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle(process.env.API_NAME ?? "Test")
     .setVersion(process.env.API_VERSION ?? "Test")
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("docs", app, document);
