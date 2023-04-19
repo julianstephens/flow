@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 0.0.0.0 --disable-host-check --extra-webpack-config webpack.partial.js -o",
+    "start": "ng serve --host 0.0.0.0 --disable-host-check --extra-webpack-config webpack.partial.cjs -o",
     "build": "ng build",
     "test": "ng test"
   },
