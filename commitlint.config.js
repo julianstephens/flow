@@ -5,6 +5,7 @@ const apps = fs.readdirSync(path.resolve(__dirname, "apps"));
 const packages = fs.readdirSync(path.resolve(__dirname, "packages"));
 /** @type {import('cz-git').UserConfig} */
 module.exports = {
+  extends: ["@commitlint/config-conventional"],
   rules: {
     // @see: https://commitlint.js.org/#/reference-rules
   },
