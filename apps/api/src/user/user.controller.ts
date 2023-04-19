@@ -1,4 +1,3 @@
-import { CreateUserDto, UpdateUserDto, UserDto } from "@/dtos/user";
 import { FindOneQuery } from "@/types";
 import { UserService } from "@/user/user.service";
 import {
@@ -16,6 +15,7 @@ import { ConfigService } from "@nestjs/config";
 import { ApiOkResponse, ApiTags } from "@nestjs/swagger";
 import bcrypt from "bcryptjs";
 import { User } from "db";
+import { CreateUserDto, UpdateUserDto, UserDto } from "./user.dto";
 
 @Controller({
   path: "users",

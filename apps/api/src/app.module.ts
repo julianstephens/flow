@@ -1,6 +1,7 @@
 import { AppController } from "@/app.controller";
 import { AppService } from "@/app.service";
 import { AuthModule } from "@/auth/auth.module";
+import { LinkModule } from "@/link/link.module";
 import { UserModule } from "@/user/user.module";
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
@@ -12,6 +13,7 @@ import { ZodValidationPipe } from "nestjs-zod";
   imports: [
     ConfigModule.forRoot({ isGlobal: true, envFilePath: ".env" }),
     UserModule,
+    LinkModule,
     AuthModule,
   ],
   controllers: [AppController],
@@ -24,7 +26,7 @@ import { ZodValidationPipe } from "nestjs-zod";
     {
       provide: APP_PIPE,
       useClass: ZodValidationPipe,
-    }
+    },
   ],
 })
 export class AppModule {}
