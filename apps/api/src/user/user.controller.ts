@@ -1,19 +1,17 @@
 import { FindOneQuery } from "@/types";
 import { UserService } from "@/user/user.service";
 import {
-    Body,
-    Controller,
-    Delete,
-    Get,
-    NotFoundException,
-    Param,
-    ParseIntPipe,
-    Post,
-    Put
+  Body,
+  Controller,
+  Delete,
+  Get,
+  NotFoundException,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
 } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
 import { ApiOkResponse, ApiTags } from "@nestjs/swagger";
-import bcrypt from "bcryptjs";
 import { User } from "db";
 import { CreateUserDto, UpdateUserDto, UserDto } from "./user.dto";
 
@@ -22,20 +20,7 @@ import { CreateUserDto, UpdateUserDto, UserDto } from "./user.dto";
 })
 @ApiTags("Users")
 export class UserController {
-  constructor(
-    private readonly userSVC: UserService,
-    private configSVC: ConfigService
-  ) {}
-
-  private async hashPassword(pwd: string) {
-    const saltRounds = this.configSVC.get<number>("PWD_COST_FACTOR");
-    try {
-      const salt = await bcrypt.genSalt(saltRounds ?? 10);
-      return await bcrypt.hash(pwd, Number.parseInt(salt));
-    } catch (err) {
-      throw err;
-    }
-  }
+  constructor(private readonly userSVC: UserService) {}
 
   @Get("")
   @ApiOkResponse({
@@ -66,11 +51,7 @@ export class UserController {
     type: UserDto,
   })
   async create(@Body() userInput: CreateUserDto): Promise<User> {
-    const sanitizedInput = {
-      ...userInput,
-      password: await this.hashPassword(userInput.password),
-    };
-    return this.userSVC.create(sanitizedInput);
+    return this.userSVC.create(userInput);
   }
 
   @Put(":id")
@@ -82,12 +63,7 @@ export class UserController {
     @Param("id", ParseIntPipe) id: number,
     @Body() userInput: UpdateUserDto
   ): Promise<User | null> {
-    const sanitizedInput = { ...userInput };
-    if (sanitizedInput.password)
-      sanitizedInput.password = await this.hashPassword(
-        sanitizedInput.password
-      );
-    return this.userSVC.update(id, sanitizedInput);
+    return this.userSVC.update(id, userInput);
   }
 
   @Delete(":id")

@@ -1,8 +1,9 @@
-import { CreateUserDto, UpdateUserDto } from "@/dtos/user";
 import { PrismaService } from "@/prisma.service";
 import { FindOneQuery } from "@/types";
 import { Injectable } from "@nestjs/common";
 import { Prisma, User } from "db";
+import { nanoid } from "nanoid";
+import { CreateUserDto, UpdateUserDto } from "./user.dto";
 
 @Injectable()
 export class UserService {
@@ -19,7 +20,9 @@ export class UserService {
   }
 
   async create(data: CreateUserDto): Promise<User> {
-    return await this.prismaSVC.db.user.create({ data });
+    return await this.prismaSVC.db.user.create({
+      data: { ...data, plaidUID: nanoid() },
+    });
   }
 
   async update(id: number, data: UpdateUserDto): Promise<User> {

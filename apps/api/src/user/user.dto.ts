@@ -5,6 +5,7 @@ export const CreateUserSchema = UserSchema.omit({
   id: true,
   createdAt: true,
   updatedAt: true,
+  plaidUID: true,
 });
 export const UpdateUserScheam = CreateUserSchema.partial();
 

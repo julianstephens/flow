@@ -8,6 +8,7 @@ import { ConfigModule } from "@nestjs/config";
 import { APP_GUARD, APP_PIPE } from "@nestjs/core";
 import { AuthGuard } from "@nestjs/passport";
 import { ZodValidationPipe } from "nestjs-zod";
+import { PlaidService } from "./plaid.service";
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ZodValidationPipe } from "nestjs-zod";
       provide: APP_PIPE,
       useClass: ZodValidationPipe,
     },
+    PlaidService,
   ],
 })
 export class AppModule {}
