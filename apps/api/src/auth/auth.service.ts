@@ -12,7 +12,7 @@ import {
 export class AuthService {
   constructor(private readonly plaidSVC: PlaidService) {}
 
-  async createLinkToken(userId: string) {
+  async createLinkToken(userId: string): Promise<LinkTokenCreateResponse> {
     const linkTokenReq: LinkTokenCreateRequest = {
       client_name: env.APP_NAME,
       user: {
@@ -24,8 +24,7 @@ export class AuthService {
     };
 
     try {
-      const { data }: LinkTokenCreateResponse =
-        await this.plaidSVC.plaid.linkTokenCreate(linkTokenReq);
+      const { data } = await this.plaidSVC.plaid.linkTokenCreate(linkTokenReq);
       return data;
     } catch (err) {
       throw err;

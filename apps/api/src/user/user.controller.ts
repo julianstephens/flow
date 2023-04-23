@@ -11,10 +11,11 @@ import {
   Post,
   Put,
 } from "@nestjs/common";
-import { ApiOkResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiOkResponse, ApiTags } from "@nestjs/swagger";
 import { User } from "db";
 import { CreateUserDto, UpdateUserDto, UserDto } from "./user.dto";
 
+@ApiBearerAuth("defaultBearerAuth")
 @Controller({
   path: "users",
 })
