@@ -26,3 +26,9 @@ type FindByEmail = {
 };
 
 export type FindOneQuery = FindById | FindByEmail;
+
+export type Auth0Resp = {
+  access_token: string;
+  expires_in: number;
+  token_type: string;
+};

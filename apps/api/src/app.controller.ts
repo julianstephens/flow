@@ -1,10 +1,11 @@
 import { AppService } from "@/app.service";
 import { Controller, Get } from "@nestjs/common";
-import { ApiOkResponse } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiOkResponse } from "@nestjs/swagger";
 
+@ApiBearerAuth("defaultBearerAuth")
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) { }
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   @ApiOkResponse({

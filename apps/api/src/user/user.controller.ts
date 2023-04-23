@@ -2,21 +2,22 @@ import { CreateUserDto, UpdateUserDto, UserDto } from "@/dtos/user";
 import { FindOneQuery } from "@/types";
 import { UserService } from "@/user/user.service";
 import {
-    Body,
-    Controller,
-    Delete,
-    Get,
-    NotFoundException,
-    Param,
-    ParseIntPipe,
-    Post,
-    Put
+  Body,
+  Controller,
+  Delete,
+  Get,
+  NotFoundException,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { ApiOkResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiOkResponse, ApiTags } from "@nestjs/swagger";
 import bcrypt from "bcryptjs";
 import { User } from "db";
 
+@ApiBearerAuth("defaultBearerAuth")
 @Controller({
   path: "users",
 })
