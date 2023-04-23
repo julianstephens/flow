@@ -1,6 +1,6 @@
 import { z } from "nestjs-zod/z";
 
-const env = z.object({
+const e = z.object({
   APP_NAME: z.string(),
   API_NAME: z.string(),
   API_VERSION: z.string().default("1"),
@@ -13,5 +13,6 @@ const env = z.object({
   AUTH0_AUDIENCE: z.string(),
   NODE_ENV: z.enum(["development", "test", "production", "staging"]),
 });
+const env = e.parse(process.env);
 
 export default env;
