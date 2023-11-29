@@ -6,6 +6,7 @@ import {
 } from "next-auth";
 
 import Discord from "next-auth/providers/discord";
+import Google from "next-auth/providers/google";
 import { env } from "~/env";
 import { db } from "./db";
 
@@ -16,18 +17,18 @@ import { db } from "./db";
  * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
  */
 declare module "next-auth" {
-  interface Session extends DefaultSession {
-    user: {
-      id: string;
-      // ...other properties
-      // role: UserRole;
-    } & DefaultSession["user"];
-  }
+    interface Session extends DefaultSession {
+        user: {
+            id: string;
+            // ...other properties
+            // role: UserRole;
+        } & DefaultSession["user"];
+    }
 
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
+    // interface User {
+    //   // ...other properties
+    //   // role: UserRole;
+    // }
 }
 
 /**
@@ -36,27 +37,27 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
-  adapter: DrizzleAdapter(db),
-  secret: env.NEXTAUTH_SECRET,
-  callbacks: {
-    redirect: async ({ url, baseUrl }) =>
-      url.startsWith(baseUrl) ? Promise.resolve(url) : Promise.resolve(baseUrl),
-  },
-  providers: [
-    Discord({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
-    }),
-    /**
-     * ...add more providers here.
-     *
-     * Most other providers require a bit more work than the Discord provider. For example, the
-     * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
-     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
-     *
-     * @see https://next-auth.js.org/providers/github
-     */
-  ],
+    adapter: DrizzleAdapter(db),
+    secret: env.NEXTAUTH_SECRET,
+    providers: [
+        Discord({
+            clientId: env.DISCORD_CLIENT_ID,
+            clientSecret: env.DISCORD_CLIENT_SECRET,
+        }),
+        Google({
+            clientId: env.GOOGLE_CLIENT_ID,
+            clientSecret: env.GOOGLE_CLIENT_SECRET,
+        }),
+        /**
+         * ...add more providers here.
+         *
+         * Most other providers require a bit more work than the Discord provider. For example, the
+         * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
+         * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
+         *
+         * @see https://next-auth.js.org/providers/github
+         */
+    ],
 };
 
 /**
@@ -64,4 +65,5 @@ export const authOptions: NextAuthOptions = {
  *
  * @see https://next-auth.js.org/configuration/nextjs
  */
-export const getServerAuthSession = () => getServerSession(authOptions);
+export const getServerAuthSession = async () =>
+    await getServerSession(authOptions);

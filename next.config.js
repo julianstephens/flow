@@ -5,6 +5,17 @@
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback.net = false;
+      config.resolve.fallback.tls = false;
+      config.resolve.fallback.perf_hooks = false;
+      config.resolve.fallback.fs = false;
+    }
+
+    return config;
+  },
+};
 
 export default config;
