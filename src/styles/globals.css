@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply h-full w-full bg-bg text-xl;
+  }
+
+  a {
+    @apply text-black no-underline cursor-pointer hover:text-blue;
+  }
+
+  p {
+    @apply p-0 m-0;
+  }
+
+  label {
+    @apply text-xs py-0 px-3 font-bold text-grey-dark;
+  }
+
+  input, textarea {
+    @apply bg-grey-light py-0 px-3 outline-none hover:active:focus:bg-grey-light disabled:cursor-default disabled:bg-grey disabled:hover:shadow-none disabled:hover:bg-grey disabled:text-grey-dark;
+  }
+
+  button {
+    @apply disabled:cursor-default disabled:bg-grey disabled:hover:shadow-none disabled:hover:bg-grey
+  }
+}
+
+@layer components {
+  .transition-slow {
+    @apply transition-all ease-in duration-300;
+  }
+
+  .icon-left {
+    @apply mr-3;
+  }
+
+  .icon-right {
+    @apply ml-3;
+  }
+
+  .button {
+    @apply flex rounded-xl items-center justify-center w-fit h-fit px-3 py-2 transition-slow hover:shadow-xl;
+  }
+
+  .col {
+    @apply flex flex-col;
+  }
+}
