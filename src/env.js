@@ -36,7 +36,7 @@ export const env = createEnv({
      * `NEXT_PUBLIC_`.
      */
     client: {
-        // NEXT_PUBLIC_CLIENTVAR: z.string(),
+        NEXT_PUBLIC_APP_NAME: z.string(),
     },
 
     /**
@@ -53,8 +53,7 @@ export const env = createEnv({
         GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
         DATABASE_URL: `${process.env.POSTGRES_URL}?sslmode=require`,
         ROOT_DIR: process.env.PWD,
-        // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
-    },
+        NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME    },
     /**
      * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
      * This is especially useful for Docker builds.

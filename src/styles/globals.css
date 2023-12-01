@@ -3,50 +3,90 @@
 @tailwind utilities;
 
 @layer base {
-  html,
-  body {
-    @apply h-full w-full bg-bg text-xl;
-  }
+    html,
+    body {
+        @apply h-full w-full bg-bg text-xl;
+    }
 
-  a {
-    @apply text-black no-underline cursor-pointer hover:text-blue;
-  }
+    h1,
+    .h1 {
+        @apply text-4xl;
+    }
 
-  p {
-    @apply p-0 m-0;
-  }
+    h2,
+    .h2 {
+        @apply text-3xl;
+    }
 
-  label {
-    @apply text-xs py-0 px-3 font-bold text-grey-dark;
-  }
+    h3,
+    .h3 {
+        @apply text-2xl;
+    }
 
-  input, textarea {
-    @apply bg-grey-light py-0 px-3 outline-none hover:active:focus:bg-grey-light disabled:cursor-default disabled:bg-grey disabled:hover:shadow-none disabled:hover:bg-grey disabled:text-grey-dark;
-  }
+    a {
+        @apply cursor-pointer text-black no-underline hover:text-blue;
+    }
 
-  button {
-    @apply disabled:cursor-default disabled:bg-grey disabled:hover:shadow-none disabled:hover:bg-grey
-  }
+    p {
+        @apply m-0 p-0;
+    }
+
+    label {
+        @apply px-3 py-0 text-xs font-bold text-grey-dark;
+    }
+
+    input,
+    textarea {
+        @apply bg-grey-light px-3 py-0 outline-none hover:active:focus:bg-grey-light disabled:cursor-default disabled:bg-grey disabled:text-grey-dark disabled:hover:bg-grey disabled:hover:shadow-none;
+    }
+
+    button {
+        @apply disabled:cursor-default disabled:bg-grey disabled:hover:bg-grey disabled:hover:shadow-none;
+    }
 }
 
 @layer components {
-  .transition-slow {
-    @apply transition-all ease-in duration-300;
-  }
+    .transition-slow {
+        @apply transition-all duration-300 ease-in;
+    }
 
-  .icon-left {
-    @apply mr-3;
-  }
+    .icon-left {
+        @apply mr-3;
+    }
 
-  .icon-right {
-    @apply ml-3;
-  }
+    .icon-right {
+        @apply ml-3;
+    }
 
-  .button {
-    @apply flex rounded-xl items-center justify-center w-fit h-fit px-3 py-2 transition-slow hover:shadow-xl;
-  }
+    .circle {
+        @apply h-12 w-12 rounded-full;
+    }
 
-  .col {
-    @apply flex flex-col;
-  }
+    .full {
+        @apply h-full w-full;
+    }
+
+    .centered {
+        @apply items-center justify-center;
+    }
+
+    .button {
+        @apply transition-slow flex h-fit w-fit items-center justify-center rounded-xl px-3 py-2 hover:shadow-xl;
+    }
+
+    .icon-button {
+        @apply button bg-none text-grey-dark hover:text-blue hover:shadow-none;
+    }
+
+    .col {
+        @apply flex flex-col;
+    }
+
+    .row {
+        @apply flex w-full;
+    }
+
+    .form-group {
+        @apply w-full;
+    }
 }

@@ -2,13 +2,16 @@ import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
-    content: ["./src/**/*.tsx"],
+    content: [
+        "./src/**/*.tsx",
+        "./node_modules/tailwind-datepicker-react/dist/**/*.js",
+    ],
     theme: {
         extend: {
             fontFamily: {
-                sans: ["var(--font-sans)", ...fontFamily.sans],
-                logo: "var(--font-monts-alt)",
-                accent: "var(--font-monts)",
+                sans: ["var(--font-pt)", ...fontFamily.sans],
+                logo: ["var(--font-monts-alt)"],
+                accent: ["var(--font-monts)"],
             },
             colors: {
                 bg: "#f9f9f9",
@@ -23,5 +26,5 @@ export default {
             },
         },
     },
-    plugins: [],
+    plugins: [require("@tailwindcss/forms")],
 } satisfies Config;

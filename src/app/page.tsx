@@ -1,7 +1,8 @@
+"use client";
 import Link from "next/link";
-import { SignInButton } from "./_components/authButtons";
+import { SignInButton } from "./_components/auth/AuthButtons";
 
-const Home = async () => {
+const Home = () => {
     return (
         <main>
             <div className="mt-12 px-12">
