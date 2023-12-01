@@ -5,7 +5,7 @@ export const FieldWrapper = (props: FieldWrapperProps) => {
     return (
         <div>
             <label
-                className={`block text-sm font-medium text-gray-700 ${className}`}
+                className={`block p-0 text-sm font-medium text-gray-700 ${className}`}
             >
                 {label}
                 <div className="mt-1">{children}</div>
@@ -14,7 +14,7 @@ export const FieldWrapper = (props: FieldWrapperProps) => {
                 <div
                     role="alert"
                     aria-label={error.message}
-                    className="text-red-500 text-sm font-semibold"
+                    className="text-sm font-semibold text-red"
                 >
                     {error.message}
                 </div>

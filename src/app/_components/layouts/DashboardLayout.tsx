@@ -1,8 +1,8 @@
 import type { Props } from "~/types";
-import { env } from "~/env";
 import Link from "next/link";
 import { DashboardHeader } from "../DashboardHeader";
 import { LogoutButton } from "../auth";
+import { AppBrand } from "../Brand";
 
 export const DashboardLayout = ({
     children,
@@ -15,7 +15,7 @@ export const DashboardLayout = ({
                 className="col h-full min-w-[16rem] max-w-[18rem] border-r-2 border-r-grey-light p-5"
             >
                 <Link href="/overview" className="h3 font-logo">
-                    {env.NEXT_PUBLIC_APP_NAME}
+                    <AppBrand />
                 </Link>
                 <LogoutButton className="mt-auto" />
             </div>

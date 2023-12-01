@@ -7,7 +7,7 @@ import type React from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useInterval } from "usehooks-ts";
-import { env } from "~/env";
+import { AppBrand } from "~/app/_components/Brand";
 import type { SessionWrapper } from "~/types";
 
 const LoginPage = () => {
@@ -42,7 +42,7 @@ const LoginPage = () => {
         <div className="col full centered">
             <form>
                 <h3 className="font-bold">
-                    Sign in to {env.NEXT_PUBLIC_APP_NAME}
+                    Sign in to <AppBrand />
                 </h3>
                 <div id="oauthButtons">
                     {providers.map((p, i) => (

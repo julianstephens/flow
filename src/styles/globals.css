@@ -41,7 +41,7 @@
     }
 
     button {
-        @apply disabled:cursor-default disabled:bg-grey disabled:hover:bg-grey disabled:hover:shadow-none;
+        @apply text-lg disabled:cursor-default disabled:bg-grey disabled:hover:bg-grey disabled:hover:shadow-none;
     }
 }
 

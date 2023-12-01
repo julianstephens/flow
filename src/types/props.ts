@@ -7,7 +7,7 @@ export type ChildrenProps = {
 
 export type ComponentStyleProps = {
     className?: string;
-    style?: string;
+    style?: React.CSSProperties;
 };
 
 export type FieldWrapperProps = ComponentStyleProps & {
