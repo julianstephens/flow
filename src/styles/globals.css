@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html,
+    body {
+        @apply h-full w-full bg-bg text-xl;
+    }
+
+    h1,
+    .h1 {
+        @apply text-4xl;
+    }
+
+    h2,
+    .h2 {
+        @apply text-3xl;
+    }
+
+    h3,
+    .h3 {
+        @apply text-2xl;
+    }
+
+    a {
+        @apply cursor-pointer text-black no-underline hover:text-blue;
+    }
+
+    p {
+        @apply m-0 p-0;
+    }
+
+    label {
+        @apply px-3 py-0 text-xs font-bold text-grey-dark;
+    }
+
+    input,
+    textarea {
+        @apply bg-grey-light px-3 py-0 outline-none hover:active:focus:bg-grey-light disabled:cursor-default disabled:bg-grey disabled:text-grey-dark disabled:hover:bg-grey disabled:hover:shadow-none;
+    }
+
+    button {
+        @apply text-lg disabled:cursor-default disabled:bg-grey disabled:hover:bg-grey disabled:hover:shadow-none;
+    }
+}
+
+@layer components {
+    .transition-slow {
+        @apply transition-all duration-300 ease-in;
+    }
+
+    .icon-left {
+        @apply mr-3;
+    }
+
+    .icon-right {
+        @apply ml-3;
+    }
+
+    .circle {
+        @apply h-12 w-12 rounded-full;
+    }
+
+    .full {
+        @apply h-full w-full;
+    }
+
+    .centered {
+        @apply items-center justify-center;
+    }
+
+    .button {
+        @apply transition-slow flex h-fit w-fit items-center justify-center rounded-xl px-3 py-2 hover:shadow-xl;
+    }
+
+    .icon-button {
+        @apply button bg-none text-grey-dark hover:text-blue hover:shadow-none;
+    }
+
+    .col {
+        @apply flex flex-col;
+    }
+
+    .row {
+        @apply flex w-full;
+    }
+
+    .form-group {
+        @apply w-full;
+    }
+}
