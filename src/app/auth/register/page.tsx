@@ -1,4 +1,5 @@
 "use client";
+import { signIn } from "next-auth/react";
 import { z } from "zod";
 import { AppBrand } from "~/app/_components/Brand";
 import { OauthSignInButtons } from "~/app/_components/auth";
@@ -92,11 +93,12 @@ type RegisterForm = z.infer<typeof registerFormSchema>;
 
 const RegisterPage = () => {
     const onSubmit = async (formValues: RegisterForm) => {
-        console.log("registerForm", formValues);
-        // await signIn("credentials", {
-        //     ...formValues,
-        //     name: `${formValues.pname} ${formValues.lname}`,
-        // });
+        await signIn("credentials", {
+            name: `${formValues.pname ?? formValues.fname} ${formValues.lname}`,
+            email: formValues.email,
+            password: formValues.password,
+            callbackUrl: "/overview",
+        });
     };
 
     return (

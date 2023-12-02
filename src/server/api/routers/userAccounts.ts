@@ -5,6 +5,13 @@ import { db } from "~/server/db";
 import { newUserSchema, users } from "~/server/db/schemas";
 
 export const userAccountRouter = createTRPCRouter({
+    getByEmail: protectedProcedure
+        .input(z.object({ email: z.string().email() }))
+        .query(async ({ input: { email } }) => {
+            return (
+                await db.select().from(users).where(eq(users.email, email))
+            )[0];
+        }),
     create: protectedProcedure
         .input(newUserSchema)
         .mutation(async ({ input }) => {

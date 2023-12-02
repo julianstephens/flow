@@ -1,19 +1,22 @@
 "use client";
-
-import type { SignInResponse } from "next-auth/react";
 import { getSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import type React from "react";
-import { useState } from "react";
-import toast from "react-hot-toast";
 import { useInterval } from "usehooks-ts";
 import { AppBrand } from "~/app/_components/Brand";
+import { OauthSignInButtons } from "~/app/_components/auth";
 import type { SessionWrapper } from "~/types";
-import { capitalize } from "~/utils/helpers";
+import { Form, TextField } from "~/app/_components/form";
+import { z } from "zod";
+
+const loginFormSchema = z.object({
+    email: z.string().email(),
+    password: z.string(),
+});
+
+type LoginForm = z.infer<typeof loginFormSchema>;
 
 const LoginPage = () => {
     const router = useRouter();
-    const [providers] = useState(["google", "discord"]);
 
     const validateSession = async () => {
         const session = (await getSession()) as unknown as SessionWrapper;
@@ -23,16 +26,12 @@ const LoginPage = () => {
         }
     };
 
-    const handleSignIn = async (e: React.SyntheticEvent, provider: string) => {
-        e.preventDefault();
-
-        const res = (await signIn(provider, {
-            redirect: false,
-        })) as SignInResponse;
-
-        if (res.error) {
-            toast.error(res.error);
-        }
+    const onSubmit = async (formValues: LoginForm) => {
+        await signIn("credentials", {
+            email: formValues.email,
+            password: formValues.password,
+            callbackUrl: "/overview",
+        });
     };
 
     useInterval(() => {
@@ -41,22 +40,33 @@ const LoginPage = () => {
 
     return (
         <div className="col full centered">
-            <form>
-                <h3 className="font-bold">
-                    Sign in to <AppBrand linkHome />
-                </h3>
-                <div id="oauthButtons">
-                    {providers.map((p, i) => (
-                        <button
-                            className="button"
-                            onClick={(e) => handleSignIn(e, p)}
-                            key={i}
-                        >
-                            {capitalize(p)}
+            <h3 className="mb-10">
+                Sign In To <AppBrand linkHome />
+            </h3>
+            <Form<LoginForm>
+                id="loginForm"
+                onSubmit={onSubmit}
+                schema={loginFormSchema}
+            >
+                {({ register, formState }) => (
+                    <>
+                        <TextField
+                            label="Email"
+                            error={formState.errors.email}
+                            registration={register("email")}
+                        />
+                        <TextField
+                            label="Password"
+                            error={formState.errors.password}
+                            registration={register("password")}
+                        />
+                        <button className="button mx-auto" type="submit">
+                            Login
                         </button>
-                    ))}
-                </div>
-            </form>
+                        <OauthSignInButtons />
+                    </>
+                )}
+            </Form>
         </div>
     );
 };
