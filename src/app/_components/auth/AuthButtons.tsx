@@ -1,14 +1,43 @@
 "use client";
-import { signOut } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import type { Props } from "~/types";
-import { FaSignOutAlt } from "react-icons/fa";
+import { FaDiscord, FaGoogle, FaSignOutAlt } from "react-icons/fa";
 import Link from "next/link";
 import type React from "react";
+import { capitalize } from "~/utils/helpers";
+
+const providers: Record<string, React.ReactNode> = {
+    google: <FaGoogle />,
+    discord: <FaDiscord />,
+};
 
 export const SignInButton = () => (
     <Link href="/auth/login" className="button">
         Sign In
     </Link>
+);
+
+export const OauthSignInButtons = () => (
+    <>
+        <div className="relative flex items-center">
+            <div className="flex-grow border-t border-gray-400" />
+            <span className="mx-4 flex-shrink text-grey">or</span>
+            <div className="flex-grow border-t border-gray-400" />
+        </div>
+        <div className="col items-center gap-3">
+            {Object.keys(providers).map((p, i) => (
+                <button
+                    type="button"
+                    key={i}
+                    className="button w-full"
+                    onClick={() => signIn(p)}
+                >
+                    <span className="icon-left">{providers[p]}</span>
+                    Sign in with {capitalize(p)}
+                </button>
+            ))}
+        </div>
+    </>
 );
 
 export const RegisterButton = () => (

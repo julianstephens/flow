@@ -7,8 +7,11 @@ import {
 
 import Discord from "next-auth/providers/discord";
 import Google from "next-auth/providers/google";
+import Credentials from "next-auth/providers/credentials";
 import { env } from "~/env";
 import { db } from "./db";
+import { newUserSchema, type NewUser } from "./db/schemas";
+import { api } from "~/trpc/server";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -41,6 +44,36 @@ export const authOptions: NextAuthOptions = {
     adapter: DrizzleAdapter(db),
     secret: env.NEXTAUTH_SECRET,
     providers: [
+        Credentials({
+            name: "Password",
+            credentials: {
+                name: {
+                    label: "Name",
+                    type: "text",
+                    placeholder: "John Doe",
+                },
+                email: {
+                    label: "Email",
+                    type: "text",
+                    placeholder: "john.doe@coolmail.com",
+                },
+                password: {
+                    label: "Password",
+                    type: "text",
+                },
+            },
+            authorize: async (credentials) => {
+                try {
+                    const user: NewUser = newUserSchema.parse({
+                        ...credentials,
+                    });
+                    const res = await api.users.create.mutate(user);
+                    return res ?? null;
+                } catch (err) {
+                    return null;
+                }
+            },
+        }),
         Discord({
             clientId: env.DISCORD_CLIENT_ID,
             clientSecret: env.DISCORD_CLIENT_SECRET,

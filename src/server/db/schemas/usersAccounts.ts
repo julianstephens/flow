@@ -6,6 +6,7 @@ import {
     text,
     timestamp,
 } from "drizzle-orm/pg-core";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import type { AdapterAccount } from "next-auth/adapters";
 
 export const users = pgTable("user", {
@@ -23,6 +24,8 @@ export const users = pgTable("user", {
 
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
+export const userSchema = createSelectSchema(users);
+export const newUserSchema = createInsertSchema(users);
 
 export const accounts = pgTable(
     "account",

@@ -22,8 +22,19 @@ export type FieldWrapperPassThroughProps = Omit<
     "className" | "children"
 >;
 
+type TextFieldType =
+    | {
+          isPassword?: boolean;
+          isEmail?: never;
+      }
+    | {
+          isPassword?: never;
+          isEmail?: boolean;
+      };
+
 export type TextFieldProps = FieldWrapperPassThroughProps &
-    ComponentStyleProps & {
+    ComponentStyleProps &
+    TextFieldType & {
         registration: Partial<UseFormRegisterReturn>;
         id?: string;
         name?: string;

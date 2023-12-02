@@ -41,7 +41,7 @@
     }
 
     button {
-        @apply text-lg disabled:cursor-default disabled:bg-grey disabled:hover:bg-grey disabled:hover:shadow-none;
+        @apply disabled:cursor-default disabled:bg-grey disabled:hover:bg-grey disabled:hover:shadow-none;
     }
 }
 
@@ -71,7 +71,7 @@
     }
 
     .button {
-        @apply transition-slow flex h-fit w-fit items-center justify-center rounded-xl px-3 py-2 hover:shadow-xl;
+        @apply transition-slow flex h-fit w-fit items-center justify-center rounded-xl border-2 border-blue px-3 py-2 text-lg text-blue hover:bg-blue hover:text-white hover:shadow-xl;
     }
 
     .icon-button {

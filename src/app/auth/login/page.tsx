@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { useInterval } from "usehooks-ts";
 import { AppBrand } from "~/app/_components/Brand";
 import type { SessionWrapper } from "~/types";
+import { capitalize } from "~/utils/helpers";
 
 const LoginPage = () => {
     const router = useRouter();
@@ -42,7 +43,7 @@ const LoginPage = () => {
         <div className="col full centered">
             <form>
                 <h3 className="font-bold">
-                    Sign in to <AppBrand />
+                    Sign in to <AppBrand linkHome />
                 </h3>
                 <div id="oauthButtons">
                     {providers.map((p, i) => (
@@ -50,7 +51,9 @@ const LoginPage = () => {
                             className="button"
                             onClick={(e) => handleSignIn(e, p)}
                             key={i}
-                        >{`${p[0]?.toUpperCase()}${p.slice(1)}`}</button>
+                        >
+                            {capitalize(p)}
+                        </button>
                     ))}
                 </div>
             </form>
